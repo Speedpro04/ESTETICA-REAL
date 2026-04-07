@@ -1,0 +1,24 @@
+{
+  "name": "landing_page_axos_solara",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Speedpro04/pagina_de_venda_clinica.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Speedpro04/landing_page_axos_solara/issues"
+  },
+  "homepage": "https://github.com/Speedpro04/landing_page_axos_solara#readme",
+  "dependencies": {
+    "lucide-react": "^1.7.0"
+  }
+}

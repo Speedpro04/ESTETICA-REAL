@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solara Connect — Atendente Digital Inteligente para Clínicas</title>
+    <meta name="description" content="Solara Connect organiza o atendimento da sua clínica via WhatsApp, agenda consultas e confirma horários automaticamente.">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ─── BASE STYLES ─── */
+        :root {
+            --navy:       #000f41;
+            --navy-dark:  #00082e;
+            --navy-mid:   #000d38;
+            --orange:     #F79F1F;
+            --orange-hover:#e68a00;
+            --cyan:       #7EE7E7;
+            --white:      #ffffff;
+            --text-dark:  #0b1026;
+            --text-muted: #6b7a99;
+            --bg-light:   #f8fafc;
+            --radius-lg:  24px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-muted);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(0, 15, 65, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(126, 231, 231, 0.1);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .logo { font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none; font-size: 20px; }
+        .logo span { color: var(--cyan); }
+
+        .btn-nav {
+            background: var(--orange);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 13px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(247, 159, 31, 0.3);
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            padding: 180px 0 120px;
+            background: linear-gradient(160deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+            background: url('images/medica-sorrindo.jpg') center/cover no-repeat;
+            opacity: 0.4; mask-image: linear-gradient(to left, black, transparent);
+        }
+
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; position: relative; z-index: 2; align-items: center; }
+
+        h1 { font-size: clamp(32px, 4vw, 56px); font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.02em; }
+        h1 span { color: var(--cyan); }
+
+        .subheadline { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; max-width: 600px; line-height: 1.7; }
+
+        .hero-support { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+        .btn-main {
+            display: inline-flex; background: var(--orange); color: #fff; padding: 20px 48px; border-radius: 100px;
+            font-size: 16px; font-weight: 800; text-transform: uppercase; text-decoration: none;
+            box-shadow: 0 10px 30px rgba(247, 159, 31, 0.4); transition: 0.3s;
+        }
+        .btn-main:hover { transform: translateY(-5px); background: var(--orange-hover); }
+
+        /* ─── PROBLEMA ─── */
+        #problema { padding: 100px 0; background: var(--bg-light); color: var(--text-dark); }
+        .section-head { text-align: center; margin-bottom: 60px; }
+        .section-head h2 { font-size: 36px; font-weight: 800; margin-bottom: 20px; }
+
+        .prob-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .atendente-img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+
+        .prob-list { list-style: none; margin-bottom: 30px; }
+        .prob-list li { padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--text-muted); }
+        .prob-list li::before { content: '✕'; color: #f44336; font-weight: 900; }
+
+        .prob-footer { margin-top: 30px; font-size: 18px; line-height: 1.7; }
+        .prob-bold { font-weight: 800; color: var(--navy); margin-top: 20px; display: block; }
+
+        /* ─── SOLUÇÃO ─── */
+        #solucao { padding: 120px 0; background: var(--navy); color: #fff; text-align: center; }
+        .sol-content { max-width: 800px; margin: 0 auto; }
+        .sol-headline { font-size: 40px; font-weight: 900; margin-bottom: 30px; }
+        .sol-text { font-size: 18px; color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.8; }
+
+        /* ─── COMO FUNCIONA ─── */
+        #como-funciona { padding: 100px 0; }
+        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
+        .step-card { background: #fff; padding: 40px 30px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); position: relative; transition: 0.3s; }
+        .step-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .step-num { position: absolute; top: -20px; left: 30px; width: 50px; height: 50px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; border: 5px solid #fff; }
+        .step-card h3 { margin: 20px 0 15px; font-size: 16px; color: var(--navy); }
+        .step-card p { font-size: 14px; }
+
+        /* ─── FUNCIONALIDADES ─── */
+        #funcionalidades { padding: 120px 0; background: var(--bg-light); }
+        .feat-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; }
+        .feat-img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .feat-list { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .feat-item { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .feat-item h4 { color: var(--navy); margin-bottom: 10px; font-size: 15px; font-weight: 800; }
+        .feat-item p { font-size: 13px; line-height: 1.6; }
+
+        /* ─── SEGURANÇA ─── */
+        #seguranca { padding: 100px 0; background: var(--navy-dark); color: #fff; }
+        .seg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .seg-badge { display: inline-block; background: rgba(126, 231, 231, 0.1); color: var(--cyan); padding: 8px 16px; border-radius: 100px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
+
+        /* ─── CTA FINAL ─── */
+        #cta-final { padding: 120px 0; background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); color: #fff; text-align: center; }
+        .cta-box { max-width: 800px; margin: 0 auto; }
+        .btn-cta { background: var(--orange); color: #fff; font-size: 18px; font-weight: 800; padding: 22px 56px; border-radius: 100px; text-decoration: none; text-transform: uppercase; display: inline-block; margin: 40px 0 20px; box-shadow: 0 15px 40px rgba(247, 159, 31, 0.4); transition: 0.3s; }
+        .btn-cta:hover { transform: translateY(-5px); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .hero-grid, .prob-layout, .steps-grid, .feat-grid, .feat-list, .seg-grid { grid-template-columns: 1fr; text-align: center; }
+            #hero::before { display: none; }
+            .btn-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo">Solara <span>Connect</span></a>
+            <a href="#cta-final" class="btn-nav">Agendar Demonstração</a>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>Solara — a atendente digital que <span>organiza o atendimento</span> da sua clínica.</h1>
+                <p class="subheadline">O Solara Connect responde pacientes no WhatsApp, agenda consultas, confirma horários e organiza todo o fluxo de atendimento automaticamente — enquanto sua equipe se dedica ao que realmente importa: os pacientes.</p>
+                <a href="#cta-final" class="btn-main">Agendar demonstração</a>
+                <p class="hero-support">Configuração simples. Sem necessidade de equipe técnica.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="problema">
+        <div class="container">
+            <div class="section-head">
+                <h2>O atendimento de muitas clínicas ainda depende de mensagens, anotações e improviso.</h2>
+            </div>
+            <div class="prob-layout">
+                <img src="images/atendente.jpg" alt="Atendente sobrecarregada" class="atendente-img">
+                <div class="prob-text">
+                    <ul class="prob-list">
+                        <li>Mensagens acumuladas no WhatsApp.</li>
+                        <li>Pacientes esperando resposta.</li>
+                        <li>Consultas esquecidas.</li>
+                        <li>Agenda desorganizada.</li>
+                    </ul>
+                    <p class="prob-footer">
+                        Mesmo com uma equipe dedicada, a rotina de atendimento pode rapidamente se transformar em um fluxo confuso de mensagens e informações espalhadas.
+                        <br><br>
+                        E quando o atendimento perde organização, a clínica acaba perdendo algo ainda mais importante: consultas.
+                        <br><br>
+                        O problema raramente é falta de pacientes.
+                        <span class="prob-bold">Na maioria das vezes, é falta de um sistema que organize o atendimento.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucao">
+        <div class="container sol-content">
+            <h2 class="sol-headline">Foi exatamente para resolver isso que o Solara Connect foi criado.</h2>
+            <p class="sol-text">
+                Solara é uma atendente digital inteligente que responde pacientes, organiza agendamentos, confirma consultas e registra todas as interações automaticamente.
+                <br><br>
+                Enquanto a equipe da clínica cuida do atendimento presencial, o sistema cuida da comunicação, da organização e do fluxo de pacientes.
+                <br><br>
+                Tudo funcionando de forma contínua, todos os dias.
+            </p>
+            <img src="images/prescricao.jpg" alt="Organização clínica" style="width: 100%; border-radius: 30px; opacity: 0.8;">
+        </div>
+    </section>
+
+    <section id="como-funciona">
+        <div class="container">
+            <div class="section-head">
+                <h2>Como o Solara Connect organiza o atendimento da sua clínica</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>O paciente entra em contato</h3>
+                    <p>O paciente envia uma mensagem pelo WhatsApp da clínica e é atendido imediatamente pela Solara.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>O sistema conduz o atendimento</h3>
+                    <p>A Solara responde dúvidas iniciais, coleta informações do paciente e apresenta horários disponíveis para agendamento.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>A consulta é registrada automaticamente</h3>
+                    <p>O sistema agenda a consulta, registra o paciente no banco de dados e envia confirmação imediata.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">4</div>
+                    <h3>A clínica acompanha tudo no painel</h3>
+                    <p>A equipe da clínica acompanha agenda, pacientes e atendimentos em um painel simples e organizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="funcionalidades">
+        <div class="container">
+            <div class="feat-grid">
+                <div class="feat-list">
+                    <div class="feat-item">
+                        <h4>Atendimento automático no WhatsApp</h4>
+                        <p>Pacientes recebem respostas imediatas e orientações iniciais sem precisar aguardar atendimento humano.</p>
+                    </div>
+                    <div class="feat-item">
+                        <h4>Agendamento inteligente de consultas</h4>
+                        <p>O sistema consulta a agenda da clínica e oferece automaticamente os horários disponíveis.</p>
+                    </div>
+                    <div class="feat-item">
+                        <h4>Confirmações e lembretes automáticos</h4>
+                        <p>Pacientes recebem confirmação e lembretes antes da consulta, ajudando a reduzir faltas.</p>
+                    </div>
+                    <div class="feat-item">
+                        <h4>Painel completo de gestão</h4>
+                        <p>Todas as interações, pacientes e consultas ficam organizados em um único painel de controle.</p>
+                    </div>
+                </div>
+                <img src="images/analise.jpg" alt="Painel de gestão clínica" class="feat-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="seguranca">
+        <div class="container seg-grid">
+            <div class="seg-text">
+                <span class="seg-badge">LGPD Compliant</span>
+                <h2>Segurança e privacidade no padrão que clínicas precisam.</h2>
+                <p>
+                    Todas as informações registradas no Solara Connect são armazenadas em banco de dados seguro, com criptografia e seguindo as diretrizes da Lei Geral de Proteção de Dados (LGPD).
+                    <br><br>
+                    Isso garante que os dados dos pacientes sejam tratados com o nível de segurança exigido para operações clínicas.
+                </p>
+            </div>
+            <img src="images/medica-tablet.jpg" alt="Segurança de dados" style="width: 100%; border-radius: 30px; box-shadow: 0 0 40px rgba(126,231,231,0.2);">
+        </div>
+    </section>
+
+    <section id="cta-final">
+        <div class="container cta-box">
+            <h2>Veja como o Solara Connect pode transformar o atendimento da sua clínica.</h2>
+            <p style="font-size: 18px; color: rgba(255,255,255,0.7); margin-top: 20px;">Automatize a comunicação com pacientes, organize sua agenda e acompanhe todo o atendimento em um único sistema.</p>
+            <a href="#" class="btn-cta">Agendar demonstração</a>
+            <p style="margin-top: 20px; font-size: 14px; color: rgba(255,255,255,0.4);">Implementação simples e rápida para clínicas.</p>
+        </div>
+    </section>
+
+    <footer style="padding: 40px 0; text-align: center; background: var(--navy-dark); color: rgba(255,255,255,0.3); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p>© 2025 Solara Connect — Tecnologia Axos Hub. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
