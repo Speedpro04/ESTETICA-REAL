@@ -70,7 +70,7 @@ const PrivacidadeView: React.FC = () => {
               {[
                 { title: 'Termo de Consentimento de Dados', desc: 'Para novos pacientes assinarem digitalmente.' },
                 { title: 'Relatório de Atividades de Tratamento', desc: 'Histórico completo de quem acessou cada dado.' },
-                { title: 'Política de Privacidade Interna', desc: 'Manual de conduta para recepcionistas e médicos.' },
+                { title: 'Política de Privacidade Interna', desc: 'Manual de conduta para recepcionistas e dentistas.' },
               ].map((doc, i) => (
                 <div key={i} className="bg-white/80 p-6 rounded-3xl border border-white shadow-sm flex items-center justify-between group hover:translate-x-2 transition-all cursor-pointer hover:bg-white">
                    <div className="flex items-center gap-4">

@@ -33,7 +33,7 @@ export interface MedicalRecord {
   notes: string;
   summary?: string;
   procedure?: string; // Procedimento ou serviço realizado
-  category?: string; // Categoria: Estética, Médica, Terapia, etc.
+  category?: string; // Categoria: Estética, Odontológica, Terapia, etc.
 }
 
 export interface Appointment {

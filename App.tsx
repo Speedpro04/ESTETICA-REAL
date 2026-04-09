@@ -388,7 +388,7 @@ const App: React.FC = () => {
             </button>
             <div className="flex flex-col">
               <h1 className="text-3xl font-light text-[#0a3d62] tracking-tighter uppercase leading-none italic">Módulo de Recepção Digital</h1>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-3 opacity-60 italic">Clínicas médicas conectadas em tempo real</p>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-3 opacity-60 italic">Clínicas odontológicas conectadas em tempo real</p>
             </div>
           </div>
 
