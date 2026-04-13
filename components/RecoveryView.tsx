@@ -60,15 +60,15 @@ function gerarSugestao(score: RiskScore, status: string): string {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const BASE_PATIENTS = [
-  { id: '1', name: 'Marcos Vinícius', lastVisit: '15/07/2024', status: 'Faltou',             attempts: 2, lastContact: '12/03', channel: 'WhatsApp' as ContactChannel },
-  { id: '2', name: 'Helena Costa',    lastVisit: '10/08/2024', status: 'Sem agendamento',      attempts: 1, lastContact: '18/03', channel: 'SMS' as ContactChannel },
-  { id: '3', name: 'Sérgio Ramos',    lastVisit: '22/06/2024', status: 'Revisão pendente',    attempts: 3, lastContact: '05/03', channel: 'WhatsApp' as ContactChannel },
-  { id: '4', name: 'Larissa Manoela', lastVisit: '05/09/2024', status: 'Desmarcou',           attempts: 0, lastContact: '--',    channel: '--' as ContactChannel },
-  { id: '5', name: 'Ana Souza',       lastVisit: '01/08/2024', status: 'Revisão pendente',    attempts: 2, lastContact: '20/03', channel: 'Email' as ContactChannel },
-  { id: '6', name: 'João Martins',    lastVisit: '15/06/2024', status: 'Sem agendamento',      attempts: 1, lastContact: '10/03', channel: 'WhatsApp' as ContactChannel },
-  { id: '7', name: 'Fabiana Lima',    lastVisit: '12/09/2024', status: 'Desmarcou',           attempts: 1, lastContact: '22/03', channel: 'SMS' as ContactChannel },
-  { id: '8', name: 'Rafael Pereira',  lastVisit: '04/05/2024', status: 'Tratamento pausado',  attempts: 4, lastContact: '01/03', channel: 'WhatsApp' as ContactChannel },
-  { id: '9', name: 'Camila Borges',   lastVisit: '30/10/2024', status: 'Agendamento cancelado', attempts: 0, lastContact: '--',  channel: 'Email' as ContactChannel },
+  { id: '1', name: 'Marcos Vinícius', lastVisit: '15/07/2024', status: 'Orçamento Botox',    attempts: 2, lastContact: '12/03', channel: 'WhatsApp' as ContactChannel },
+  { id: '2', name: 'Helena Costa',    lastVisit: '10/08/2024', status: 'Preenchimento Labial', attempts: 1, lastContact: '18/03', channel: 'SMS' as ContactChannel },
+  { id: '3', name: 'Sérgio Ramos',    lastVisit: '22/06/2024', status: 'Limpeza de Pele',      attempts: 3, lastContact: '05/03', channel: 'WhatsApp' as ContactChannel },
+  { id: '4', name: 'Larissa Manoela', lastVisit: '05/09/2024', status: 'Harmonização Facial', attempts: 0, lastContact: '--',    channel: '--' as ContactChannel },
+  { id: '5', name: 'Ana Souza',       lastVisit: '01/08/2024', status: 'Bioestimulador',       attempts: 2, lastContact: '20/03', channel: 'Email' as ContactChannel },
+  { id: '6', name: 'João Martins',    lastVisit: '15/06/2024', status: 'Peeling Químico',      attempts: 1, lastContact: '10/03', channel: 'WhatsApp' as ContactChannel },
+  { id: '7', name: 'Fabiana Lima',    lastVisit: '12/09/2024', status: 'Lipo de Papada',       attempts: 1, lastContact: '22/03', channel: 'SMS' as ContactChannel },
+  { id: '8', name: 'Rafael Pereira',  lastVisit: '04/05/2024', status: 'Ultraformer III',      attempts: 4, lastContact: '01/03', channel: 'WhatsApp' as ContactChannel },
+  { id: '9', name: 'Camila Borges',   lastVisit: '30/10/2024', status: 'Criolipólise',         attempts: 0, lastContact: '--',    channel: 'Email' as ContactChannel },
 ];
 
 function enriquecerPacientes() {
@@ -133,25 +133,25 @@ const RecoveryView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="text-4xl font-light text-[#0a3d62] tracking-tighter uppercase italic">
-            Recuperação de Pacientes
+          <h2 className="text-3xl font-semibold text-[#706fd3] tracking-tight uppercase">
+            IA de Recuperação de Orçamentos
           </h2>
-          <p className="text-[#57606f] text-sm font-light uppercase tracking-widest mt-3 opacity-70">
-            Motor de Inteligência ativo · Score calculado em tempo real
+          <p className="text-[#57606f] text-sm font-medium uppercase tracking-widest mt-3 opacity-70">
+            Inteligência Preditiva · Identificação de abandonos em orçamentos
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
             Atualizado: {lastUpdate.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
           </span>
           <button
             onClick={handleRecalculate}
             disabled={isRecalculating}
-            className="flex items-center gap-3 px-6 py-3 bg-[#0a3d62] text-white rounded-xl text-[11px] font-light uppercase tracking-widest hover:bg-[#ff7675] transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-[#0a3d62]/10"
+            className="flex items-center gap-3 px-6 py-3 bg-[#706fd3] text-white rounded-xl text-sm font-medium uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-[#706fd3]/10"
             title="Recalcular pontuação de risco agora"
           >
             <RefreshCw size={16} className={isRecalculating ? 'animate-spin' : ''} />
-            Recalcular Scores
+            Sincronizar Orçamentos
           </button>
         </div>
       </div>
@@ -163,9 +163,9 @@ const RecoveryView: React.FC = () => {
             <div className={`inline-flex p-3 rounded-xl ${kpi.bg} mb-4`}>
               <kpi.icon size={20} className={kpi.color} />
             </div>
-            <p className="text-[10px] font-light text-slate-400 uppercase tracking-widest mb-2 leading-tight">{kpi.label}</p>
-            <h3 className={`text-2xl font-light ${kpi.color} leading-none`}>{kpi.value}</h3>
-            <p className="text-[9px] font-light text-slate-400 mt-2 uppercase tracking-tight opacity-70 leading-tight">{kpi.sub}</p>
+            <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2 leading-tight">{kpi.label}</p>
+            <h3 className={`text-3xl font-semibold ${kpi.color} leading-none`}>{kpi.value}</h3>
+            <p className="text-xs font-medium text-slate-400 mt-2 uppercase tracking-tight opacity-70 leading-tight">{kpi.sub}</p>
           </div>
         ))}
       </div>
@@ -174,17 +174,17 @@ const RecoveryView: React.FC = () => {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
           <div>
-            <h3 className="text-xs font-light text-[#0a3d62] uppercase tracking-[0.1em]">Distribuição por Score de Risco</h3>
-            <p className="text-[9px] font-light text-slate-400 uppercase tracking-widest mt-1 opacity-70">Motor IA recalcula automaticamente</p>
+            <h3 className="text-sm font-semibold text-[#706fd3] uppercase tracking-[0.1em]">Distribuição por Score de Risco</h3>
+            <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mt-1 opacity-70">Motor IA recalcula automaticamente</p>
           </div>
           <div className="flex gap-2 flex-wrap">
             {(['TODOS', 'CRITICO', 'ALTO', 'MODERADO', 'BAIXO'] as const).map(s => (
               <button
                 key={s}
                 onClick={() => setFilterScore(s)}
-                className={`px-4 py-2 rounded-lg text-[10px] font-light uppercase tracking-widest border transition-all ${
+                className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-widest border transition-all ${
                   filterScore === s
-                    ? 'bg-[#0a3d62] text-white border-[#0a3d62]'
+                    ? 'bg-[#706fd3] text-white border-[#706fd3]'
                     : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300 shadow-sm'
                 } active:scale-95`}
                 title={`Filtrar por ${s === 'TODOS' ? 'todos os pacientes' : 'score ' + s}`}
@@ -224,7 +224,7 @@ const RecoveryView: React.FC = () => {
             return (
               <div key={score} className="flex items-center gap-2">
                 <div className={`w-2.5 h-2.5 rounded-full ${s.dot}`} />
-                <span className="text-[10px] font-light text-slate-500 uppercase tracking-widest">{s.label}: {count}</span>
+                <span className="text-xs font-medium text-slate-500 uppercase tracking-widest">{s.label}: {count}</span>
               </div>
             );
           })}
@@ -235,11 +235,11 @@ const RecoveryView: React.FC = () => {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/30">
           <div>
-            <h3 className="text-xs font-light text-[#0a3d62] uppercase tracking-[0.1em]">
-              Pacientes Prioritários para Recuperação
+            <h3 className="text-sm font-semibold text-[#706fd3] uppercase tracking-[0.1em]">
+              Clientes Prioritários para Recuperação
             </h3>
-            <p className="text-[10px] font-light text-slate-400 uppercase tracking-widest mt-2 opacity-70">
-              {filteredList.length} paciente{filteredList.length !== 1 ? 's' : ''} · Score IA identifica urgência automaticamente
+            <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mt-2 opacity-70">
+              {filteredList.length} cliente{filteredList.length !== 1 ? 's' : ''} · Score IA identifica urgência automaticamente
             </p>
           </div>
         </div>
@@ -249,7 +249,7 @@ const RecoveryView: React.FC = () => {
             <thead>
               <tr className="border-b border-slate-100 bg-slate-50/50">
                 {['Paciente', 'Última Visita', 'Motivo', 'Score IA', 'Último Contato', 'Canal', 'Sugestão IA', 'Faturamento', 'Ações'].map(h => (
-                  <th key={h} className="px-6 py-5 text-[10px] font-light text-slate-400 uppercase tracking-widest whitespace-nowrap">{h}</th>
+                  <th key={h} className="px-6 py-5 text-xs font-semibold text-slate-400 uppercase tracking-widest whitespace-nowrap">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -261,36 +261,36 @@ const RecoveryView: React.FC = () => {
                   <tr key={p.id} className="hover:bg-slate-50/50 transition-colors group">
                     <td className="px-6 py-6">
                       <div className="flex flex-col">
-                        <span className="text-sm font-light text-[#0a3d62] italic">{p.name}</span>
-                        <span className="text-[10px] font-light text-slate-400 uppercase mt-1">
-                          {p.attempts} tentativa{p.attempts !== 1 ? 's' : ''}
+                        <span className="text-base font-semibold text-[#706fd3]">{p.name}</span>
+                        <span className="text-xs font-medium text-slate-400 uppercase mt-1">
+                          {p.attempts} contato{p.attempts !== 1 ? 's' : ''}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-6 text-[11px] font-light text-slate-500 whitespace-nowrap">{p.lastVisit}</td>
-                    <td className="px-6 py-6 text-[10px] font-light uppercase tracking-wide text-[#0a3d62] opacity-60 whitespace-nowrap">{p.status}</td>
+                    <td className="px-6 py-6 text-sm font-medium text-slate-500 whitespace-nowrap">{p.lastVisit}</td>
+                    <td className="px-6 py-6 text-xs font-semibold uppercase tracking-wide text-[#706fd3] opacity-80 whitespace-nowrap">{p.status}</td>
                     <td className="px-6 py-6">
                       <div className="flex items-center gap-2">
                         <div className={`w-2 h-2 rounded-full shrink-0 ${score.dot}`} />
-                        <span className={`px-3 py-1.5 rounded-lg text-[9px] font-light uppercase tracking-widest border ${score.cls}`}>
+                        <span className={`px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-widest border ${score.cls}`}>
                           {score.label}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-6 text-[10px] font-light text-slate-500 whitespace-nowrap">{p.lastContact}</td>
+                    <td className="px-6 py-6 text-sm font-medium text-slate-500 whitespace-nowrap">{p.lastContact}</td>
                     <td className="px-6 py-6">
                       <div className="flex items-center gap-2">
                         {CHANNEL_ICONS[p.channel]}
-                        <span className="text-[10px] font-light text-slate-500">{p.channel}</span>
+                        <span className="text-sm font-medium text-slate-500">{p.channel}</span>
                       </div>
                     </td>
                     <td className="px-6 py-6 max-w-[180px]">
                       <div className="flex items-start gap-2">
                         <Brain size={14} className="text-[#ff7675] shrink-0 mt-0.5" />
-                        <span className="text-[10px] font-light text-slate-600 leading-tight italic">{p.sugestao}</span>
+                        <span className="text-xs font-medium text-slate-600 leading-tight">{p.sugestao}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-6 text-[11px] font-light text-violet-600 whitespace-nowrap">
+                    <td className="px-6 py-6 text-sm font-semibold text-violet-600 whitespace-nowrap">
                       R$ {p.faturamento.toLocaleString('pt-BR')}
                     </td>
                     <td className="px-6 py-6">
@@ -325,41 +325,41 @@ const RecoveryView: React.FC = () => {
       </div>
 
       {/* AI Suggestion Card */}
-      <div className="bg-[#0a3d62] rounded-2xl p-8 text-white relative overflow-hidden flex flex-col md:flex-row items-center gap-8 border-2 border-[#ff7675]/20">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff7675]/10 blur-[80px] rounded-full pointer-events-none" />
+      <div className="bg-[#40407a] rounded-2xl p-8 text-white relative overflow-hidden flex flex-col md:flex-row items-center gap-8 border-2 border-[#706fd3]/20">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#706fd3]/10 blur-[80px] rounded-full pointer-events-none" />
         <div className="p-4 bg-white/10 rounded-2xl border border-white/10 backdrop-blur-sm">
-          <Brain size={32} className="text-[#ff7675]" />
+          <Brain size={32} className="text-[#706fd3]" />
         </div>
         <div className="flex-1 space-y-3">
-          <h4 className="text-[11px] font-light text-[#ff7675] uppercase tracking-[0.2em]">Recomendação do Motor de Inteligência</h4>
-          <p className="text-base font-light text-slate-200 leading-relaxed italic">
-            "Pacientes com score <strong className="text-white not-italic font-light">CRÍTICO</strong> têm{' '}
-            <strong className="text-white not-italic font-light">40% mais chance</strong> de retornar quando a
-            mensagem menciona o mesmo procedimento da última visita. Detectamos{' '}
-            <strong className="text-[#ff7675] not-italic font-light">{criticos} pacientes</strong> neste perfil hoje."
+          <h4 className="text-sm font-semibold text-[#706fd3] uppercase tracking-[0.2em]">Recomendação da Solara AI</h4>
+          <p className="text-base font-medium text-slate-200 leading-relaxed">
+            "Clientes com orçamentos de <strong className="text-white font-semibold">ESTÉTICA FACIAL</strong> têm{' '}
+            <strong className="text-white font-semibold">52% mais chance</strong> de fechar quando o
+            contato é feito em até 48h após a avaliação. Temos{' '}
+            <strong className="text-[#706fd3] font-semibold">{criticos} orçamentos</strong> prioritários aguardando você."
           </p>
           <div className="flex items-center gap-6 pt-2">
             <div className="flex items-center gap-2">
               <DollarSign size={16} className="text-violet-300" />
-              <span className="text-[10px] font-light text-violet-300 uppercase tracking-widest">
-                Potencial: R$ {faturamentoPotencial.toLocaleString('pt-BR')}
+              <span className="text-xs font-semibold text-violet-300 uppercase tracking-widest">
+                Retorno Estimado: R$ {faturamentoPotencial.toLocaleString('pt-BR')}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-slate-400" />
-              <span className="text-[10px] font-light text-slate-400 uppercase tracking-widest">
-                Melhor horário: 10h–12h e 18h–20h
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">
+                Foco: Follow-up 48h
               </span>
             </div>
           </div>
         </div>
         <button
-          onClick={() => alert('Campanha IA iniciada para ' + criticos + ' pacientes críticos!')}
-          className="bg-[#ff7675] text-white px-10 py-4 rounded-xl text-[11px] font-light uppercase tracking-widest hover:brightness-110 shadow-lg shadow-[#ff7675]/20 transition-all whitespace-nowrap shrink-0 flex items-center gap-3 active:scale-95"
+          onClick={() => alert('Campanha de Recuperação de Orçamentos iniciada!')}
+          className="bg-[#706fd3] text-white px-10 py-4 rounded-xl text-sm font-semibold uppercase tracking-widest hover:brightness-110 shadow-lg shadow-[#706fd3]/20 transition-all whitespace-nowrap shrink-0 flex items-center gap-3 active:scale-95"
           title="Iniciar campanha de recuperação automática"
         >
           <Zap size={18} />
-          Executar Campanha IA
+          Recuperar Todos agora
         </button>
       </div>
     </div>

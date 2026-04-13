@@ -4,9 +4,9 @@
 
 .landing-container {
   /* ── Brand Colors ── */
-  --navy:       #000f41;
-  --navy-dark:  #00082e;
-  --navy-mid:   #000d38;
+  --navy:       #40407a;
+  --navy-dark:  #2c2c54;
+  --navy-mid:   #343472;
   --orange:     #F79F1F;
   --orange-dark:#d4870f;
   --cyan:       #7EE7E7;
@@ -249,7 +249,7 @@
   padding-top: 160px;
   padding-bottom: 120px;
   background: 
-    linear-gradient(160deg, rgba(0,8,46,0.92) 0%, rgba(0,15,65,0.90) 100%),
+    linear-gradient(160deg, rgba(64, 64, 122, 0.96) 0%, rgba(44, 44, 84, 0.94) 100%),
     url('/bg-recepcao.jpg') center/cover no-repeat;
   position: relative;
   overflow: hidden;

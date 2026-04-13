@@ -47,7 +47,7 @@ import { mockAppointments } from './mockData';
 const TopStatusBadge: React.FC<{ active?: boolean, label: string, color?: string }> = ({ active, label, color = "bg-green-500" }) => (
   <div className="bg-white/80 backdrop-blur-md border border-black/5 px-4 py-2 rounded-2xl flex items-center gap-2.5 shadow-sm">
     <div className={`w-2 h-2 rounded-full ${active ? color : 'bg-slate-300'} ${active ? 'animate-pulse' : ''}`}></div>
-    <span className="text-[10px] font-bold uppercase tracking-widest text-[#0a3d62]">{label}</span>
+    <span className="text-[10px] font-bold uppercase tracking-widest text-[#706fd3]">{label}</span>
   </div>
 );
 
@@ -81,14 +81,16 @@ const UserAccessModule: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => {
 };
 
 const SolaraLogo: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => (
-  <div className={`flex items-center gap-3 transition-opacity duration-300 ${collapsed ? 'justify-center w-full' : ''}`}>
-    <div className="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center border border-white/20">
-      <Sparkles size={20} className="text-white fill-white/20" />
-    </div>
+  <div className={`flex items-center gap-4 transition-all duration-300 ${collapsed ? 'justify-center w-full' : ''}`}>
+    <img 
+      src="/sol_com_risco_em_baixo-removebg-preview.png" 
+      alt="Solara Estética" 
+      className={`${collapsed ? 'w-12 h-12' : 'w-16 h-16'} object-contain drop-shadow-2xl`} 
+    />
     {!collapsed && (
       <div className="flex flex-col">
-        <span className="text-lg font-light text-white tracking-widest uppercase italic leading-none">AXOS <span className="font-black">HUB</span></span>
-        <span className="text-[8px] font-black text-slate-400 uppercase tracking-[0.3em] mt-1.5">Reception Module</span>
+        <span className="text-xl font-bold text-white tracking-widest uppercase leading-none">Solara</span>
+        <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.3em] mt-1.5 leading-none">Estética Digital</span>
       </div>
     )}
   </div>
@@ -180,7 +182,7 @@ const App: React.FC = () => {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen premium-gradient flex items-center justify-center p-6 font-inter relative">
+      <div className="min-h-screen bg-[#40407a] flex items-center justify-center p-6 font-inter relative">
         <Toaster position="top-right" />
         <button
           onClick={() => setShowLanding(true)}
@@ -195,13 +197,13 @@ const App: React.FC = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h1 className="text-white text-4xl font-light tracking-tight mb-4 uppercase leading-none italic">Solara Connect</h1>
-            <p className="text-[#82ccdd] text-[9px] font-bold uppercase tracking-[0.4em] opacity-60">Gestão Inteligente AXOS HUB</p>
+            <h1 className="text-white text-4xl font-bold tracking-tight mb-4 uppercase leading-none">Solara Estética</h1>
+            <p className="text-[#c9b8ff] text-[9px] font-bold uppercase tracking-[0.4em] opacity-80">Gestão Inteligente para Clínicas de Estética</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-3">
-              <label htmlFor="login-email" className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-1">Credencial de Acesso</label>
+              <label htmlFor="login-email" className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] ml-1">E-mail ou usuário</label>
               <div className="relative group">
                 <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-[#7ed6df] transition-colors" size={20} />
                 <input 
@@ -217,7 +219,7 @@ const App: React.FC = () => {
             </div>
 
             <div className="space-y-3">
-              <label htmlFor="login-password" className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-1">Senha Segura</label>
+              <label htmlFor="login-password" className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] ml-1">Senha</label>
               <div className="relative group">
                 <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-[#7ed6df] transition-colors" size={20} />
                 <input 
@@ -329,7 +331,7 @@ const App: React.FC = () => {
       />
       
       <aside 
-        className={`${isSidebarOpen ? 'w-80' : 'w-24'} bg-[#0a3d62] text-white transition-all duration-300 flex flex-col z-50 shadow-[20px_0_60px_-15px_rgba(10,61,98,0.3)] relative`}
+        className={`${isSidebarOpen ? 'w-80' : 'w-24'} bg-[#40407a] text-white transition-all duration-300 flex flex-col z-50 shadow-[20px_0_60px_-15px_rgba(64,64,122,0.3)] relative`}
       >
         <div className="px-8 h-28 flex items-center mb-8 shrink-0">
           <SolaraLogo collapsed={!isSidebarOpen} />
@@ -338,6 +340,7 @@ const App: React.FC = () => {
         <nav className="flex-1 px-5 space-y-2.5 overflow-y-auto custom-scrollbar">
           {[
             { id: 'dashboard', icon: LayoutDashboard, label: 'Visão Geral' },
+            { id: 'recovery', icon: Sparkles, label: 'IA de Recuperação' },
             { id: 'kanban', icon: Kanban, label: 'Central Kanban' },
             { id: 'patients', icon: Users, label: 'Clientes' },
             { id: 'specialists', icon: Stethoscope, label: 'Especialistas' },
@@ -353,12 +356,12 @@ const App: React.FC = () => {
               onClick={() => setActiveTab(item.id as any)}
               className={`w-full flex items-center gap-5 p-5 rounded-[24px] transition-all duration-300 group ${
                 activeTab === item.id 
-                  ? 'bg-white/10 shadow-lg border border-white/10' 
+                  ? 'bg-[#706fd3] shadow-lg border border-white/10' 
                   : 'text-white/40 hover:text-white hover:bg-white/5 border border-transparent'
               }`}
               title={item.label}
             >
-              <item.icon size={22} className={activeTab === item.id ? 'text-[#7ed6df]' : 'text-white/30 group-hover:text-white'} />
+              <item.icon size={22} className={activeTab === item.id ? 'text-white' : 'text-white/30 group-hover:text-white'} />
               {isSidebarOpen && <span className="text-[11px] font-bold uppercase tracking-[0.2em] leading-none text-left">{item.label}</span>}
             </button>
           ))}
@@ -368,27 +371,27 @@ const App: React.FC = () => {
           <UserAccessModule collapsed={!isSidebarOpen} />
           <button 
             onClick={handleLogout}
-            className={`w-full flex items-center gap-5 p-4 text-white/30 hover:text-[#ff7675] transition-all font-bold uppercase text-[9px] tracking-widest group ${!isSidebarOpen ? 'justify-center' : ''}`}
+            className={`w-full flex items-center gap-5 p-4 text-white/30 hover:text-[#ff7675] transition-all font-bold uppercase text-[12px] tracking-widest group ${!isSidebarOpen ? 'justify-center' : ''}`}
             title="Encerrar Sessão"
           >
-            <LogOut size={20} />
+            <LogOut size={23} />
             {isSidebarOpen && <span>Sair do Sistema</span>}
           </button>
         </div>
       </aside>
 
       <main className="flex-1 flex flex-col overflow-hidden bg-[#F0F2F5]">
-        <header className="h-28 px-10 flex items-center justify-between z-40 shrink-0 relative bg-[#F0F2F5]/80 backdrop-blur-xl border-b border-black/5">
+        <header className="h-28 px-10 flex items-center justify-between z-40 shrink-0 relative bg-[#474787] backdrop-blur-xl border-b border-black/10">
           <div className="flex items-center gap-8">
             <button 
               onClick={() => setSidebarOpen(!isSidebarOpen)} 
-              className="p-3.5 bg-white border border-black/5 rounded-2xl text-[#0a3d62] hover:bg-slate-50 transition-all shadow-sm"
+              className="p-3.5 bg-white border border-black/5 rounded-2xl text-[#706fd3] hover:bg-slate-50 transition-all shadow-sm"
             >
               <Menu size={20} />
             </button>
             <div className="flex flex-col">
-              <h1 className="text-3xl font-light text-[#0a3d62] tracking-tighter uppercase leading-none italic">Módulo de Recepção Digital</h1>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-3 opacity-60 italic">Clínicas odontológicas conectadas em tempo real</p>
+              <h1 className="text-3xl font-bold text-white tracking-tighter uppercase leading-none">Módulo de Recepção Digital</h1>
+              <p className="text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] mt-3">Clínicas de estética conectadas em tempo real</p>
             </div>
           </div>
 
@@ -396,7 +399,7 @@ const App: React.FC = () => {
              <TopStatusBadge active label="Solara atendendo" />
              <TopStatusBadge label="Solicitar humano" active={false} />
              <TopStatusBadge label="Configurar clínica" active={false} />
-             <div className="bg-[#0a3d62] px-6 py-2.5 rounded-2xl text-white font-mono text-sm tracking-widest shadow-lg shadow-[#0a3d62]/20">
+             <div className="bg-[#706fd3] px-6 py-2.5 rounded-2xl text-white font-mono text-sm tracking-widest shadow-lg shadow-[#706fd3]/20">
                01:36:52
              </div>
           </div>
@@ -404,12 +407,12 @@ const App: React.FC = () => {
           <div className="flex items-center justify-end gap-6">
             <button 
               onClick={() => setIsSolaraOpen(true)}
-              className="bg-[#0a3d62] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#0a3d62]/20 flex items-center gap-2.5"
+              className="bg-[#706fd3] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#706fd3]/20 flex items-center gap-2.5"
             >
               <Sparkles size={16} /> Solara AI
             </button>
             
-            <div className="w-12 h-12 bg-[#7ed6df] rounded-2xl flex items-center justify-center text-[#0a3d62] font-black text-sm uppercase shadow-lg border border-white">
+            <div className="w-12 h-12 bg-[#7ed6df] rounded-2xl flex items-center justify-center text-[#706fd3] font-black text-sm uppercase shadow-lg border border-white">
               {currentUser?.name.charAt(0)}
             </div>
           </div>
