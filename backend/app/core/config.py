@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Assistente Solara API"
+    PROJECT_NAME: str = "Solara Estética API"
     VERSION: str = "2.0.0"
     API_V1_STR: str = "/api/v1"
     

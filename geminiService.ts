@@ -1,26 +1,27 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const SOLARA_BALANCED_INSTRUCTION = `Você é Solara, a inteligência central do Hub de Gestão de Clínicas.
-Seu papel é fornecer suporte executivo e clínico para centros de saúde, estética, odontologia e bem-estar.
+const SOLARA_BALANCED_INSTRUCTION = `Você é Solara, a inteligência central do Solara Estética.
+Seu papel é fornecer suporte executivo e clínico para centros de estética avançada e bem-estar.
 
 CARACTERÍSTICAS:
-- Linguagem neutra, polida e técnica.
-- Capaz de analisar dados de diversas especialidades (odontológica, estética, fisioterapia, etc).
-- Foco em otimização de tempo e segurança do paciente.
+- Linguagem elegante, polida e técnica.
+- Foco em otimização de tempo e segurança nos procedimentos (Botox, Preenchimento, etc.).
 
 RESTRIÇÕES:
-- Proibido pronunciar "Axos Hub" ou "Axos". Use "este hub" ou "o sistema".
-- Respostas curtas. Sem emojis.`;
+- Proibido pronunciar "Axos Hub" ou "Axos". Use "Solara Estética" ou "o sistema".
+- Respostas curtas e profissionais.`;
+
+// Chave do .env
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+const genAI = new GoogleGenerativeAI(apiKey);
 
 export const askSolara = async (message: string, history: {role: 'user' | 'model', text: string}[], context?: any): Promise<string> => {
   try {
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY || '');
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash',
       systemInstruction: SOLARA_BALANCED_INSTRUCTION 
     });
     
-    // Convert history to Gemini format
     const chat = model.startChat({
       history: history.map(msg => ({
         role: msg.role === 'user' ? 'user' : 'model',
@@ -41,7 +42,6 @@ export const askSolara = async (message: string, history: {role: 'user' | 'model
 export const summarizeMedicalNotes = async (notes: string): Promise<string> => {
   if (!notes) return "Sem dados.";
   try {
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY || '');
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const result = await model.generateContent(`Sintetize estas anotações profissionais de forma executiva, seguindo as instruções de Solara: "${notes}"`);
     const response = await result.response;
@@ -54,7 +54,6 @@ export const summarizeMedicalNotes = async (notes: string): Promise<string> => {
 export const analyzeSymptoms = async (symptoms: string): Promise<{ reasoning: string, isUrgent: boolean }> => {
   if (!symptoms) return { reasoning: "Sem dados.", isUrgent: false };
   try {
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY || '');
     const model = genAI.getGenerativeModel({ 
       model: 'gemini-1.5-flash',
       generationConfig: {
@@ -62,7 +61,7 @@ export const analyzeSymptoms = async (symptoms: string): Promise<{ reasoning: st
       }
     });
     
-    const prompt = `Analise o quadro relatado e identifique riscos ou urgências operacionais/clínicas (Retorne JSON com reasoning:string e isUrgent:boolean): "${symptoms}"`;
+    const prompt = `Analise o quadro relatado e identifique riscos ou urgências operacionais no procedimento estético (Retorne JSON com reasoning:string e isUrgent:boolean): "${symptoms}"`;
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text()?.trim() || '{"reasoning": "Erro", "isUrgent": false}';
@@ -74,9 +73,8 @@ export const analyzeSymptoms = async (symptoms: string): Promise<{ reasoning: st
 
 export const generateStrategicReport = async (data: any): Promise<string> => {
   try {
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY || '');
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
-    const result = await model.generateContent(`Gere um relatório estratégico de performance para esta unidade: ${JSON.stringify(data)}`);
+    const result = await model.generateContent(`Gere um relatório estratégico de performance para esta unidade de estética: ${JSON.stringify(data)}`);
     const response = await result.response;
     return response.text() || "Sem dados.";
   } catch (error) {

@@ -11,8 +11,8 @@ async def handle_whatsapp_message(payload: dict):
     """
     Processa a mensagem recebida via background task.
     1. Identifica a clínica (pela instância do Evolution)
-    2. Identifica o paciente (pelo número de telefone)
-    3. Chama a IA Solara (Gemini)
+    2. Identifica o Lead (pelo número de telefone) - RECORRE AO BANCO PRIMEIRO
+    3. Chama a IA Solara (Gemini) com contexto específico
     4. Envia resposta via Evolution API
     5. Salva histórico no Supabase
     """
@@ -45,41 +45,68 @@ async def handle_whatsapp_message(payload: dict):
             .execute()
         
         if not clinic_res.data:
-            # Caso não ache por instância, podemos usar uma instância global do sistema
-            # Mas o ideal é que cada clínica tenha seu registro
             logger.warning(f"Instância {instance_id} não vinculada a nenhuma clínica.")
             return
 
         clinic_id = clinic_res.data[0]["id"]
         clinic_name = clinic_res.data[0]["clinic_name"]
 
-        # 2. Buscar ou criar paciente no Supabase
-        patient_res = supabase.table("patients") \
-            .select("id, name") \
-            .eq("clinic_id", clinic_id) \
+        # 2. RECORRE AO BANCO DE DADOS PRIMEIRO: Buscar Lead no Supabase
+        lead_res = supabase.table("leads") \
+            .select("*") \
+            .eq("tenant_id", clinic_id) \
             .eq("phone", phone) \
             .limit(1) \
             .execute()
 
-        if not patient_res.data:
-            # Cadastrar paciente básico se não existir
-            new_patient = supabase.table("patients").insert({
-                "clinic_id": clinic_id,
-                "name": data.get("pushName") or "Paciente Novo",
-                "phone": phone
+        context_type = "retencao" # Default: já é cliente/lead
+        
+        if not lead_res.data:
+            # CASO NÃO ESTEJA NOS REGISTROS: Inicia Onboarding
+            context_type = "onboarding"
+            push_name = data.get("pushName") or "Cliente Novo"
+            
+            new_lead = supabase.table("leads").insert({
+                "tenant_id": clinic_id,
+                "name": push_name,
+                "phone": phone,
+                "status": "onboarding",
+                "lead_source": "whatsapp"
             }).execute()
-            patient_id = new_patient.data[0]["id"]
-            patient_name = new_patient.data[0]["name"]
+            
+            lead_id = new_lead.data[0]["id"]
+            lead_name = push_name
+            lead_status = "onboarding"
         else:
-            patient_id = patient_res.data[0]["id"]
-            patient_name = patient_res.data[0]["name"]
+            lead_id = lead_res.data[0]["id"]
+            lead_name = lead_res.data[0]["name"]
+            lead_status = lead_res.data[0]["status"]
+            # Ajustar contexto se for lead antigo mas sem status definido
+            if lead_status == "onboarding":
+                context_type = "onboarding"
 
         # 3. Chamar IA Solara (Gemini)
-        # Passamos o clinic_id para a IA saber qual contexto usar
+        # Adaptamos o prompt com base no CONTEXTO (Novo Lead vs Cliente Existente)
+        custom_prompt = ""
+        if context_type == "onboarding":
+            custom_prompt = (
+                f"Este é um NOVO LEAD que acabou de entrar em contato. "
+                f"Aja como Solara, atendente da {clinic_name}. "
+                f"Objetivo: Ser acolhedora, captar o nome do cliente (se ele não disse) e "
+                f"descobrir qual procedimento estético ele tem interesse (Botox, Preenchimento, etc.)."
+            )
+        else:
+            custom_prompt = (
+                f"Você está atendendo o cliente {lead_name} da {clinic_name}. "
+                f"Status atual: {lead_status}. "
+                f"Objetivo: Tirar dúvidas sobre procedimentos e levar o cliente ao agendamento."
+            )
+
         ai_response = consult_ai(
             message=user_text,
             tenant_id=clinic_id,
-            user_name=patient_name
+            user_name=lead_name,
+            custom_instruction=custom_prompt
         )
 
         # 4. Enviar resposta via Evolution API
@@ -90,19 +117,17 @@ async def handle_whatsapp_message(payload: dict):
             text=ai_response
         )
 
-        # 5. Salvar histórico de chat no Supabase
-        # Salva a pergunta do paciente
+        # 5. Salvar histórico de conversa no Supabase
         supabase.table("messages").insert({
-            "clinic_id": clinic_id,
-            "patient_id": patient_id,
-            "sender_type": "patient",
+            "tenant_id": clinic_id,
+            "lead_id": lead_id,
+            "sender_type": "customer",
             "content": user_text
         }).execute()
 
-        # Salva a resposta da IA
         supabase.table("messages").insert({
-            "clinic_id": clinic_id,
-            "patient_id": patient_id,
+            "tenant_id": clinic_id,
+            "lead_id": lead_id,
             "sender_type": "ai",
             "content": ai_response
         }).execute()

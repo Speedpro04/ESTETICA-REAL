@@ -20,7 +20,7 @@ import {
   Zap
 } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
-import { useAxosStore } from './store';
+import { useSolaraStore } from './store';
 import DashboardView from './components/DashboardView';
 import KanbanView from './components/KanbanView';
 import PainelView from './components/PainelView';
@@ -53,7 +53,7 @@ const TopStatusBadge: React.FC<{ active?: boolean, label: string, color?: string
 
 // Módulo de Identificação do Usuário na Sidebar
 const UserAccessModule: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => {
-  const { currentUser } = useAxosStore();
+  const { currentUser } = useSolaraStore();
   if (!currentUser) return null;
 
   return (
@@ -70,7 +70,7 @@ const UserAccessModule: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => {
             <div className="flex items-center gap-1.5 mt-1">
               <ShieldCheck size={10} className="text-[#8d939e]" />
               <span className="text-[8px] font-black text-[#8d939e] uppercase tracking-[0.2em] whitespace-nowrap">
-                SUPER ADMIN
+                UNIDADE SOLARA
               </span>
             </div>
           </div>
@@ -100,11 +100,12 @@ const App: React.FC = () => {
   const { 
     activeTab, setActiveTab, 
     isSidebarOpen, setSidebarOpen, 
-    patients, 
-    selectedPatientId, setSelectedPatientId,
-    updatePatientStatus, updatePatient,
-    currentUser, login, logout
-  } = useAxosStore();
+    leads, 
+    selectedLeadId, setSelectedLeadId,
+    updateLeadStatus, updateLead,
+    currentUser, login, logout,
+    privacyMode, togglePrivacyMode
+  } = useSolaraStore();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -277,28 +278,28 @@ const App: React.FC = () => {
     );
   }
 
-  const selectedPatient = patients.find(p => p.id === selectedPatientId);
+  const selectedLead = leads.find(l => l.id === selectedLeadId);
 
   const renderView = () => {
-    if (selectedPatientId && selectedPatient) {
+    if (selectedLeadId && selectedLead) {
       return (
         <PatientDetailView 
-          patient={selectedPatient} 
-          onBack={() => setSelectedPatientId(null)} 
-          onUpdate={updatePatient}
+          patient={selectedLead as any} 
+          onBack={() => setSelectedLeadId(null)} 
+          onUpdate={updateLead as any}
         />
       );
     }
     switch (activeTab) {
-      case 'dashboard': return <DashboardView patients={patients} appointments={mockAppointments} onOpenPatient={setSelectedPatientId} />;
+      case 'dashboard': return <DashboardView leads={leads} appointments={mockAppointments} onOpenLead={setSelectedLeadId} />;
       case 'agenda': return <AgendaView appointments={mockAppointments} />;
-      case 'kanban': return <PainelView patients={patients} onUpdateStatus={updatePatientStatus} onOpenPatient={setSelectedPatientId} />;
-      case 'patients': return (
+      case 'kanban': return <PainelView leads={leads} onUpdateStatus={updateLeadStatus} onOpenLead={setSelectedLeadId} />;
+      case 'leads': return (
         <PatientListView 
-          patients={patients.filter(p => p.name.toLowerCase().includes(debouncedQuery.toLowerCase()) || p.cpf.includes(debouncedQuery))} 
+          patients={leads.filter(l => l.name.toLowerCase().includes(debouncedQuery.toLowerCase()) || l.cpf.includes(debouncedQuery)) as any} 
           searchQuery={searchQuery} 
           setSearchQuery={setSearchQuery} 
-          onOpenPatient={setSelectedPatientId} 
+          onOpenPatient={setSelectedLeadId} 
         />
       );
       case 'whatsapp': return <WhatsAppView />;
@@ -310,7 +311,7 @@ const App: React.FC = () => {
       case 'recovery': return <RecoveryView />;
       case 'campanhas': return <CampanhasView />;
       case 'agenda-analysis': return <AgendaAnalysisView />;
-      default: return <DashboardView patients={patients} appointments={mockAppointments} onOpenPatient={setSelectedPatientId} />;
+      default: return <DashboardView leads={leads} appointments={mockAppointments} onOpenLead={setSelectedLeadId} />;
     }
   };
 
@@ -320,14 +321,14 @@ const App: React.FC = () => {
       <CommandPalette 
         isOpen={isCommandPaletteOpen} 
         onClose={() => setIsCommandPaletteOpen(false)} 
-        patients={patients}
-        onSelectPatient={setSelectedPatientId}
+        leads={leads}
+        onSelectLead={setSelectedLeadId}
       />
       
       <SolaraAssistant 
         isOpen={isSolaraOpen} 
         onClose={() => setIsSolaraOpen(false)} 
-        context={{ activeTab, patientsCount: patients.length, currentUser }}
+        context={{ activeTab, leadsCount: leads.length, currentUser }}
       />
       
       <aside 
@@ -342,10 +343,10 @@ const App: React.FC = () => {
             { id: 'dashboard', icon: LayoutDashboard, label: 'Visão Geral' },
             { id: 'recovery', icon: Sparkles, label: 'IA de Recuperação' },
             { id: 'kanban', icon: Kanban, label: 'Central Kanban' },
-            { id: 'patients', icon: Users, label: 'Clientes' },
+            { id: 'leads', icon: Users, label: 'Clientes / Leads' },
             { id: 'specialists', icon: Stethoscope, label: 'Especialistas' },
             { id: 'agenda', icon: Calendar, label: 'Agenda' },
-            { id: 'whatsapp', icon: MessageSquare, label: 'WhatsApp' },
+            { id: 'whatsapp', icon: MessageSquare, label: 'WhatsApp Live' },
             { id: 'nps', icon: BarChart3, label: 'NPS' },
             { id: 'automations', icon: Zap, label: 'Automações' },
             { id: 'privacy', icon: ShieldCheck, label: 'Privacidade' },
@@ -391,7 +392,7 @@ const App: React.FC = () => {
             </button>
             <div className="flex flex-col">
               <h1 className="text-3xl font-bold text-white tracking-tighter uppercase leading-none">Módulo de Recepção Digital</h1>
-              <p className="text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] mt-3">Clínicas de estética conectadas em tempo real</p>
+              <p className="text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] mt-3">SaaS especializado para clínicas de estética</p>
             </div>
           </div>
 
@@ -405,6 +406,16 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-end gap-6">
+            <button 
+              onClick={togglePrivacyMode}
+              className={`p-3.5 rounded-2xl transition-all shadow-xl active:scale-95 flex items-center justify-center ${
+                privacyMode ? 'bg-[#706fd3] text-white' : 'bg-white text-[#40407a]'
+              }`}
+              title={privacyMode ? "Mostrar valores" : "Ocultar valores"}
+            >
+              {privacyMode ? <Eye size={20} /> : <EyeOff size={20} />}
+            </button>
+
             <button 
               onClick={() => setIsSolaraOpen(true)}
               className="bg-[#706fd3] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#706fd3]/20 flex items-center gap-2.5"

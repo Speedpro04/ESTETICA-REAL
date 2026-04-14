@@ -77,18 +77,20 @@ tools_declaration = [
     }
 ]
 
-def consult_ai(message: str, tenant_id: str, user_name: str, **kwargs):
+def consult_ai(message: str, tenant_id: str, user_name: str, custom_instruction: str = "", **kwargs):
     """
     Interface unificada para consulta ao Gemini.
     """
     if not api_key:
         return "Erro: GEMINI_API_KEY não configurada."
     
+    # Base da instrução de sistema - Agora focada em Estética
     system_instruction = (
-        f"Você é a Solara, uma assistente virtual e consultora inteligente para clínicas odontológicas. "
-        f"Sua clínica se chama Solara Assistente. Seja educada, proativa e direta. "
-        f"Use o histórico e ferramentas quando solicitado pelo usuário ({user_name}). "
-        f"Seja empática e foque em ajudar a clínica a faturar mais recuperando pacientes."
+        f"Você é a Solara, uma assistente virtual e especialista em estética avançada para a clínica. "
+        f"Seja educada, proativa, elegante e use uma linguagem que transmita confiança e beleza. "
+        f"Sempre tente ajudar o cliente ({user_name}) a entender os benefícios dos procedimentos. "
+        f"Se solicitado, use as ferramentas de consulta disponíveis. "
+        f"\n\nINSTRUÇÃO ESPECÍFICA DE CONTEXTO: {custom_instruction}"
     )
     
     try:

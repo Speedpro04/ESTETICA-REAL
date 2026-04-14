@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.api.endpoints import (
-    auth, patients, campaigns, chat, recovery, clinics, subscriptions, webhooks, evolution
+    auth, leads, campaigns, chat, recovery, clinics, subscriptions, webhooks, evolution
 )
 
 api_router = APIRouter()
@@ -21,7 +21,7 @@ api_router.include_router(webhooks.router, prefix="/webhooks", tags=["webhooks"]
 api_router.include_router(evolution.router, prefix="/evolution", tags=["evolution"])
 
 # Módulos do sistema (requer login)
-api_router.include_router(patients.router, prefix="/patients", tags=["patients"])
+api_router.include_router(leads.router, prefix="/leads", tags=["leads"])
 api_router.include_router(campaigns.router, prefix="/campaigns", tags=["campaigns"])
 api_router.include_router(chat.router, prefix="/chat", tags=["chat"])
 api_router.include_router(recovery.router, prefix="/recovery", tags=["recovery"])

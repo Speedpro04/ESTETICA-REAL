@@ -1,8 +1,7 @@
-
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { Patient, PatientStatus, MedicalRecord } from './types';
-import { mockPatients } from './mockData';
+import { Lead, LeadStatus, MedicalRecord } from './types';
+import { mockLeads } from './mockData';
 import toast from 'react-hot-toast';
 
 interface User {
@@ -13,50 +12,57 @@ interface User {
   tenant_id?: string;
 }
 
-interface AxosState {
-  patients: Patient[];
+interface SolaraState {
+  leads: Lead[];
   isSidebarOpen: boolean;
-  activeTab: 'dashboard' | 'agenda' | 'kanban' | 'patients' | 'conversations' | 'followups' | 'specialists' | 'finance' | 'recovery' | 'campanhas' | 'ai-assistant' | 'agenda-analysis' | 'settings';
-  selectedPatientId: string | null;
+  activeTab: 'dashboard' | 'agenda' | 'kanban' | 'leads' | 'conversations' | 'followups' | 'specialists' | 'finance' | 'recovery' | 'campanhas' | 'ai-assistant' | 'agenda-analysis' | 'settings' | 'whatsapp' | 'nps' | 'automations' | 'privacy';
+  selectedLeadId: string | null;
   isLoading: boolean;
   syncStatus: 'idle' | 'syncing' | 'success' | 'error';
   currentUser: User | null;
   
   // Actions
   setSidebarOpen: (open: boolean) => void;
-  setActiveTab: (tab: AxosState['activeTab']) => void;
-  setSelectedPatientId: (id: string | null) => void;
-  setSyncStatus: (status: AxosState['syncStatus']) => void;
+  setActiveTab: (tab: SolaraState['activeTab']) => void;
+  setSelectedLeadId: (id: string | null) => void;
+  setSyncStatus: (status: SolaraState['syncStatus']) => void;
   login: (email: string, password?: string) => Promise<void>;
   logout: () => void;
   
-  // Patient management
-  updatePatientStatus: (id: string, status: PatientStatus) => Promise<void>;
-  updatePatient: (updatedPatient: Patient) => Promise<void>;
-  addMedicalRecord: (patientId: string, record: MedicalRecord) => Promise<void>;
+  // Lead management
+  updateLeadStatus: (id: string, status: LeadStatus) => Promise<void>;
+  updateLead: (updatedLead: Lead) => Promise<void>;
+  addMedicalRecord: (leadId: string, record: MedicalRecord) => Promise<void>;
+  
+  // Security/Privacy
+  privacyMode: boolean;
+  togglePrivacyMode: () => void;
   
   // n8n sync helper
   syncToN8N: (endpoint: string, data: any) => Promise<any>;
 }
 
-const API_BASE_URL = 'http://localhost:8000/api/v1'; 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'; 
 const N8N_BASE_URL = ''; 
 
-export const useAxosStore = create<AxosState>()(
+export const useSolaraStore = create<SolaraState>()(
   devtools(
     persist(
       (set, get) => ({
-        patients: mockPatients,
+        leads: mockLeads,
         isSidebarOpen: true,
         activeTab: 'dashboard',
-        selectedPatientId: null,
+        selectedLeadId: null,
         isLoading: false,
         syncStatus: 'idle',
         currentUser: null,
+        privacyMode: false,
+
+        togglePrivacyMode: () => set(state => ({ privacyMode: !state.privacyMode })),
 
         setSidebarOpen: (open) => set({ isSidebarOpen: open }),
-        setActiveTab: (tab) => set({ activeTab: tab, selectedPatientId: null }),
-        setSelectedPatientId: (id) => set({ selectedPatientId: id }),
+        setActiveTab: (tab) => set({ activeTab: tab, selectedLeadId: null }),
+        setSelectedLeadId: (id) => set({ selectedLeadId: id }),
         setSyncStatus: (status) => set({ syncStatus: status }),
         
         login: async (email, password) => {
@@ -110,56 +116,56 @@ export const useAxosStore = create<AxosState>()(
         },
 
         logout: () => {
-          set({ currentUser: null, activeTab: 'dashboard', selectedPatientId: null });
+          set({ currentUser: null, activeTab: 'dashboard', selectedLeadId: null });
           toast.success('Sessão encerrada com segurança');
         },
 
-        updatePatientStatus: async (id, status) => {
-          const previousPatients = get().patients;
+        updateLeadStatus: async (id, status) => {
+          const previousLeads = get().leads;
           set({
-            patients: previousPatients.map(p => 
-              p.id === id ? { ...p, status, isSyncing: true } : p
+            leads: previousLeads.map(l => 
+              l.id === id ? { ...l, status, isSyncing: true } : l
             )
           });
 
           try {
-            await get().syncToN8N('/update-status', { patientId: id, status });
+            await get().syncToN8N('/update-status', { leadId: id, status });
             
             set({
-              patients: get().patients.map(p => 
-                p.id === id ? { ...p, isSyncing: false } : p
+              leads: get().leads.map(l => 
+                l.id === id ? { ...l, isSyncing: false } : l
               )
             });
             toast.success(`Fluxo atualizado para ${status}`);
           } catch (error) {
-            set({ patients: previousPatients });
+            set({ leads: previousLeads });
             toast.error('Erro na sincronização de dados.');
           }
         },
 
-        updatePatient: async (updated) => {
+        updateLead: async (updated) => {
           set(state => ({
-            patients: state.patients.map(p => p.id === updated.id ? updated : p)
+            leads: state.leads.map(l => l.id === updated.id ? updated : l)
           }));
           
-          get().syncToN8N('/update-patient', updated).catch(console.error);
+          get().syncToN8N('/update-lead', updated).catch(console.error);
         },
 
-        addMedicalRecord: async (patientId, record) => {
-          const patient = get().patients.find(p => p.id === patientId);
-          if (!patient) return;
+        addMedicalRecord: async (leadId, record) => {
+          const lead = get().leads.find(l => l.id === leadId);
+          if (!lead) return;
 
-          const updatedPatient = {
-            ...patient,
-            history: [record, ...patient.history]
+          const updatedLead = {
+            ...lead,
+            history: [record, ...lead.history]
           };
 
           set(state => ({
-            patients: state.patients.map(p => p.id === patientId ? updatedPatient : p)
+            leads: state.leads.map(l => l.id === leadId ? updatedLead : l)
           }));
 
           toast.success('Prontuário atualizado e assinado');
-          get().syncToN8N('/new-record', { patientId, record }).catch(console.error);
+          get().syncToN8N('/new-record', { leadId, record }).catch(console.error);
         },
 
         syncToN8N: async (endpoint, data) => {
@@ -196,7 +202,7 @@ export const useAxosStore = create<AxosState>()(
           }
         }
       }),
-      { name: 'painel-gestao-storage' }
+      { name: 'solara-estetica-storage' }
     )
   )
 );
