@@ -22,10 +22,9 @@ import {
 import { Toaster } from 'react-hot-toast';
 import { useSolaraStore } from './store';
 import DashboardView from './components/DashboardView';
-import KanbanView from './components/KanbanView';
 import PainelView from './components/PainelView';
-import PatientListView from './components/PatientListView';
-import PatientDetailView from './components/PatientDetailView';
+import LeadListView from './components/LeadListView';
+import LeadDetailView from './components/LeadDetailView';
 import AgendaView from './components/AgendaView';
 import FinanceiroView from './components/FinanceiroView';
 import RecoveryView from './components/RecoveryView';
@@ -283,10 +282,10 @@ const App: React.FC = () => {
   const renderView = () => {
     if (selectedLeadId && selectedLead) {
       return (
-        <PatientDetailView 
-          patient={selectedLead as any} 
+        <LeadDetailView 
+          patient={selectedLead} 
           onBack={() => setSelectedLeadId(null)} 
-          onUpdate={updateLead as any}
+          onUpdate={updateLead}
         />
       );
     }
@@ -295,11 +294,11 @@ const App: React.FC = () => {
       case 'agenda': return <AgendaView appointments={mockAppointments} />;
       case 'kanban': return <PainelView leads={leads} onUpdateStatus={updateLeadStatus} onOpenLead={setSelectedLeadId} />;
       case 'leads': return (
-        <PatientListView 
-          patients={leads.filter(l => l.name.toLowerCase().includes(debouncedQuery.toLowerCase()) || l.cpf.includes(debouncedQuery)) as any} 
+        <LeadListView 
+          leads={leads.filter(l => l.name.toLowerCase().includes(debouncedQuery.toLowerCase()) || l.phone?.includes(debouncedQuery))} 
           searchQuery={searchQuery} 
           setSearchQuery={setSearchQuery} 
-          onOpenPatient={setSelectedLeadId} 
+          onOpenLead={setSelectedLeadId} 
         />
       );
       case 'whatsapp': return <WhatsAppView />;
