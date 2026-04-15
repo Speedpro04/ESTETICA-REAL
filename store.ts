@@ -15,7 +15,7 @@ interface User {
 interface SolaraState {
   leads: Lead[];
   isSidebarOpen: boolean;
-  activeTab: 'dashboard' | 'agenda' | 'kanban' | 'leads' | 'conversations' | 'followups' | 'specialists' | 'finance' | 'recovery' | 'campanhas' | 'ai-assistant' | 'agenda-analysis' | 'settings' | 'whatsapp' | 'nps' | 'automations' | 'privacy';
+  activeTab: 'dashboard' | 'agenda' | 'kanban' | 'leads' | 'conversations' | 'followups' | 'specialists' | 'finance' | 'recovery' | 'campanhas' | 'ai-assistant' | 'agenda-analysis' | 'settings' | 'whatsapp' | 'nps' | 'automations' | 'privacy' | 'second-brain';
   selectedLeadId: string | null;
   isLoading: boolean;
   syncStatus: 'idle' | 'syncing' | 'success' | 'error';

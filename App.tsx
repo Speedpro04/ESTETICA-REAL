@@ -17,7 +17,8 @@ import {
   DollarSign,
   Sparkles,
   BarChart3,
-  Zap
+  Zap,
+  BrainCircuit
 } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 import { useSolaraStore } from './store';
@@ -38,6 +39,7 @@ import PrivacidadeView from './components/PrivacidadeView';
 import { CommandPalette } from './components/CommandPalette';
 import SolaraAssistant from './components/SolaraAssistant';
 import LandingView from './components/LandingView';
+import SecondBrainView from './components/SecondBrainView';
 import RegisterView from './components/RegisterView';
 import ForgotPasswordView from './components/ForgotPasswordView';
 import { mockAppointments } from './mockData';
@@ -310,6 +312,7 @@ const App: React.FC = () => {
       case 'recovery': return <RecoveryView />;
       case 'campanhas': return <CampanhasView />;
       case 'agenda-analysis': return <AgendaAnalysisView />;
+      case 'second-brain': return <SecondBrainView />;
       default: return <DashboardView leads={leads} appointments={mockAppointments} onOpenLead={setSelectedLeadId} />;
     }
   };
@@ -340,6 +343,7 @@ const App: React.FC = () => {
         <nav className="flex-1 px-5 space-y-2.5 overflow-y-auto custom-scrollbar">
           {[
             { id: 'dashboard', icon: LayoutDashboard, label: 'Visão Geral' },
+            { id: 'second-brain', icon: BrainCircuit, label: 'Second Brain' },
             { id: 'recovery', icon: Sparkles, label: 'IA de Recuperação' },
             { id: 'kanban', icon: Kanban, label: 'Central Kanban' },
             { id: 'leads', icon: Users, label: 'Clientes / Leads' },

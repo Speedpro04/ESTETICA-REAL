@@ -1,7 +1,5 @@
-"""
-Tarefas Celery - Odonto Connect
-Todas as tarefas assíncronas do sistema ficam centralizadas aqui.
-"""
+import polars as pl
+import json
 import time
 import logging
 from datetime import datetime
@@ -255,3 +253,54 @@ def send_bulk_whatsapp(self, campaign_id: str, contacts: list, message_template:
     except Exception as exc:
         logger.error(f"[BULK-WA] Erro na campanha {campaign_id}: {exc}")
         raise self.retry(exc=exc)
+
+# ═══════════════════════════════════════════════════
+# ANÁLISE DE DADOS (Polars Engine)
+# ═══════════════════════════════════════════════════
+
+@celery_app.task(name="tasks.analyze_estetica_lead_conversion")
+def analyze_estetica_lead_conversion(leads_json: str):
+    """
+    Analisa conversão de leads de estética usando Polars.
+    Identifica quais procedimentos (Botox vs Preenchimento) têm maior taxa de fechamento.
+    """
+    try:
+        leads = json.loads(leads_json)
+        df = pl.DataFrame(leads)
+        
+        # Análise por procedimento
+        analysis = (
+            df.group_by("interested_procedure")
+              .agg([
+                  pl.len().alias("count"),
+                  pl.col("converted").mean().alias("conversion_rate")
+              ])
+              .sort("conversion_rate", descending=True)
+        )
+        
+        return {"success": True, "results": analysis.to_dicts()}
+    except Exception as e:
+        logger.error(f"[POLARS] Erro na análise: {e}")
+        return {"success": False, "error": str(e)}
+
+@celery_app.task(name="tasks.identify_inactive_patients_estetica")
+def identify_inactive_patients_estetica(appointments_json: str):
+    """
+    Identifica pacientes que fizeram Botox há mais de 5 meses e ainda não voltaram.
+    """
+    try:
+        df = pl.DataFrame(json.loads(appointments_json))
+        
+        # Filtra por Botox e intervalo de tempo
+        recalls = (
+            df.filter(
+                (pl.col("procedure") == "Botox") & 
+                (pl.col("months_since_last") >= 5)
+            )
+            .select(["patient_name", "last_date", "phone"])
+        )
+        
+        return recalls.to_dicts()
+    except Exception as e:
+        logger.error(f"[POLARS] Erro ao identificar inativos: {e}")
+        return []
