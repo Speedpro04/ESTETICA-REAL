@@ -1,13 +1,13 @@
 
 import { useState } from 'react';
 import { analyzeSymptoms, summarizeMedicalNotes } from '../geminiService';
-import { useAxosStore } from '../store';
+import { useSolaraStore } from '../store';
 import { handleError } from '../utils/errorHandler';
 import toast from 'react-hot-toast';
 
 export const useAIAnalysis = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const { syncToN8N } = useAxosStore();
+  const { syncToN8N } = useSolaraStore();
 
   const runSymptomAnalysis = async (symptoms: string, patientId: string) => {
     if (!symptoms) return null;

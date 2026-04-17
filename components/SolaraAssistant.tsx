@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Sun, X, Send, RotateCcw, Sparkles } from 'lucide-react';
-import { useAxosStore } from '../store';
+import { useSolaraStore } from '../store';
 import toast from 'react-hot-toast';
 
 interface SolaraAssistantProps {
@@ -10,7 +10,7 @@ interface SolaraAssistantProps {
 }
 
 const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) => {
-  const { currentUser } = useAxosStore();
+  const { currentUser } = useSolaraStore();
   
   const userName = currentUser?.name || 'Administrador';
 

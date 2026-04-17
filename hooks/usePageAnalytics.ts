@@ -1,9 +1,8 @@
-
 import { useRef, useEffect } from 'react';
-import { useAxosStore } from '../store';
+import { useSolaraStore } from '../store';
 
 export const usePageAnalytics = (pageName: string, metadata?: Record<string, any>) => {
-  const { syncToN8N } = useAxosStore();
+  const { syncToN8N } = useSolaraStore();
   const startTime = useRef(Date.now());
   const hasTrackedView = useRef(false);
 
