@@ -71,7 +71,7 @@ const UserAccessModule: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => {
             <div className="flex items-center gap-1.5 mt-1">
               <ShieldCheck size={10} className="text-[#8d939e]" />
               <span className="text-[8px] font-black text-[#8d939e] uppercase tracking-[0.2em] whitespace-nowrap">
-                UNIDADE SOLARA
+                UNIDADE ODONTO
               </span>
             </div>
           </div>
@@ -83,15 +83,13 @@ const UserAccessModule: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => {
 
 const SolaraLogo: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => (
   <div className={`flex items-center gap-4 transition-all duration-300 ${collapsed ? 'justify-center w-full' : ''}`}>
-    <img 
-      src="/sol_com_risco_em_baixo-removebg-preview.png" 
-      alt="Solara Estética" 
-      className={`${collapsed ? 'w-12 h-12' : 'w-16 h-16'} object-contain drop-shadow-2xl`} 
-    />
+    <div className="w-12 h-12 bg-gradient-to-br from-[#7ed6df] to-[#00A3FF] rounded-2xl flex items-center justify-center text-white shadow-lg shrink-0">
+      <Stethoscope size={24} />
+    </div>
     {!collapsed && (
       <div className="flex flex-col">
-        <span className="text-xl font-bold text-white tracking-widest uppercase leading-none">Solara</span>
-        <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.3em] mt-1.5 leading-none">Estética Digital</span>
+        <span className="text-xl font-bold text-white tracking-widest uppercase leading-none">Odonto</span>
+        <span className="text-[9px] font-black text-white/40 uppercase tracking-[0.3em] mt-1.5 leading-none">Connect</span>
       </div>
     )}
   </div>
@@ -199,8 +197,8 @@ const App: React.FC = () => {
           </div>
           
           <div className="text-center mb-12">
-            <h1 className="text-white text-4xl font-bold tracking-tight mb-4 uppercase leading-none">Solara Estética</h1>
-            <p className="text-[#c9b8ff] text-[9px] font-bold uppercase tracking-[0.4em] opacity-80">Gestão Inteligente para Clínicas de Estética</p>
+            <h1 className="text-white text-4xl font-bold tracking-tight mb-4 uppercase leading-none">Odonto Connect</h1>
+            <p className="text-[#c9b8ff] text-[9px] font-bold uppercase tracking-[0.4em] opacity-80">Gestão Inteligente para Clínicas Odontológicas</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5">
@@ -394,13 +392,13 @@ const App: React.FC = () => {
               <Menu size={20} />
             </button>
             <div className="flex flex-col">
-              <h1 className="text-3xl font-bold text-white tracking-tighter uppercase leading-none">Módulo de Recepção Digital</h1>
-              <p className="text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] mt-3">SaaS especializado para clínicas de estética</p>
+              <h1 className="text-3xl font-bold text-white tracking-tighter uppercase leading-none">Odonto Connect Dashboard</h1>
+              <p className="text-[10px] font-bold text-white/60 uppercase tracking-[0.3em] mt-3">SaaS especializado para clínicas odontológicas</p>
             </div>
           </div>
 
           <div className="hidden xl:flex items-center gap-4">
-             <TopStatusBadge active label="Solara atendendo" />
+             <TopStatusBadge active label="Odonto AI atendendo" />
              <TopStatusBadge label="Solicitar humano" active={false} />
              <TopStatusBadge label="Configurar clínica" active={false} />
              <div className="bg-[#706fd3] px-6 py-2.5 rounded-2xl text-white font-mono text-sm tracking-widest shadow-lg shadow-[#706fd3]/20">
@@ -421,9 +419,9 @@ const App: React.FC = () => {
 
             <button 
               onClick={() => setIsSolaraOpen(true)}
-              className="bg-[#706fd3] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#706fd3]/20 flex items-center gap-2.5"
+              className="bg-[#7ed6df] text-[#40407a] px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#7ed6df]/20 flex items-center gap-2.5"
             >
-              <Sparkles size={16} /> Solara AI
+              <Sparkles size={16} /> Odonto AI
             </button>
             
             <div className="w-12 h-12 bg-[#7ed6df] rounded-2xl flex items-center justify-center text-[#706fd3] font-black text-sm uppercase shadow-lg border border-white">
