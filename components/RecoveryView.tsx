@@ -4,7 +4,7 @@ import {
   DollarSign, Activity, Brain, Phone, Mail, RefreshCw,
   Zap, CheckCircle2, Clock
 } from 'lucide-react';
-import { useAxosStore } from '../store';
+import { useSolaraStore } from '../store';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Constantes e Tipos
@@ -86,7 +86,7 @@ function enriquecerPacientes() {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const RecoveryView: React.FC = () => {
-  const { currentUser } = useAxosStore();
+  const { currentUser } = useSolaraStore();
 
   const [recoveryList, setRecoveryList] = useState(enriquecerPacientes());
   const [filterScore, setFilterScore] = useState<RiskScore | 'TODOS'>('TODOS');
