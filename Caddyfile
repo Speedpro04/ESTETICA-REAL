@@ -22,13 +22,6 @@
     # Roteamento SPA
     try_files {path} /index.html
     
-    # MIME Types Customizados (Crucial para contornar Strict MIME checking no navegador)
-    mime {
-        .tsx application/javascript
-        .ts  application/javascript
-        .jsx application/javascript
-    }
-    
     # Servir arquivos estáticos normalmente
     file_server
 }
