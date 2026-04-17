@@ -51,7 +51,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
         />
         <DashboardStatusCard 
           icon={MessageSquare} 
-          label="Interações Solara (Hoje)" 
+          label="Interações Odonto AI (Hoje)" 
           value="12 atendimentos" 
           color="bg-[#706fd3]/10 text-[#706fd3]" 
         />
@@ -63,7 +63,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
         />
         <div className="flex gap-4 ml-auto">
           <button className="bg-[#706fd3] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest shadow-xl shadow-[#706fd3]/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
-            <Sparkles size={14} /> Solara Intelligence
+            <Sparkles size={14} /> Odonto AI Intelligence
           </button>
         </div>
       </div>
@@ -151,10 +151,9 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
               </div>
            </div>
 
-           {/* Monitor de Conversas (Solara) */}
            <div className="bg-[#40407a] rounded-[40px] border border-white/10 shadow-2xl overflow-hidden flex flex-col min-h-[320px]">
              <div className="p-8 border-b border-white/5 flex justify-between items-center bg-black/10">
-                <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em]">Solara Live Chat</h3>
+                <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em]">Odonto AI Live Chat</h3>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-[9px] font-bold text-green-500 truncate uppercase">Online</span>
@@ -162,7 +161,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
              </div>
              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-white/40">
                 <MessageSquare size={40} className="mb-6 opacity-20" />
-                <p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed">Solara está gerenciando 5 conversas simultâneas no WhatsApp.</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed">A Odonto AI está gerenciando 5 conversas simultâneas no WhatsApp.</p>
              </div>
              <div className="p-8 bg-black/20">
                 <button className="w-full py-5 bg-white/10 text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/20 transition-all border border-white/10">
