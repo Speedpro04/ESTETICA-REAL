@@ -45,7 +45,8 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/chat/', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+      const response = await fetch(`${apiUrl}/chat/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
