@@ -101,7 +101,7 @@ const CampanhasView: React.FC = () => {
       {/* Header */}
       <div>
         <h2 className="text-3xl font-light text-[#0a3d62] tracking-tight uppercase">Campanhas Inteligentes</h2>
-        <p className="text-[#57606f] text-xs font-light uppercase tracking-widest mt-1 opacity-70">
+        <p className="text-[#2f3640] text-xs font-black uppercase tracking-widest mt-1 opacity-90">
           IA identifica pacientes e dispara campanhas automaticamente
         </p>
       </div>
@@ -114,11 +114,11 @@ const CampanhasView: React.FC = () => {
           { label: 'Taxa Média Retorno',   value: '28%',    icon: TrendingUp,   color: 'text-emerald-500', bg: 'bg-emerald-50' },
           { label: 'Faturamento Gerado',   value: 'R$ 12.480', icon: Zap,      color: 'text-violet-500', bg: 'bg-violet-50' },
         ].map((k, i) => (
-          <div key={i} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
-            <div className={`inline-flex p-2 rounded-xl ${k.bg} mb-3`}>
+          <div key={i} className="bg-white rounded-[13px] p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
+            <div className={`inline-flex p-2 rounded-[13px] ${k.bg} mb-3`}>
               <kpi.icon size={18} className={k.color} />
             </div>
-            <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest mb-1 leading-tight">{k.label}</p>
+            <p className="text-[11px] font-black text-[#2f3640] uppercase tracking-widest mb-1 leading-tight">{k.label}</p>
             <h3 className={`text-3xl font-light ${k.color}`}>{k.value}</h3>
           </div>
         ))}
@@ -130,7 +130,7 @@ const CampanhasView: React.FC = () => {
           <button
             key={s.id}
             onClick={() => setActiveSection(s.id)}
-            className={`flex items-center gap-2.5 px-6 py-4 rounded-xl text-xs font-light uppercase tracking-widest transition-all border ${
+            className={`flex items-center gap-2.5 px-6 py-4 rounded-[13px] text-xs font-light uppercase tracking-widest transition-all border ${
               activeSection === s.id
                 ? 'bg-[#0a3d62] text-white border-[#0a3d62] shadow-lg'
                 : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'
@@ -152,7 +152,7 @@ const CampanhasView: React.FC = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Brain size={18} className="text-[#ff7675]" />
-            <p className="text-xs font-light text-slate-500 uppercase tracking-widest">
+            <p className="text-xs font-black text-[#2f3640] uppercase tracking-widest">
               IA analisou {campanhasSugeridas.reduce((a, c) => a + c.pacientes, 0)} pacientes e sugere as seguintes campanhas
             </p>
           </div>
@@ -160,8 +160,8 @@ const CampanhasView: React.FC = () => {
             const meta = CAMPANHA_META[c.id];
             const isActivated = activatedIds.has(c.id);
             return (
-              <div key={c.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 flex flex-col md:flex-row items-start md:items-center gap-6 hover:shadow-md transition-all group">
-                <div className="p-4 bg-[#ff7675]/10 rounded-xl border border-[#ff7675]/20 relative">
+              <div key={c.id} className="bg-white rounded-[13px] border border-slate-200 shadow-sm p-8 flex flex-col md:flex-row items-start md:items-center gap-6 hover:shadow-md transition-all group">
+                <div className="p-4 bg-[#ff7675]/10 rounded-[13px] border border-[#ff7675]/20 relative">
                   <Megaphone size={24} className="text-[#ff7675]" />
                   {meta?.score === 'CRÍTICO' && (
                     <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-rose-500 rounded-full flex items-center justify-center">
@@ -181,7 +181,7 @@ const CampanhasView: React.FC = () => {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm font-light text-slate-500 leading-relaxed">{c.descricao}</p>
+                  <p className="text-sm font-bold text-[#202020] leading-relaxed">{c.descricao}</p>
                   <div className="flex items-center gap-6 mt-3">
                     <div className="flex items-center gap-2">
                       <Users size={14} className="text-slate-400" />
@@ -198,14 +198,14 @@ const CampanhasView: React.FC = () => {
                   </div>
                 </div>
                 {isActivated ? (
-                  <div className="shrink-0 flex items-center gap-3 bg-emerald-50 text-emerald-600 border border-emerald-200 px-6 py-3 rounded-xl text-[11px] font-light uppercase tracking-widest">
+                  <div className="shrink-0 flex items-center gap-3 bg-emerald-50 text-emerald-600 border border-emerald-200 px-6 py-3 rounded-[13px] text-[11px] font-light uppercase tracking-widest">
                     <CheckCircle2 size={16} />
                     Executando...
                   </div>
                 ) : (
                   <button
                     onClick={() => handleActivate(c.id)}
-                    className="shrink-0 flex items-center gap-3 bg-[#0a3d62] text-white px-7 py-4 rounded-xl text-[11px] font-light uppercase tracking-widest hover:bg-[#ff7675] transition-all shadow-sm active:scale-95"
+                    className="shrink-0 flex items-center gap-3 bg-[#0a3d62] text-white px-7 py-4 rounded-[13px] text-[11px] font-light uppercase tracking-widest hover:bg-[#ff7675] transition-all shadow-sm active:scale-95"
                   >
                     <Sparkles size={16} />
                     Executar com IA
@@ -221,9 +221,9 @@ const CampanhasView: React.FC = () => {
       {activeSection === 'ativas' && (
         <div className="space-y-4">
           {campanhasAtivas.map(c => (
-            <div key={c.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 hover:shadow-md transition-all">
+            <div key={c.id} className="bg-white rounded-[13px] border border-slate-200 shadow-sm p-8 hover:shadow-md transition-all">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                <div className="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                <div className="p-4 bg-emerald-50 rounded-[13px] border border-emerald-100">
                   <Play size={24} className="text-emerald-500" />
                 </div>
                 <div className="flex-1">
@@ -279,7 +279,7 @@ const CampanhasView: React.FC = () => {
       {activeSection === 'resultados' && (
         <div className="space-y-4">
           {/* Summary bar */}
-          <div className="bg-gradient-to-r from-[#0a3d62] to-[#0c4f7d] rounded-2xl p-8 text-white flex flex-wrap gap-12 border-2 border-[#82ccdd]/20">
+          <div className="bg-gradient-to-r from-[#0a3d62] to-[#0c4f7d] rounded-[13px] p-8 text-white flex flex-wrap gap-12 border-2 border-[#82ccdd]/20">
             {[
               { label: 'Campanhas concluídas', value: campanhasConcluidas.length.toString() },
               { label: 'Total de pacientes', value: campanhasConcluidas.reduce((a,c)=>a+c.pacientes,0).toString() },
@@ -294,9 +294,9 @@ const CampanhasView: React.FC = () => {
           </div>
 
           {campanhasConcluidas.map(c => (
-            <div key={c.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 hover:shadow-md transition-all">
+            <div key={c.id} className="bg-white rounded-[13px] border border-slate-200 shadow-sm p-8 hover:shadow-md transition-all">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-                <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="p-4 bg-slate-50 rounded-[13px] border border-slate-100">
                   <CheckCircle2 size={24} className="text-slate-400" />
                 </div>
                 <div className="flex-1">

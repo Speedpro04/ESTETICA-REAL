@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Sun, X, Send, RotateCcw, Sparkles } from 'lucide-react';
 import { useSolaraStore } from '../store';
+import { askSolara } from '../geminiService';
 import toast from 'react-hot-toast';
 
 interface SolaraAssistantProps {
@@ -45,20 +46,8 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
     setIsLoading(true);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-      const response = await fetch(`${apiUrl}/chat/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${currentUser?.token}`
-        },
-        body: JSON.stringify({ message: userMsg })
-      });
-      
-      if (!response.ok) throw new Error('Erro ao se comunicar com o servidor');
-      
-      const data = await response.json();
-      setMessages(prev => [...prev, { role: 'model' as const, text: data.response }]);
+      const responseText = await askSolara(userMsg, messages);
+      setMessages(prev => [...prev, { role: 'model' as const, text: responseText }]);
     } catch(err) {
       toast.error("Erro na comunicação com a IA.");
       setMessages(prev => [...prev, { role: 'model' as const, text: `Desculpe ${userName}, ocorreu um erro de conexão com o servidor. Tente novamente mais tarde.` }]);
@@ -75,16 +64,16 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 w-[400px] h-[600px] bg-white shadow-2xl rounded-3xl overflow-hidden z-[10000] flex flex-col animate-in zoom-in-95 duration-300 border border-slate-200 font-inter">
+    <div className="fixed bottom-6 right-6 w-[420px] h-[650px] bg-white shadow-2xl rounded-[13px] overflow-hidden z-[10000] flex flex-col animate-in zoom-in-95 duration-300 border border-white/20 font-inter shadow-[0_20px_60px_-15px_rgba(10,61,98,0.4)]">
       {/* Header */}
       <div className="p-8 bg-[#0a3d62] text-white flex justify-between items-center border-b border-white/5 shadow-xl relative overflow-hidden">
         <div className="flex items-center gap-4 relative z-10">
           <img src="/sol_com_risco_em_baixo-removebg-preview.png" alt="Solara Logo" style={{ width: 60, height: 60, objectFit: 'contain' }} />
           <div>
-            <h3 className="font-bold text-lg leading-tight tracking-tight uppercase">Solara</h3>
+            <h3 className="font-black text-xl leading-none tracking-tighter uppercase italic">Solara AI</h3>
             <div className="flex items-center gap-2 mt-1">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-orange-400">Inteligência de Suporte</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7ed6df]">Inteligência Neural Ativa</p>
             </div>
           </div>
         </div>
@@ -102,10 +91,10 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-8 bg-slate-50/30 custom-scrollbar">
         {messages.map((m, i) => (
           <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
-            <div className={`max-w-[88%] p-5 rounded-[24px] text-sm leading-relaxed shadow-sm whitespace-pre-wrap transition-all ${
+            <div className={`max-w-[88%] p-6 rounded-[13px] text-sm leading-relaxed shadow-sm whitespace-pre-wrap transition-all ${
               m.role === 'user' 
-                ? 'bg-[#1e293b] text-white rounded-tr-none' 
-                : 'bg-white text-slate-700 rounded-tl-none border border-slate-200 font-medium'
+                ? 'bg-[#0a3d62] text-white rounded-tr-none border border-white/10 font-black' 
+                : 'bg-slate-50 text-[#2f3640] rounded-tl-none border border-black/5 font-black opacity-90'
             }`}>
               {m.text}
             </div>
@@ -113,12 +102,12 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
         ))}
         {isLoading && (
           <div className="flex justify-start animate-in fade-in">
-            <div className="bg-white p-5 rounded-[24px] rounded-tl-none border border-slate-200 shadow-sm flex items-center gap-4">
+            <div className="bg-white p-5 rounded-[13px] rounded-tl-none border border-black/5 shadow-sm flex items-center gap-4">
               <div className="relative w-5 h-5">
                 <div className="absolute inset-0 border-2 border-slate-100 rounded-full"></div>
                 <div className="absolute inset-0 border-2 border-[#FF9500] rounded-full border-t-transparent animate-spin"></div>
               </div>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Processando requisição...</span>
+              <span className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest">Sincronizando com a clínica...</span>
             </div>
           </div>
         )}
@@ -126,11 +115,11 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
 
       {/* Input Area */}
       <div className="p-8 bg-white border-t border-slate-100">
-        <div className="relative flex items-center bg-slate-50 border border-slate-200 rounded-[20px] overflow-hidden focus-within:border-orange-400 focus-within:bg-white transition-all">
+        <div className="relative flex items-center bg-slate-50 border border-black/5 rounded-[13px] overflow-hidden focus-within:border-[#0a3d62] focus-within:bg-white transition-all">
           <input 
             type="text"
-            className="w-full pl-6 pr-14 py-5 bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-400"
-            placeholder="Aguardando comando..."
+            className="w-full pl-6 pr-14 py-6 bg-transparent outline-none text-sm font-black text-[#2f3640] placeholder:text-slate-300"
+            placeholder="Comando para Solara IA..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
@@ -138,7 +127,7 @@ const SolaraAssistant: React.FC<SolaraAssistantProps> = ({ isOpen, onClose }) =>
           <button 
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
-            className="absolute right-3 w-11 h-11 bg-[#FF9500] text-white rounded-2xl flex items-center justify-center hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 shadow-lg shadow-orange-500/20"
+            className="absolute right-3 w-12 h-12 bg-[#0a3d62] text-white rounded-[13px] flex items-center justify-center hover:brightness-110 active:scale-95 transition-all disabled:opacity-30 shadow-xl shadow-blue-900/20"
           >
             <Send size={20} />
           </button>

@@ -22,7 +22,7 @@ const AgendaAnalysisView: React.FC = () => {
       {/* Header */}
       <div>
         <h2 className="text-2xl font-black text-[#0a3d62] tracking-tighter uppercase italic">Análise de Agenda</h2>
-        <p className="text-[#57606f] text-[10px] font-bold uppercase tracking-widest mt-1 opacity-70">Otimização de ocupação e inteligência preditiva</p>
+        <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-widest opacity-90">Otimização de ocupação e inteligência preditiva</p>
       </div>
 
       {/* KPI Grid */}
@@ -33,11 +33,11 @@ const AgendaAnalysisView: React.FC = () => {
           { label: 'REMARCAÇÕES IA', value: '08', icon: Users, color: 'text-blue-500 bg-blue-50' },
           { label: 'GAP SCORE', value: '8.4', icon: CheckCircle, color: 'text-purple-500 bg-purple-50' },
         ].map((kpi, i) => (
-          <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm group">
-            <div className={`p-2 w-fit rounded-lg mb-4 ${kpi.color}`}>
+          <div key={i} className="bg-white p-6 rounded-[13px] border border-slate-200 shadow-sm group">
+            <div className={`p-2 w-fit rounded-[13px] mb-4 ${kpi.color}`}>
               <kpi.icon size={18} />
             </div>
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">{kpi.label}</p>
+            <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest mb-1">{kpi.label}</p>
             <h3 className="text-xl font-black text-[#0a3d62]">{kpi.value}</h3>
           </div>
         ))}
@@ -45,7 +45,7 @@ const AgendaAnalysisView: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Chart Section */}
-        <div className="lg:col-span-7 bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+        <div className="lg:col-span-7 bg-white p-8 rounded-[13px] border border-slate-200 shadow-sm space-y-8">
           <div className="flex justify-between items-center">
             <h3 className="text-[11px] font-black text-[#0a3d62] uppercase tracking-[0.1em]">Taxa de Ocupação Semanal</h3>
             <span className="text-[10px] font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">+4% vs semana passada</span>
@@ -86,7 +86,7 @@ const AgendaAnalysisView: React.FC = () => {
 
           <div className="space-y-4">
             {suggestions.map((s, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-[#e55039]/30 transition-all group">
+              <div key={i} className="bg-white p-6 rounded-[13px] border border-slate-200 shadow-sm hover:border-[#e55039]/30 transition-all group">
                 <div className="flex justify-between items-start mb-4">
                    <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-[#0a3d62]">
                       <Users size={18} />
@@ -97,18 +97,18 @@ const AgendaAnalysisView: React.FC = () => {
                 </div>
                 
                 <h4 className="text-[11px] font-light text-[#0a3d62] italic mb-1">{s.patient}</h4>
-                <p className="text-[10px] text-slate-500 leading-relaxed mb-4">{s.reason}</p>
+                <p className="text-[10px] text-[#2f3640] font-black leading-relaxed mb-4">{s.reason}</p>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-50">
                    <span className="text-[9px] font-black text-[#e55039] uppercase tracking-widest">{s.action}</span>
-                   <button title="Executar Ação" className="p-2 bg-[#0a3d62] text-white rounded-lg hover:bg-[#e55039] transition-all">
+                   <button title="Executar Ação" className="p-2 bg-[#0a3d62] text-white rounded-[13px] hover:bg-[#e55039] transition-all">
                       <ArrowRight size={14} />
                    </button>
                 </div>
               </div>
             ))}
 
-            <div className="bg-gradient-to-br from-[#0a3d62] to-[#1e3a8a] p-8 rounded-2xl text-white shadow-xl relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#0a3d62] to-[#1e3a8a] p-8 rounded-[13px] text-white shadow-xl relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
                <h4 className="text-[10px] font-black text-[#82ccdd] uppercase tracking-[0.2em] mb-4">Insight Preditivo</h4>
                <p className="text-xs font-medium leading-loose italic opacity-90">

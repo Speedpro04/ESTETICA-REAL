@@ -37,7 +37,7 @@ const SecondBrainView: React.FC = () => {
               <BrainCircuit className="text-[#E84118]" size={24} />
               <h2 className="text-xl font-bold tracking-tight text-slate-800 uppercase">SECOND BRAIN</h2>
             </div>
-            <button className="p-2 bg-[#E84118] text-white rounded-xl hover:scale-110 transition-transform">
+            <button className="p-2 bg-[#E84118] text-white rounded-[13px] hover:scale-110 transition-transform">
               <Plus size={18} />
             </button>
           </div>
@@ -47,7 +47,7 @@ const SecondBrainView: React.FC = () => {
             <input 
               type="text" 
               placeholder="Buscar no conhecimento..." 
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 pl-12 pr-4 text-sm outline-none focus:ring-2 ring-[#E84118]/20 transition-all font-medium"
+              className="w-full bg-slate-50 border border-slate-100 rounded-[13px] py-3 pl-12 pr-4 text-sm outline-none focus:ring-2 ring-[#E84118]/20 transition-all font-medium"
             />
           </div>
 
@@ -56,26 +56,25 @@ const SecondBrainView: React.FC = () => {
               <button 
                 key={note.id}
                 onClick={() => setActiveNoteId(note.id)}
-                className={`w-full text-left p-4 rounded-2xl transition-all group ${
+                className={`w-full text-left p-4 rounded-[13px] transition-all group ${
                   activeNoteId === note.id 
                     ? 'bg-[#E84118] text-white shadow-lg' 
-                    : 'hover:bg-slate-50 text-slate-500'
+                    : 'hover:bg-slate-50 text-slate-600 font-medium'
                 }`}
               >
                 <div className="flex items-center gap-3 mb-1">
-                  <FileText size={16} className={activeNoteId === note.id ? 'text-white' : 'text-slate-400'} />
+                  <FileText size={16} className={activeNoteId === note.id ? 'text-white' : 'text-slate-500 font-medium'} />
                   <span className="font-bold text-xs uppercase tracking-widest truncate">{note.title}</span>
                 </div>
-                <div className="text-[10px] opacity-60 font-medium ml-7">{note.category} • {note.updated}</div>
+                <div className="text-[10px] text-slate-500 font-semibold ml-7">{note.category} • {note.updated}</div>
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Editor Principal */}
       <div className="col-span-6 flex flex-col gap-6">
-        <div className="bg-white border border-black/5 rounded-[40px] p-10 shadow-xl shadow-slate-200/50 flex flex-col h-[calc(100vh-220px)] overflow-hidden">
+        <div className="bg-white border border-black/5 rounded-[13px] p-10 shadow-xl shadow-slate-200/50 flex flex-col h-[calc(100vh-220px)] overflow-hidden">
           <div className="flex items-center justify-between mb-8">
             <input 
               className="text-3xl font-bold text-slate-800 border-none outline-none w-full bg-transparent tracking-tighter"
@@ -87,7 +86,7 @@ const SecondBrainView: React.FC = () => {
                  <Database size={12} />
                  Polars Sync
                </div>
-               <div className="bg-slate-100 text-slate-500 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-slate-200">
+               <div className="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-slate-200">
                  Draft
                </div>
             </div>
@@ -119,18 +118,18 @@ const SecondBrainView: React.FC = () => {
 
            <div className="space-y-4">
              <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] px-2">Sugestões da IA (RAG)</h4>
-             <div className="bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-all cursor-pointer group">
+             <div className="bg-white/5 border border-white/5 rounded-[13px] p-4 hover:bg-white/10 transition-all cursor-pointer group">
                <div className="flex items-center gap-2 mb-2">
                  <Zap size={14} className="text-yellow-400" />
                  <span className="text-[11px] font-bold text-white uppercase tracking-widest">CONEXÃO DETECTADA</span>
                </div>
-               <p className="text-xs text-white/60 leading-relaxed group-hover:text-white transition-colors">
+               <p className="text-xs text-white/80 font-medium leading-relaxed group-hover:text-white transition-colors">
                  O Polars sugere conectar esta nota ao protocolo de <strong>Recuperação Pós-Peeling</strong>.
                </p>
              </div>
            </div>
 
-           <div className="mt-auto bg-[#E84118] rounded-2xl p-6 text-white shadow-lg shadow-red-900/40">
+           <div className="mt-auto bg-[#E84118] rounded-[13px] p-6 text-white shadow-lg shadow-red-900/40">
               <div className="flex items-center gap-2 mb-3">
                 <Sparkles size={16} />
                 <span className="text-xs font-bold uppercase tracking-widest">Smart Insights</span>

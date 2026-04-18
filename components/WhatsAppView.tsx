@@ -33,27 +33,27 @@ const WhatsAppView: React.FC = () => {
       <div className="flex justify-between items-center mb-10">
         <div>
           <h2 className="text-4xl font-light text-[#0a3d62] tracking-tighter uppercase leading-none italic">WhatsApp da Clínica</h2>
-          <p className="text-[#57606f] text-[10px] font-bold uppercase tracking-[0.3em] mt-3 opacity-60">Central de Comunicação Inteligente</p>
+          <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-[0.3em] opacity-90">Central de Comunicação Inteligente</p>
         </div>
         <div className="flex gap-4">
-          <button className="flex items-center gap-2.5 px-6 py-3 bg-white/50 border border-[#0a3d62]/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-[#0a3d62] hover:bg-white transition-all shadow-sm">
+          <button className="flex items-center gap-2.5 px-6 py-3 bg-white/50 border border-[#0a3d62]/10 rounded-[13px] text-[10px] font-bold uppercase tracking-widest text-[#0a3d62] hover:bg-white transition-all shadow-sm">
             <Trash2 size={16} /> Limpar conversa
           </button>
-          <button className="flex items-center gap-2.5 px-6 py-3 bg-[#0a3d62] border border-[#0a3d62]/10 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-white hover:brightness-110 transition-all shadow-lg shadow-[#0a3d62]/20">
+          <button className="flex items-center gap-2.5 px-6 py-3 bg-[#0a3d62] border border-[#0a3d62]/10 rounded-[13px] text-[10px] font-bold uppercase tracking-widest text-white hover:brightness-110 transition-all shadow-lg shadow-[#0a3d62]/20">
             <UserPlus size={16} /> Assumir humano
           </button>
         </div>
       </div>
 
       {/* Seletor de Instância / Status */}
-      <div className="bg-white/40 backdrop-blur-md rounded-3xl p-4 border border-white/50 shadow-xl mb-8">
-        <div className="bg-white/80 rounded-2xl p-5 border border-white shadow-sm flex items-center justify-between">
+      <div className="bg-white/40 backdrop-blur-md rounded-[13px] p-4 border border-white/50 shadow-xl mb-8">
+        <div className="bg-white/80 rounded-[13px] p-5 border border-white shadow-sm flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 ${isConnected ? 'bg-green-500/10 border-green-500/30 text-green-600' : 'bg-slate-100 border-slate-200 text-slate-400'}`}>
+            <div className={`w-14 h-14 rounded-[13px] flex items-center justify-center border-2 ${isConnected ? 'bg-green-500/10 border-green-500/30 text-green-600' : 'bg-slate-100 border-slate-200 text-slate-400'}`}>
               <MessageSquare size={24} />
             </div>
             <div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Clínica / Instância</p>
+              <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest mb-1.5">Clínica / Instância</p>
               <h3 className="text-xl font-light text-[#0a3d62] tracking-tight">
                 {isConnected ? instance.name : "Nenhuma conexão cadastrada"}
               </h3>
@@ -71,7 +71,7 @@ const WhatsAppView: React.FC = () => {
             </div>
             <button 
               onClick={() => setIsConnected(!isConnected)}
-              className="px-6 py-3 bg-[#ff7675] text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-[#ff7675]/20"
+              className="px-6 py-3 bg-[#ff7675] text-white rounded-[13px] text-[10px] font-bold uppercase tracking-widest hover:brightness-110 transition-all active:scale-95 shadow-lg shadow-[#ff7675]/20"
             >
               {isConnected ? 'Desconectar' : 'Configurar Instância'}
             </button>
@@ -83,7 +83,7 @@ const WhatsAppView: React.FC = () => {
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0">
         
         {/* Coluna Esquerda: Lista de Conversas */}
-        <div className="lg:col-span-4 flex flex-col bg-white/40 backdrop-blur-md rounded-3xl border border-white/50 shadow-xl overflow-hidden min-h-0">
+        <div className="lg:col-span-4 flex flex-col bg-white/40 backdrop-blur-md rounded-[13px] border border-white/50 shadow-xl overflow-hidden min-h-0">
           <div className="p-6 border-b border-black/5 bg-white/50 flex items-center justify-between">
             <div className="flex items-center gap-3">
                <h4 className="text-sm font-bold text-[#0a3d62] uppercase tracking-[0.15em]">Conversas</h4>
@@ -98,7 +98,7 @@ const WhatsAppView: React.FC = () => {
               <input 
                 type="text" 
                 placeholder="Buscar conversa..."
-                className="w-full bg-white/60 border border-black/5 rounded-xl py-3 pl-12 pr-4 text-xs font-light text-[#0a3d62] outline-none focus:bg-white focus:border-[#0a3d62]/20 transition-all"
+                className="w-full bg-white/60 border border-black/5 rounded-[13px] py-3 pl-12 pr-4 text-xs font-light text-[#0a3d62] outline-none focus:bg-white focus:border-[#0a3d62]/20 transition-all"
               />
             </div>
           </div>
@@ -116,26 +116,26 @@ const WhatsAppView: React.FC = () => {
         {/* Coluna Direita: Detalhamento / Chat */}
         <div className="lg:col-span-8 flex flex-col min-h-0">
           {/* Header da conversa selecionada */}
-          <div className="bg-white/40 backdrop-blur-md rounded-3xl p-6 border border-white/50 shadow-xl mb-6">
+          <div className="bg-white/40 backdrop-blur-md rounded-[13px] p-6 border border-white/50 shadow-xl mb-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center border-2 border-white shadow-sm overflow-hidden text-slate-300">
+                <div className="w-16 h-16 bg-slate-100 rounded-[13px] flex items-center justify-center border-2 border-white shadow-sm overflow-hidden text-slate-300">
                   <span className="text-xl font-bold">C</span>
                 </div>
                 <div>
                   <h3 className="text-xl font-light text-[#0a3d62] tracking-tight italic">Nenhum cliente selecionado</h3>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Sem número vinculado</p>
+                  <p className="text-[11px] font-black text-[#2f3640] uppercase tracking-widest">Sem número vinculado</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <div className="h-10 w-[1px] bg-[#0a3d62]/10"></div>
                 <div className="flex flex-col items-end">
-                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Instância</p>
+                   <p className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">Instância</p>
                    <p className="text-xs font-bold text-[#0a3d62]">--</p>
                 </div>
                 <div className="h-10 w-[1px] bg-[#0a3d62]/10"></div>
                 <div className="flex flex-col items-end">
-                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">WhatsApp</p>
+                   <p className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">WhatsApp</p>
                    <p className="text-xs font-bold text-[#0a3d62]">--</p>
                 </div>
               </div>
@@ -143,7 +143,7 @@ const WhatsAppView: React.FC = () => {
           </div>
 
           {/* Área de Chat (Placeholder) */}
-          <div className="flex-1 bg-white/40 backdrop-blur-md rounded-[40px] border border-white/50 shadow-2xl relative overflow-hidden flex flex-col">
+          <div className="flex-1 bg-white/40 backdrop-blur-md rounded-[13px] border border-white/50 shadow-2xl relative overflow-hidden flex flex-col">
             <div className="absolute inset-0 bg-white/10 pointer-events-none"></div>
             
             <div className="flex-1 flex flex-col items-center justify-center opacity-30 text-center px-10">
@@ -158,7 +158,7 @@ const WhatsAppView: React.FC = () => {
 
             {/* Input Fake */}
             <div className="p-8 border-t border-white/40 bg-white/20 backdrop-blur-xl">
-               <div className="w-full h-16 bg-white/60 border border-white rounded-[24px] flex items-center px-8 text-slate-300 italic text-sm shadow-inner group-hover:bg-white transition-all cursor-not-allowed">
+               <div className="w-full h-16 bg-white/60 border border-white rounded-[13px] flex items-center px-8 text-slate-300 italic text-sm shadow-inner group-hover:bg-white transition-all cursor-not-allowed">
                   Aguardando conexão...
                </div>
             </div>

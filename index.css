@@ -10,15 +10,17 @@
   --solara-accent2: #78e08f;
   --solara-border: #82ccdd;
   --solara-bg: #ced6e0;
-  --solara-text-dark: #57606f;
+  --solara-text-dark: #2f3640;
   --solara-text-light: #f1f2f6;
-  --solara-radius: 7px;
+  --solara-radius: 13px;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--solara-bg);
   color: var(--solara-text-dark);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }
 
 .solara-header-sidebar {

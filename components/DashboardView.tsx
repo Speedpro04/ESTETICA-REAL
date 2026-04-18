@@ -1,15 +1,19 @@
+
 import React from 'react';
 import { 
-  Clock, 
+  TrendingUp, 
   Users, 
-  ChevronRight, 
-  Activity, 
-  Calendar,
-  Sparkles,
-  TrendingUp,
-  MessageSquare,
-  DollarSign
+  MessageSquare, 
+  DollarSign, 
+  Calendar, 
+  Sparkles, 
+  ChevronRight,
+  Zap,
+  ArrowUpRight,
+  Clock,
+  Layout
 } from 'lucide-react';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Lead, Appointment } from '../types';
 import { useSolaraStore } from '../store';
 
@@ -19,185 +23,231 @@ interface DashboardViewProps {
   onOpenLead: (id: string) => void;
 }
 
-const DashboardStatusCard: React.FC<{ icon: any, label: string, value: string, color: string }> = ({ icon: Icon, label, value, color }) => (
-  <div className="bg-white/60 backdrop-blur-md p-5 rounded-3xl border border-white shadow-sm flex items-center gap-4 flex-1 min-w-[200px]">
-    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${color} shadow-sm border border-white`}>
-      <Icon size={20} />
+const StatCard: React.FC<{ label: string; value: string; trend: string; icon: any; color: string }> = ({ label, value, trend, icon: Icon, color }) => (
+  <div className="bg-white/80 backdrop-blur-xl p-8 rounded-[13px] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all group overflow-hidden relative">
+    <div className={`absolute top-0 right-0 w-32 h-32 ${color} opacity-[0.03] rounded-full -mr-16 -mt-16 group-hover:scale-110 transition-transform`} />
+    <div className="flex justify-between items-start mb-6">
+      <div className={`p-4 rounded-[13px] ${color} bg-opacity-10 text-opacity-100 flex items-center justify-center`}>
+        <Icon size={24} className={color.replace('bg-', 'text-')} />
+      </div>
+      <div className="flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
+        <ArrowUpRight size={12} className="text-emerald-500" />
+        <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">{trend}</span>
+      </div>
     </div>
-    <div>
-      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1.5">{label}</p>
-      <h3 className="text-sm font-bold text-[#40407a] uppercase tracking-tight">{value}</h3>
-    </div>
+    <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-[0.2em] mb-2">{label}</p>
+    <h3 className="text-3xl font-black text-[#0a3d62] tracking-tighter leading-none">{value}</h3>
   </div>
 );
 
 const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOpenLead }) => {
   const { privacyMode } = useSolaraStore();
 
-  const formatValue = (val: string) => {
-    return privacyMode ? 'R$ •••••' : val;
-  };
+  const chartData = [
+    { name: 'Seg', val: 4000, leads: 24 },
+    { name: 'Ter', val: 3000, leads: 18 },
+    { name: 'Qua', val: 5000, leads: 32 },
+    { name: 'Qui', val: 2780, leads: 15 },
+    { name: 'Sex', val: 6890, leads: 45 },
+    { name: 'Sab', val: 2390, leads: 20 },
+  ];
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-700 font-inter">
+    <div className="space-y-10 animate-in fade-in duration-1000 font-inter">
       
-      {/* Indicadores do Topo */}
-      <div className="flex flex-wrap gap-6 items-center">
-        <DashboardStatusCard 
-          icon={TrendingUp} 
-          label="Conversão de Leads" 
-          value="84.2%" 
-          color="bg-[#7ed6df]/10 text-[#40407a]" 
-        />
-        <DashboardStatusCard 
-          icon={MessageSquare} 
-          label="Interações Solara AI (Hoje)" 
-          value="12 atendimentos" 
-          color="bg-[#706fd3]/10 text-[#706fd3]" 
-        />
-        <DashboardStatusCard 
-          icon={Clock} 
-          label="Tempo de Resposta AI" 
-          value="< 5 segundos" 
-          color="bg-green-50 text-green-600" 
-        />
-        <div className="flex gap-4 ml-auto">
-          <button className="bg-[#706fd3] text-white px-8 py-3.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest shadow-xl shadow-[#706fd3]/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
-            <Sparkles size={14} /> Solara AI Intelligence
+      {/* Welcome Banner */}
+      <div className="bg-gradient-to-r from-[#0a3d62] to-[#1e3a8a] p-10 rounded-[13px] text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-8 border border-white/10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl" />
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+             <div className="bg-[#7ed6df] text-[#0a3d62] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">IA Ativa</div>
+             <span className="text-white/40 text-[10px] font-black uppercase tracking-widest border-l border-white/20 pl-3">Dashboard Consolidado</span>
+          </div>
+          <h1 className="text-4xl font-black tracking-tighter uppercase leading-none italic mb-4">Métricas Operacionais</h1>
+          <p className="text-white/60 text-sm font-medium max-w-xl leading-relaxed">
+            Sua clínica está operando com <span className="text-[#7ed6df] font-black">92% de eficiência</span>. A Odonto AI recuperou 12 pacientes nas últimas 24 horas.
+          </p>
+        </div>
+        <div className="flex gap-4 relative z-10">
+          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-[13px] text-[10px] font-black uppercase tracking-widest hover:bg-white/20 transition-all shadow-xl">
+            Exportar Dados
+          </button>
+          <button className="bg-[#7ed6df] text-[#0a3d62] px-8 py-4 rounded-[13px] text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-[#7ed6df]/20 flex items-center gap-2">
+            <Sparkles size={16} /> Insights IA
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      {/* Main Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <StatCard 
+          label="Faturamento Mensal" 
+          value={privacyMode ? "R$ •••••" : "R$ 142.580"} 
+          trend="+12.4%" 
+          icon={DollarSign} 
+          color="bg-[#0a3d62]" 
+        />
+        <StatCard 
+          label="Novos Leads (Mês)" 
+          value="482" 
+          trend="+34%" 
+          icon={Users} 
+          color="bg-[#ed4c67]" 
+        />
+        <StatCard 
+          label="Conversão Geral" 
+          value="84.2%" 
+          trend="+5.1%" 
+          icon={TrendingUp} 
+          color="bg-[#22a6b3]" 
+        />
+        <StatCard 
+          label="Atendimentos IA" 
+          value="1.240" 
+          trend="+18%" 
+          icon={MessageSquare} 
+          color="bg-[#706fd3]" 
+        />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full items-stretch">
         
-        {/* Coluna Principal: Fluxo e Agendamentos */}
-        <div className="lg:col-span-8 flex flex-col gap-8">
-          
-          {/* Funil de Vendas / Leads */}
-          <div className="bg-white/40 backdrop-blur-md rounded-[40px] border border-white/50 shadow-xl overflow-hidden">
-            <div className="p-8 border-b border-black/5 flex justify-between items-center bg-white/50">
-              <h3 className="text-sm font-bold text-[#40407a] uppercase tracking-[0.15em]">Funil de Captação e Atendimento</h3>
-              <span className="text-[10px] font-bold text-[#b2bec3] uppercase bg-slate-50 px-3 py-1.5 rounded-lg border border-black/5">Realtime</span>
-            </div>
-            <div className="p-8 grid grid-cols-2 md:grid-cols-4 gap-6">
-               {[
-                 { label: 'Novos Leads', val: leads.filter(l => l.status === 'Novo Lead').length, color: 'text-[#40407a]' },
-                 { label: 'Qualificados', val: leads.filter(l => l.status === 'Qualificado').length, color: 'text-[#706fd3]' },
-                 { label: 'Agendados', val: leads.filter(l => l.status === 'Agendado').length, color: 'text-[#22a6b3]' },
-                 { label: 'Finalizados', val: leads.filter(l => l.status === 'Finalizado').length, color: 'text-green-600' },
-               ].map((item, i) => (
-                 <div key={i} className="bg-white/80 p-6 rounded-3xl border border-white shadow-sm hover:translate-y-[-4px] transition-all cursor-pointer group">
-                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">{item.label}</p>
-                   <h3 className={`text-4xl font-light ${item.color} group-hover:scale-105 transition-transform`}>{item.val}</h3>
-                   <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mt-4">Ver detalhes</p>
+        {/* Analytics Section */}
+        <div className="lg:col-span-8 space-y-8 h-full flex flex-col">
+          <div className="bg-white p-10 rounded-[13px] border border-black/5 shadow-xl flex-1 flex flex-col">
+            <div className="flex justify-between items-center mb-10">
+              <div>
+                <h3 className="text-sm font-black text-[#0a3d62] uppercase tracking-[0.2em] mb-2 leading-none">Desempenho Semanal</h3>
+                <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest opacity-60">Fluxo de caixa vs Atração de pacientes</p>
+              </div>
+              <div className="flex gap-4">
+                 <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#0a3d62]"></div>
+                    <span className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">Receita</span>
                  </div>
-               ))}
+                 <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-[#7ed6df]"></div>
+                    <span className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">Leads</span>
+                 </div>
+              </div>
             </div>
+            
+            <div className="flex-1 min-h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={chartData}>
+                  <defs>
+                    <linearGradient id="colorVal" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#0a3d62" stopOpacity={0.1}/>
+                      <stop offset="95%" stopColor="#0a3d62" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="5 5" vertical={false} stroke="#f1f2f6" />
+                  <XAxis 
+                    dataKey="name" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{fill: '#2f3640', fontSize: 10, fontWeight: 900}} 
+                    dy={12}
+                  />
+                  <YAxis hide />
+                  <Tooltip 
+                    contentStyle={{borderRadius: '13px', border: 'none', boxShadow: '0 20px 40px -4px rgba(0,0,0,0.1)', fontFamily: 'Montserrat'}}
+                  />
+                  <Area type="monotone" dataKey="val" stroke="#0a3d62" strokeWidth={4} fillOpacity={1} fill="url(#colorVal)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>          
           </div>
 
-          {/* Próximos Procedimentos */}
-          <div className="bg-white/40 backdrop-blur-md rounded-[40px] border border-white/50 shadow-xl overflow-hidden">
-             <div className="p-8 border-b border-black/5 flex justify-between items-center bg-white/50">
-               <h3 className="text-sm font-bold text-[#40407a] uppercase tracking-[0.15em]">Procedimentos agendados</h3>
-               <span className="text-[10px] font-bold text-[#b2bec3] uppercase bg-slate-50 px-3 py-1.5 rounded-lg">Próximos</span>
-             </div>
-             
-             <div className="p-8 space-y-4">
-                {appointments.slice(0, 3).map((app) => (
-                  <div key={app.id} className="flex items-center justify-between p-6 bg-white/80 rounded-3xl border border-white shadow-sm group hover:bg-white transition-all">
-                    <div className="flex items-center gap-6">
-                      <div className="w-14 h-14 bg-[#40407a]/5 rounded-2xl flex items-center justify-center text-[#40407a] font-bold">
-                        {app.time}
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-[#40407a]">{app.leadName}</h4>
-                        <p className="text-[10px] font-bold text-[#706fd3] uppercase tracking-widest mt-1">{app.type}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="text-right">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">{app.professional}</p>
-                        <p className="text-[8px] font-black text-slate-300 uppercase tracking-[0.2em] mt-2 italic">{app.specialty}</p>
-                      </div>
-                      <ChevronRight size={16} className="text-slate-200 group-hover:text-[#706fd3] transition-colors" />
-                    </div>
-                  </div>
-                ))}
-                {appointments.length === 0 && (
-                  <div className="py-12 text-center opacity-30 grayscale items-center flex flex-col">
-                    <Calendar size={40} className="mb-4" />
-                    <p className="text-[10px] font-bold uppercase tracking-widest">Nenhum agendamento para hoje</p>
-                  </div>
-                )}
-             </div>
-          </div>
-
-        </div>
-
-        {/* Coluna Lateral: Leads Recentes e Chat Live */}
-        <div className="lg:col-span-4 flex flex-col gap-8">
-           
-           {/* Card Faturamento Estimado (Novo) */}
-           <div className="bg-white/40 backdrop-blur-md rounded-[40px] border border-white/50 shadow-xl p-8 flex flex-col gap-4 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-                <DollarSign size={80} className="text-[#40407a]" />
-              </div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Faturamento Projetado</p>
-              <h3 className="text-3xl font-bold text-[#40407a] tracking-tighter">
-                {formatValue('R$ 42.850')}
-              </h3>
-              <div className="flex items-center gap-2 mt-2">
-                <span className="text-[9px] font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-lg">+15% vs mês anterior</span>
-              </div>
-           </div>
-
-           <div className="bg-[#40407a] rounded-[40px] border border-white/10 shadow-2xl overflow-hidden flex flex-col min-h-[320px]">
-             <div className="p-8 border-b border-white/5 flex justify-between items-center bg-black/10">
-                <h3 className="text-sm font-bold text-white uppercase tracking-[0.15em]">Solara AI Live Chat</h3>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-[9px] font-bold text-green-500 truncate uppercase">Online</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1">
+             <div className="bg-white p-8 rounded-[13px] border border-black/5 shadow-xl">
+                <h3 className="text-sm font-black text-[#0a3d62] uppercase tracking-[0.2em] mb-8 leading-none">Saúde da Carteira</h3>
+                <div className="space-y-6">
+                   {[
+                     { label: 'Pacientes Ativos', val: 820, total: 1000, color: 'bg-[#0a3d62]' },
+                     { label: 'Em Recuperação (IA)', val: 142, total: 1000, color: 'bg-[#706fd3]' },
+                     { label: 'Inativos', val: 38, total: 1000, color: 'bg-[#ed4c67]' },
+                   ].map((item, i) => (
+                     <div key={i}>
+                        <div className="flex justify-between items-center mb-2">
+                           <span className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest">{item.label}</span>
+                           <span className="text-[10px] font-black text-[#0a3d62]">{item.val}</span>
+                        </div>
+                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                           <div 
+                            className={`h-full ${item.color} rounded-full transition-all duration-1000`} 
+                            style={{ width: `${(item.val / item.total) * 100}%` }}
+                           />
+                        </div>
+                     </div>
+                   ))}
                 </div>
              </div>
-             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-white/40">
-                <MessageSquare size={40} className="mb-6 opacity-20" />
-                <p className="text-[10px] font-bold uppercase tracking-widest leading-relaxed">A Solara AI está gerenciando 5 conversas simultâneas no WhatsApp.</p>
-             </div>
-             <div className="p-8 bg-black/20">
-                <button className="w-full py-5 bg-white/10 text-white rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/20 transition-all border border-white/10">
-                  Intervir e assumir chat
+
+             <div className="bg-gradient-to-br from-[#7ed6df] to-[#22a6b3] p-8 rounded-[13px] text-[#0a3d62] shadow-xl relative overflow-hidden group">
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Zap size={32} className="mb-6 animate-pulse" />
+                <h3 className="text-xl font-black uppercase tracking-tighter italic mb-4">Automação Inteligente</h3>
+                <p className="text-[11px] font-black uppercase tracking-widest leading-loose mb-10 border-l-4 border-[#0a3d62]/20 pl-4">
+                  Sua clínica economizou <span className="text-white font-black underline">42 horas</span> de trabalho manual este mês através dos disparos automáticos da Odonto AI.
+                </p>
+                <button className="w-full py-4 bg-[#0a3d62] text-white rounded-[13px] text-[10px] font-black uppercase tracking-widest shadow-xl shadow-[#0a3d62]/20 hover:scale-[1.02] active:scale-95 transition-all">
+                   Ver Relatório Completo
                 </button>
              </div>
-           </div>
+          </div>
+        </div>
 
-           {/* Leads Recentes */}
-           <div className="bg-white/40 backdrop-blur-md rounded-[40px] border border-white/50 shadow-xl overflow-hidden flex flex-col">
-             <div className="p-8 border-b border-black/5 flex justify-between items-center bg-white/50">
-                <h3 className="text-sm font-bold text-[#40407a] uppercase tracking-[0.15em]">Novos Leads</h3>
-             </div>
-             <div className="p-8 flex flex-col gap-4">
-               {leads.slice(0, 3).map((l) => (
-                 <div key={l.id} className="bg-white/80 p-5 rounded-3xl border border-white shadow-sm flex items-center justify-between hover:scale-[0.98] transition-all cursor-pointer hover:bg-white" onClick={() => onOpenLead(l.id)}>
-                    <div className="flex items-center gap-4">
-                       <div className="w-12 h-12 bg-[#706fd3]/5 rounded-2xl flex items-center justify-center font-bold text-[#706fd3] text-sm">
-                         {l.name.charAt(0)}
+        {/* Real-time Activity Feed */}
+        <div className="lg:col-span-4 h-full">
+          <div className="bg-[#40407a] text-white h-full rounded-[13px] shadow-2xl overflow-hidden border border-white/10 flex flex-col h-full items-stretch">
+            <div className="p-8 border-b border-white/5 flex justify-between items-center bg-black/10">
+               <div>
+                  <h3 className="text-sm font-black text-white uppercase tracking-[0.2em] leading-none mb-2 text-left">Timeline Solo IA</h3>
+                  <div className="flex items-center gap-2">
+                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></div>
+                     <span className="text-[9px] font-black text-green-500 uppercase tracking-widest">Monitoramento Ativo</span>
+                  </div>
+               </div>
+               <Layout size={20} className="text-white/20" />
+            </div>
+            
+            <div className="flex-1 p-8 space-y-8 overflow-y-auto custom-scrollbar h-full">
+               {[
+                 { user: 'Odonto AI', action: 'Lead Recuperado', p: 'Ricardo Mendes', time: 'Há 5 min', color: 'bg-emerald-500' },
+                 { user: 'Sistema', action: 'Agendamento Confirmado', p: 'Sara Oliveira', time: 'Há 12 min', color: 'bg-blue-500' },
+                 { user: 'Odonto AI', action: 'Disparo Automático', p: 'Lista: Inativos 6+', time: 'Há 24 min', color: 'bg-[#7ed6df]' },
+                 { user: 'Dr. Mendes', action: 'Procedimento Finalizado', p: 'Carlos Ferreira', time: 'Há 1h', color: 'bg-violet-500' },
+                 { user: 'Odonto AI', action: 'NPS Enviado', p: 'Juliana Silva', time: 'Há 1h', color: 'bg-orange-500' },
+               ].map((log, i) => (
+                 <div key={i} className="flex gap-4 relative group cursor-default">
+                    {i !== 4 && <div className="absolute left-1.5 top-5 bottom-[-20px] w-0.5 bg-white/5" />}
+                    <div className={`w-3 h-3 rounded-full ${log.color} ring-4 ring-white/5 relative z-10 shrink-0 mt-1`} />
+                    <div className="flex-1 text-left">
+                       <div className="flex justify-between items-center mb-1">
+                          <span className="text-[10px] font-black text-white uppercase tracking-widest">{log.user}</span>
+                          <span className="text-[9px] font-black text-white/30 uppercase tracking-widest leading-none">{log.time}</span>
                        </div>
-                       <div>
-                         <p className="text-[12px] font-bold text-[#40407a] leading-none mb-2">{l.name}</p>
-                         <p className="text-[9px] font-bold text-[#7ed6df] uppercase tracking-[0.15em]">{l.interestArea || 'Interesse não definido'}</p>
+                       <p className="text-[11px] font-bold text-white/60 mb-2">{log.action}</p>
+                       <div className="bg-white/5 p-3 rounded-[13px] border border-white/5 group-hover:bg-white/10 transition-all">
+                          <span className="text-[10px] font-black text-[#7ed6df] uppercase tracking-widest">{log.p}</span>
                        </div>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <ChevronRight size={14} className="text-slate-200" />
                     </div>
                  </div>
                ))}
-             </div>
-           </div>
+            </div>
 
+            <div className="p-8 bg-black/20 mt-auto">
+               <button className="w-full flex items-center justify-between group">
+                  <span className="text-[10px] font-black text-white/40 group-hover:text-white uppercase tracking-widest transition-all">Ver todos os logs</span>
+                  <ChevronRight size={16} className="text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all" />
+               </button>
+            </div>
+          </div>
         </div>
 
       </div>
+
     </div>
   );
 };

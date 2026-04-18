@@ -11,25 +11,27 @@ const LandingView: React.FC<LandingViewProps> = ({ onEnterApp }) => {
 
       {/* ─── NAVBAR ─── */}
       <nav>
-        <a href="#hero" className="nav-logo">
-          <img src="/sol_com_risco_em_baixo-removebg-preview.png" alt="Solara Estética Logo" style={{ width: '64px', height: '64px' }} />
-          <div className="nav-logo-text">
-            <span className="assistente">Solara</span>
-            <span className="solara">Estética</span>
-            <span className="tagline">Atendimento Digital</span>
-          </div>
-        </a>
-        <ul className="nav-links">
-          <li><a href="#problema">Problema</a></li>
-          <li><a href="#solucao">Solução</a></li>
-          <li><a href="#como-funciona">Como Funciona</a></li>
-          <li><a href="#precos">Planos</a></li>
-          <li>
-            <button onClick={onEnterApp} className="btn-nav">
-              Acessar o Sistema
-            </button>
-          </li>
-        </ul>
+        <div className="nav-inner">
+          <a href="#hero" className="nav-logo">
+            <img src="/sol_com_risco_em_baixo-removebg-preview.png" alt="Solara Estética Logo" style={{ width: '64px', height: '64px' }} />
+            <div className="nav-logo-text">
+              <span className="assistente">Solara</span>
+              <span className="solara">Estética</span>
+              <span className="tagline">Atendimento Digital</span>
+            </div>
+          </a>
+          <ul className="nav-links">
+            <li><a href="#problema">Problema</a></li>
+            <li><a href="#solucao">Solução</a></li>
+            <li><a href="#como-funciona">Como Funciona</a></li>
+            <li><a href="#precos">Planos</a></li>
+            <li>
+              <button onClick={onEnterApp} className="btn-nav">
+                Acessar o Sistema
+              </button>
+            </li>
+          </ul>
+        </div>
       </nav>
 
       {/* ─── HERO ─── */}
