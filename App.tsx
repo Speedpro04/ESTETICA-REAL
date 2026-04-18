@@ -88,8 +88,8 @@ const SolaraLogo: React.FC<{ collapsed?: boolean }> = ({ collapsed }) => (
     />
     {!collapsed && (
       <div className="flex flex-col">
-        <span className="text-xl font-bold text-white tracking-widest uppercase leading-none">Solara</span>
-        <span className="text-[9px] font-black text-[#7ed6df] font-bold">Connect</span>
+        <span className="text-xl font-black text-white tracking-widest uppercase leading-none">Solara</span>
+        <span className="text-[9px] font-black text-[#7ed6df] uppercase tracking-[0.2em] mt-1">Estética</span>
       </div>
     )}
   </div>
