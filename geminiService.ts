@@ -15,8 +15,8 @@ RESTRIÇÕES CRÍTICAS:
 - Quando analisar dados, procure por anomalias ou oportunidades de ouro que o humano possa ter perdido.
 - Trate o usuário como um CEO/Dono de clínica que precisa de decisões rápidas e baseadas em dados.`;
 
-// Chave do .env (com fallback direto caso o Vite não tenha reiniciado)
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyC0Ce_OsocHaBrrg8pG1ubDTSIYo6g6r-k';
+// Chave do .env (Nota: Em produção, mude para uma chamada via Backend para segurança total)
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export const askSolara = async (message: string, history: {role: 'user' | 'model', text: string}[], context?: any): Promise<string> => {
