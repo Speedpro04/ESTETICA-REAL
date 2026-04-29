@@ -61,14 +61,14 @@ const SpecialistsView: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h2 className="text-4xl font-bold text-[#40407a] tracking-tight uppercase leading-none">Corpo Clínico Premium</h2>
-          <p className="text-[#2f3640] text-[10px] font-black uppercase tracking-[0.3em] mt-3 opacity-90">Gestão de Especialistas e Suítes de Atendimento</p>
+          <p className="text-[#2f3640] text-xs font-extrabold uppercase tracking-[0.3em] mt-3 opacity-90">Gestão de Especialistas e Suítes de Atendimento</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="bg-[#706fd3] text-white px-10 py-5 rounded-[13px] flex items-center gap-3 w-fit shadow-xl hover:scale-[1.02] transition-all group"
+          className="bg-[#706fd3] text-white px-10 py-5 rounded-[13px] flex items-center gap-3 w-fit shadow-xl hover:scale-[1.02] active:scale-95 transition-all group"
         >
           <Plus size={20} className="group-hover:rotate-90 transition-transform" /> 
-          <span className="text-[11px] font-bold uppercase tracking-widest">Novo Especialista</span>
+          <span className="text-xs font-bold uppercase tracking-widest">Novo Especialista</span>
         </button>
       </div>
 
@@ -82,9 +82,9 @@ const SpecialistsView: React.FC = () => {
                     <div className={`p-3 rounded-[13px] bg-white border border-black/5 shadow-sm ${col.color}`}>
                        <col.icon size={20} />
                     </div>
-                    <h3 className="text-[11px] font-black text-[#0a3d62] uppercase tracking-widest">{col.title}</h3>
+                    <h3 className="text-xs font-extrabold text-[#0a3d62] uppercase tracking-widest">{col.title}</h3>
                  </div>
-                 <span className="text-[10px] font-black text-[#2f3640] bg-white border border-black/5 px-3 py-1 rounded-[13px]">
+                 <span className="text-xs font-extrabold text-[#2f3640] bg-white border border-black/5 px-3 py-1 rounded-[13px]">
                    {colSpecialists.length}
                  </span>
               </div>
@@ -103,24 +103,24 @@ const SpecialistsView: React.FC = () => {
                           {spec.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
                        </div>
                        <div>
-                          <h4 className="text-lg font-black text-[#0a3d62] tracking-tight group-hover:text-[#706fd3] transition-colors">{spec.name}</h4>
-                          <p className="text-[10px] font-black text-[#7ed6df] uppercase tracking-widest mt-1.5">{spec.specialty}</p>
+                          <h4 className="text-lg font-extrabold text-[#0a3d62] tracking-tight group-hover:text-[#706fd3] transition-colors">{spec.name}</h4>
+                          <p className="text-xs font-extrabold text-[#7ed6df] uppercase tracking-widest mt-1.5">{spec.specialty}</p>
                        </div>
                     </div>
 
                     <div className="space-y-4 mb-8 relative z-10 border-l-2 border-[#40407a]/5 pl-6">
                        <div className="flex items-center gap-3 text-slate-500">
                           <Gem size={16} className="text-[#7ed6df]" />
-                          <span className="text-xs font-black text-[#2f3640] tracking-widest uppercase">{spec.reg}</span>
+                          <span className="text-xs font-extrabold text-[#2f3640] tracking-widest uppercase">{spec.reg}</span>
                        </div>
                        <div className="flex items-center gap-3 text-[#2f3640] mb-2">
                           <Phone size={16} className="text-[#7ed6df]" />
-                          <span className="text-sm font-black">{spec.phone}</span>
+                          <span className="text-sm font-extrabold">{spec.phone}</span>
                        </div>
                     </div>
 
                     <div className="flex gap-3 relative z-10">
-                       <button className="flex-1 bg-white border border-black/5 text-[#40407a] py-4 rounded-[13px] text-[10px] font-bold uppercase tracking-widest hover:bg-[#40407a] hover:text-white transition-all flex items-center justify-center gap-2 shadow-sm">
+                       <button className="flex-1 bg-white border border-black/5 text-[#40407a] py-4 rounded-[13px] text-xs font-bold uppercase tracking-widest hover:bg-[#40407a] hover:text-white transition-all flex items-center justify-center gap-2 shadow-sm">
                           <Calendar size={16} /> Ver Agenda
                        </button>
                     </div>
@@ -130,7 +130,7 @@ const SpecialistsView: React.FC = () => {
                 {colSpecialists.length === 0 && (
                    <div className="py-20 border-2 border-dashed border-black/5 rounded-[13px] flex flex-col items-center justify-center opacity-20">
                       <Sparkles size={40} className="text-slate-300" />
-                      <span className="text-[10px] font-bold uppercase tracking-widest mt-3">Sem registros</span>
+                      <span className="text-xs font-bold uppercase tracking-widest mt-3">Sem registros</span>
                    </div>
                 )}
               </div>
@@ -152,12 +152,12 @@ const SpecialistsView: React.FC = () => {
 
             <div className="mb-10">
               <h3 className="text-3xl font-bold text-[#40407a] tracking-tight uppercase">Novo Especialista</h3>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Corpo Clínico Solara Estética</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-2">Corpo Clínico Solara Estética</p>
             </div>
 
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Nome Completo</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Nome Completo</label>
                 <input
                   type="text"
                   placeholder="Ex: Dra. Juliana Costa"
@@ -169,7 +169,7 @@ const SpecialistsView: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Especialidade</label>
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Especialidade</label>
                   <input
                     type="text"
                     placeholder="Ex: Harmonização"
@@ -179,7 +179,7 @@ const SpecialistsView: React.FC = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Registro (CRM/BM)</label>
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Registro (CRM/BM)</label>
                   <input
                     type="text"
                     placeholder="CR0 00000"
@@ -193,7 +193,7 @@ const SpecialistsView: React.FC = () => {
 
             <button
               onClick={handleSave}
-              className="w-full mt-10 py-6 bg-[#40407a] text-white rounded-[13px] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#474787] shadow-xl transition-all"
+              className="w-full mt-10 py-6 bg-[#40407a] text-white rounded-[13px] text-xs font-bold uppercase tracking-[0.3em] hover:bg-[#474787] shadow-xl transition-all"
             >
               Cadastrar Especialista
             </button>

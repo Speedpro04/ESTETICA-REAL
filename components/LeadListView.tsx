@@ -46,14 +46,14 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-4xl font-bold text-[#40407a] tracking-tight uppercase leading-none">Base de Leads e Clientes</h1>
-          <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-[0.3em]">Gestão Inteligente Solara Estética</p>
+          <p className="text-[#2f3640] font-extrabold mt-3 text-xs uppercase tracking-[0.3em]">Gestão Inteligente Solara Estética</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
           className="bg-[#706fd3] text-white px-10 py-5 rounded-[13px] flex items-center gap-3 w-fit shadow-xl hover:scale-[1.02] active:scale-95 transition-all group"
         >
           <Plus size={20} className="group-hover:rotate-90 transition-transform" /> 
-          <span className="text-[11px] font-bold uppercase tracking-widest leading-none">Novo Lead Manual</span>
+          <span className="text-xs font-bold uppercase tracking-widest leading-none">Novo Lead Manual</span>
         </button>
       </div>
 
@@ -70,10 +70,10 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
             />
           </div>
           <div className="flex gap-4">
-            <button className="flex items-center gap-3 text-[#40407a] font-bold text-[10px] uppercase tracking-widest bg-white border border-black/5 px-8 py-5 rounded-[13px] hover:bg-slate-50 transition-all shadow-sm">
+            <button className="flex items-center gap-3 text-[#40407a] font-bold text-xs uppercase tracking-widest bg-white border border-black/5 px-8 py-5 rounded-[13px] hover:bg-slate-50 transition-all shadow-sm">
               <Filter size={18} className="text-[#706fd3]" /> Filtrar Canais
             </button>
-            <button className="flex items-center gap-3 text-white font-bold text-[10px] uppercase tracking-widest bg-[#40407a] px-8 py-5 rounded-[13px] hover:bg-[#474787] transition-all shadow-xl">
+            <button className="flex items-center gap-3 text-white font-bold text-xs uppercase tracking-widest bg-[#40407a] px-8 py-5 rounded-[13px] hover:bg-[#474787] transition-all shadow-xl">
               <Sparkles size={18} /> IA Sorter
             </button>
           </div>
@@ -82,7 +82,7 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-[#40407a] text-white text-[10px] uppercase tracking-[0.2em] font-bold">
+              <tr className="bg-[#40407a] text-white text-xs uppercase tracking-[0.2em] font-bold">
                 <th className="px-10 py-6">Lead / Cliente</th>
                 <th className="px-10 py-6">Interesse Principal</th>
                 <th className="px-10 py-6">Origem</th>
@@ -105,21 +105,21 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
                           {l.name.charAt(0)}
                         </div>
                         <div>
-                          <p className="text-lg font-black text-[#0a3d62] leading-none mb-2">{l.name}</p>
-                          <p className="text-[11px] text-[#2f3640] font-black uppercase tracking-widest">{l.phone}</p>
+                          <p className="text-lg font-extrabold text-[#0a3d62] leading-none mb-2">{l.name}</p>
+                          <p className="text-xs text-[#2f3640] font-extrabold uppercase tracking-widest">{l.phone}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-10 py-8">
-                       <span className="text-[11px] font-black text-[#7ed6df] uppercase tracking-widest bg-[#7ed6df]/10 px-4 py-2 rounded-[13px]">
+                       <span className="text-xs font-extrabold text-[#7ed6df] uppercase tracking-widest bg-[#7ed6df]/10 px-4 py-2 rounded-[13px]">
                          {l.interestArea || 'Procedimento'}
                        </span>
                     </td>
                     <td className="px-10 py-8">
-                       <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-[0.15em] opacity-80">{l.leadSource || 'Orgânico'}</p>
+                       <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-[0.15em] opacity-80">{l.leadSource || 'Orgânico'}</p>
                     </td>
                     <td className="px-10 py-8">
-                      <span className={`text-[10px] font-black px-5 py-2.5 rounded-[13px] border-2 uppercase tracking-tight shadow-sm ${styles.bg} ${styles.text} ${styles.border}`}>
+                      <span className={`text-xs font-extrabold px-5 py-2.5 rounded-[13px] border-2 uppercase tracking-tight shadow-sm ${styles.bg} ${styles.text} ${styles.border}`}>
                         {l.status}
                       </span>
                     </td>
@@ -149,12 +149,12 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
 
             <div className="mb-10">
               <h3 className="text-3xl font-bold text-[#40407a] tracking-tight uppercase mb-2">Novo Lead Manual</h3>
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Entrada direta no funil comercial</p>
+              <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Entrada direta no funil comercial</p>
             </div>
 
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Nome Completo</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Nome Completo</label>
                 <input
                   type="text"
                   placeholder="Ex: Maria Oliveira"
@@ -165,7 +165,7 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">WhatsApp / Telefone</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">WhatsApp / Telefone</label>
                 <input
                   type="text"
                   placeholder="(00) 00000-0000"
@@ -176,7 +176,7 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-1">Área de Interesse</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1">Área de Interesse</label>
                 <select
                   className="w-full bg-slate-50 border border-black/5 rounded-[13px] px-6 py-5 text-base font-medium text-[#40407a] outline-none focus:border-[#706fd3] transition-all appearance-none cursor-pointer"
                   value={form.interestArea}
@@ -194,7 +194,7 @@ const LeadListView: React.FC<LeadListViewProps> = ({ leads, searchQuery, setSear
 
             <button
               onClick={handleSave}
-              className="w-full mt-10 py-6 bg-[#0a3d62] text-white rounded-[13px] text-[10px] font-black uppercase tracking-[0.3em] hover:brightness-110 shadow-2xl transition-all active:scale-95 border border-white/20"
+              className="w-full mt-10 py-6 bg-[#0a3d62] text-white rounded-[13px] text-xs font-extrabold uppercase tracking-[0.3em] hover:brightness-110 shadow-2xl transition-all active:scale-95 border border-white/20"
             >
               Confirmar Entrada
             </button>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BarChart3, TrendingUp, Users, Calendar, AlertTriangle, CheckCircle, ArrowRight } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -18,11 +19,11 @@ const AgendaAnalysisView: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-10 animate-in fade-in duration-700 font-montserrat">
+    <div className="space-y-10 animate-in fade-in duration-700 font-inter">
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-black text-[#0a3d62] tracking-tighter uppercase italic">Análise de Agenda</h2>
-        <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-widest opacity-90">Otimização de ocupação e inteligência preditiva</p>
+        <h2 className="text-2xl font-extrabold text-[#0a3d62] tracking-tighter uppercase italic">Análise de Agenda</h2>
+        <p className="text-[#2f3640] font-extrabold mt-3 text-xs uppercase tracking-widest opacity-90">Otimização de ocupação e inteligência preditiva</p>
       </div>
 
       {/* KPI Grid */}
@@ -37,8 +38,8 @@ const AgendaAnalysisView: React.FC = () => {
             <div className={`p-2 w-fit rounded-[13px] mb-4 ${kpi.color}`}>
               <kpi.icon size={18} />
             </div>
-            <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest mb-1">{kpi.label}</p>
-            <h3 className="text-xl font-black text-[#0a3d62]">{kpi.value}</h3>
+            <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest mb-1">{kpi.label}</p>
+            <h3 className="text-xl font-extrabold text-[#0a3d62]">{kpi.value}</h3>
           </div>
         ))}
       </div>
@@ -47,8 +48,8 @@ const AgendaAnalysisView: React.FC = () => {
         {/* Chart Section */}
         <div className="lg:col-span-7 bg-white p-8 rounded-[13px] border border-slate-200 shadow-sm space-y-8">
           <div className="flex justify-between items-center">
-            <h3 className="text-[11px] font-black text-[#0a3d62] uppercase tracking-[0.1em]">Taxa de Ocupação Semanal</h3>
-            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">+4% vs semana passada</span>
+            <h3 className="text-xs font-extrabold text-[#0a3d62] uppercase tracking-[0.1em]">Taxa de Ocupação Semanal</h3>
+            <span className="text-xs font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full">+4% vs semana passada</span>
           </div>
           
           <div className="h-[300px] w-full">
@@ -59,13 +60,13 @@ const AgendaAnalysisView: React.FC = () => {
                   dataKey="name" 
                   axisLine={false} 
                   tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 700 }}
+                  tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 800 }}
                   dy={10}
                 />
                 <YAxis hide />
                 <Tooltip 
                   cursor={{ fill: '#f8fafc' }}
-                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontFamily: 'Montserrat' }}
+                  contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)', fontFamily: 'Inter' }}
                 />
                 <Bar dataKey="ocupacao" radius={[6, 6, 0, 0]} barSize={40}>
                   {data.map((entry, index) => (
@@ -79,7 +80,7 @@ const AgendaAnalysisView: React.FC = () => {
 
         {/* Suggestions Sidebar */}
         <div className="lg:col-span-5 space-y-6">
-          <h3 className="text-[11px] font-black text-[#0a3d62] uppercase tracking-[0.1em] flex items-center gap-2">
+          <h3 className="text-xs font-extrabold text-[#0a3d62] uppercase tracking-[0.1em] flex items-center gap-2">
             <AlertTriangle size={16} className="text-amber-500" />
             Oportunidades de Otimização
           </h3>
@@ -91,16 +92,16 @@ const AgendaAnalysisView: React.FC = () => {
                    <div className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-[#0a3d62]">
                       <Users size={18} />
                    </div>
-                   <span className="text-[8px] font-black bg-emerald-50 text-emerald-600 px-2 py-1 rounded-md uppercase tracking-widest border border-emerald-100">
+                   <span className="text-xs font-extrabold bg-emerald-50 text-emerald-600 px-2 py-1 rounded-md uppercase tracking-widest border border-emerald-100">
                       Alta Probabilidade
                    </span>
                 </div>
                 
-                <h4 className="text-[11px] font-light text-[#0a3d62] italic mb-1">{s.patient}</h4>
-                <p className="text-[10px] text-[#2f3640] font-black leading-relaxed mb-4">{s.reason}</p>
+                <h4 className="text-base font-normal text-[#0a3d62] italic mb-1">{s.patient}</h4>
+                <p className="text-xs text-[#2f3640] font-extrabold leading-relaxed mb-4">{s.reason}</p>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                   <span className="text-[9px] font-black text-[#e55039] uppercase tracking-widest">{s.action}</span>
+                   <span className="text-xs font-extrabold text-[#e55039] uppercase tracking-widest">{s.action}</span>
                    <button title="Executar Ação" className="p-2 bg-[#0a3d62] text-white rounded-[13px] hover:bg-[#e55039] transition-all">
                       <ArrowRight size={14} />
                    </button>
@@ -110,8 +111,8 @@ const AgendaAnalysisView: React.FC = () => {
 
             <div className="bg-gradient-to-br from-[#0a3d62] to-[#1e3a8a] p-8 rounded-[13px] text-white shadow-xl relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-               <h4 className="text-[10px] font-black text-[#82ccdd] uppercase tracking-[0.2em] mb-4">Insight Preditivo</h4>
-               <p className="text-xs font-medium leading-loose italic opacity-90">
+               <h4 className="text-xs font-extrabold text-[#82ccdd] uppercase tracking-[0.2em] mb-4">Insight Preditivo</h4>
+               <p className="text-sm font-medium leading-loose italic opacity-90">
                  "Baseado no histórico dos últimos 3 meses, as quintas-feiras à tarde têm 25% de taxa de cancelamento. Sugerimos abrir 2 vagas extras de encaixe preventivo."
                </p>
             </div>

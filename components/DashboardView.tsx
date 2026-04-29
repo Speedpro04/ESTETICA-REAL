@@ -32,11 +32,11 @@ const StatCard: React.FC<{ label: string; value: string; trend: string; icon: an
       </div>
       <div className="flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
         <ArrowUpRight size={12} className="text-emerald-500" />
-        <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">{trend}</span>
+        <span className="text-xs font-extrabold text-emerald-600 uppercase tracking-widest">{trend}</span>
       </div>
     </div>
-    <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-[0.2em] mb-2">{label}</p>
-    <h3 className="text-3xl font-black text-[#0a3d62] tracking-tighter leading-none">{value}</h3>
+    <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-[0.2em] mb-2">{label}</p>
+    <h3 className="text-3xl font-extrabold text-[#0a3d62] tracking-tighter leading-none">{value}</h3>
   </div>
 );
 
@@ -60,19 +60,19 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl" />
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-4">
-             <div className="bg-[#7ed6df] text-[#0a3d62] px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">IA Ativa</div>
-             <span className="text-white/40 text-[10px] font-black uppercase tracking-widest border-l border-white/20 pl-3">Dashboard Consolidado</span>
+             <div className="bg-[#7ed6df] text-[#0a3d62] px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest">IA Ativa</div>
+             <span className="text-white/40 text-xs font-extrabold uppercase tracking-widest border-l border-white/20 pl-3">Dashboard Consolidado</span>
           </div>
-          <h1 className="text-4xl font-black tracking-tighter uppercase leading-none italic mb-4">Métricas Operacionais</h1>
+          <h1 className="text-4xl font-extrabold tracking-tighter uppercase leading-none italic mb-4">Métricas Operacionais</h1>
           <p className="text-white/60 text-sm font-medium max-w-xl leading-relaxed">
-            Sua clínica está operando com <span className="text-[#7ed6df] font-black">92% de eficiência</span>. A Solara AI recuperou 12 pacientes nas últimas 24 horas.
+            Sua clínica está operando com <span className="text-[#7ed6df] font-extrabold">92% de eficiência</span>. A Solara AI recuperou 12 pacientes nas últimas 24 horas.
           </p>
         </div>
         <div className="flex gap-4 relative z-10">
-          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-[13px] text-[10px] font-black uppercase tracking-widest hover:bg-white/20 transition-all shadow-xl">
+          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-[13px] text-xs font-extrabold uppercase tracking-widest hover:bg-white/20 transition-all shadow-xl">
             Exportar Dados
           </button>
-          <button className="bg-[#7ed6df] text-[#0a3d62] px-8 py-4 rounded-[13px] text-[10px] font-black uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-[#7ed6df]/20 flex items-center gap-2">
+          <button className="bg-[#7ed6df] text-[#0a3d62] px-8 py-4 rounded-[13px] text-xs font-extrabold uppercase tracking-widest hover:brightness-110 transition-all shadow-xl shadow-[#7ed6df]/20 flex items-center gap-2">
             <Sparkles size={16} /> Insights IA
           </button>
         </div>
@@ -117,17 +117,17 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
           <div className="bg-white p-10 rounded-[13px] border border-black/5 shadow-xl flex-1 flex flex-col">
             <div className="flex justify-between items-center mb-10">
               <div>
-                <h3 className="text-sm font-black text-[#0a3d62] uppercase tracking-[0.2em] mb-2 leading-none">Desempenho Semanal</h3>
-                <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest opacity-60">Fluxo de caixa vs Atração de pacientes</p>
+                <h3 className="text-sm font-extrabold text-[#0a3d62] uppercase tracking-[0.2em] mb-2 leading-none">Desempenho Semanal</h3>
+                <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest opacity-60">Fluxo de caixa vs Atração de pacientes</p>
               </div>
               <div className="flex gap-4">
                  <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#0a3d62]"></div>
-                    <span className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">Receita</span>
+                    <span className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest">Receita</span>
                  </div>
                  <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-[#7ed6df]"></div>
-                    <span className="text-[9px] font-black text-[#2f3640] uppercase tracking-widest">Leads</span>
+                    <span className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest">Leads</span>
                  </div>
               </div>
             </div>
@@ -146,7 +146,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
                     dataKey="name" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{fill: '#2f3640', fontSize: 10, fontWeight: 900}} 
+                    tick={{fill: '#2f3640', fontSize: 12, fontWeight: 800}} 
                     dy={12}
                   />
                   <YAxis hide />
@@ -161,7 +161,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1">
              <div className="bg-white p-8 rounded-[13px] border border-black/5 shadow-xl">
-                <h3 className="text-sm font-black text-[#0a3d62] uppercase tracking-[0.2em] mb-8 leading-none">Saúde da Carteira</h3>
+                <h3 className="text-sm font-extrabold text-[#0a3d62] uppercase tracking-[0.2em] mb-8 leading-none">Saúde da Carteira</h3>
                 <div className="space-y-6">
                    {[
                      { label: 'Pacientes Ativos', val: 820, total: 1000, color: 'bg-[#0a3d62]' },
@@ -170,8 +170,8 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
                    ].map((item, i) => (
                      <div key={i}>
                         <div className="flex justify-between items-center mb-2">
-                           <span className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest">{item.label}</span>
-                           <span className="text-[10px] font-black text-[#0a3d62]">{item.val}</span>
+                           <span className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest">{item.label}</span>
+                           <span className="text-xs font-extrabold text-[#0a3d62]">{item.val}</span>
                         </div>
                         <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                            <div 
@@ -187,11 +187,11 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
              <div className="bg-gradient-to-br from-[#7ed6df] to-[#22a6b3] p-8 rounded-[13px] text-[#0a3d62] shadow-xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <Zap size={32} className="mb-6 animate-pulse" />
-                <h3 className="text-xl font-black uppercase tracking-tighter italic mb-4">Automação Inteligente</h3>
-                <p className="text-[11px] font-black uppercase tracking-widest leading-loose mb-10 border-l-4 border-[#0a3d62]/20 pl-4">
-                  Sua clínica economizou <span className="text-white font-black underline">42 horas</span> de trabalho manual este mês através dos disparos automáticos da Solara AI.
+                <h3 className="text-xl font-extrabold uppercase tracking-tighter italic mb-4">Automação Inteligente</h3>
+                <p className="text-xs font-extrabold uppercase tracking-widest leading-loose mb-10 border-l-4 border-[#0a3d62]/20 pl-4">
+                  Sua clínica economizou <span className="text-white font-extrabold underline">42 horas</span> de trabalho manual este mês através dos disparos automáticos da Solara AI.
                 </p>
-                <button className="w-full py-4 bg-[#0a3d62] text-white rounded-[13px] text-[10px] font-black uppercase tracking-widest shadow-xl shadow-[#0a3d62]/20 hover:scale-[1.02] active:scale-95 transition-all">
+                <button className="w-full py-4 bg-[#0a3d62] text-white rounded-[13px] text-xs font-extrabold uppercase tracking-widest shadow-xl shadow-[#0a3d62]/20 hover:scale-[1.02] active:scale-95 transition-all">
                    Ver Relatório Completo
                 </button>
              </div>
@@ -203,10 +203,10 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
           <div className="bg-[#40407a] text-white h-full rounded-[13px] shadow-2xl overflow-hidden border border-white/10 flex flex-col h-full items-stretch">
             <div className="p-8 border-b border-white/5 flex justify-between items-center bg-black/10">
                <div>
-                  <h3 className="text-sm font-black text-white uppercase tracking-[0.2em] leading-none mb-2 text-left">Timeline Solo IA</h3>
+                  <h3 className="text-sm font-extrabold text-white uppercase tracking-[0.2em] leading-none mb-2 text-left">Timeline Solo IA</h3>
                   <div className="flex items-center gap-2">
                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.8)]"></div>
-                     <span className="text-[9px] font-black text-green-500 uppercase tracking-widest">Monitoramento Ativo</span>
+                     <span className="text-xs font-extrabold text-green-500 uppercase tracking-widest">Monitoramento Ativo</span>
                   </div>
                </div>
                <Layout size={20} className="text-white/20" />
@@ -225,12 +225,12 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
                     <div className={`w-3 h-3 rounded-full ${log.color} ring-4 ring-white/5 relative z-10 shrink-0 mt-1`} />
                     <div className="flex-1 text-left">
                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-[10px] font-black text-white uppercase tracking-widest">{log.user}</span>
-                          <span className="text-[9px] font-black text-white/30 uppercase tracking-widest leading-none">{log.time}</span>
+                          <span className="text-xs font-extrabold text-white uppercase tracking-widest">{log.user}</span>
+                          <span className="text-xs font-extrabold text-white/30 uppercase tracking-widest leading-none">{log.time}</span>
                        </div>
-                       <p className="text-[11px] font-bold text-white/60 mb-2">{log.action}</p>
+                       <p className="text-xs font-bold text-white/60 mb-2">{log.action}</p>
                        <div className="bg-white/5 p-3 rounded-[13px] border border-white/5 group-hover:bg-white/10 transition-all">
-                          <span className="text-[10px] font-black text-[#7ed6df] uppercase tracking-widest">{log.p}</span>
+                          <span className="text-xs font-extrabold text-[#7ed6df] uppercase tracking-widest">{log.p}</span>
                        </div>
                     </div>
                  </div>
@@ -239,7 +239,7 @@ const DashboardView: React.FC<DashboardViewProps> = ({ leads, appointments, onOp
 
             <div className="p-8 bg-black/20 mt-auto">
                <button className="w-full flex items-center justify-between group">
-                  <span className="text-[10px] font-black text-white/40 group-hover:text-white uppercase tracking-widest transition-all">Ver todos os logs</span>
+                  <span className="text-xs font-extrabold text-white/40 group-hover:text-white uppercase tracking-widest transition-all">Ver todos os logs</span>
                   <ChevronRight size={16} className="text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all" />
                </button>
             </div>

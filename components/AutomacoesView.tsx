@@ -35,10 +35,10 @@ const AutomacoesView: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-4xl font-light text-[#0a3d62] tracking-tighter uppercase leading-none italic">Automações Solara</h2>
-          <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-[0.3em] opacity-90">Régua de Comunicação Inteligente</p>
+          <h2 className="text-4xl font-normal text-[#0a3d62] tracking-tighter uppercase leading-none italic">Automações Solara</h2>
+          <p className="text-[#2f3640] font-extrabold mt-3 text-xs uppercase tracking-[0.3em] opacity-90">Régua de Comunicação Inteligente</p>
         </div>
-        <button className="bg-[#0a3d62] text-white px-8 py-3.5 rounded-[13px] text-[10px] font-bold uppercase tracking-widest shadow-xl shadow-[#0a3d62]/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
+        <button className="bg-[#0a3d62] text-white px-8 py-3.5 rounded-[13px] text-xs font-bold uppercase tracking-widest shadow-xl shadow-[#0a3d62]/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-3">
           <PlusCircle size={18} /> Nova Automação
         </button>
       </div>
@@ -50,11 +50,11 @@ const AutomacoesView: React.FC = () => {
                <Zap size={32} />
             </div>
             <div>
-               <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest leading-none mb-2">Motor de Disparo</p>
-               <h3 className="text-xl font-light text-[#0a3d62]">Conectado</h3>
+               <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest leading-none mb-2">Motor de Disparo</p>
+               <h3 className="text-xl font-normal text-[#0a3d62]">Conectado</h3>
                <div className="flex items-center gap-2 mt-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-500">Live</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-500">Live</span>
                </div>
             </div>
          </div>
@@ -64,10 +64,10 @@ const AutomacoesView: React.FC = () => {
                <Bell size={32} />
             </div>
             <div>
-               <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest leading-none mb-2">Mensagens Hoje</p>
-               <h3 className="text-xl font-light text-[#0a3d62]">142 Envios</h3>
+               <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest leading-none mb-2">Mensagens Hoje</p>
+               <h3 className="text-xl font-normal text-[#0a3d62]">142 Envios</h3>
                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#0a3d62] opacity-40">Taxa de Sucesso: 98.4%</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#0a3d62] opacity-40">Taxa de Sucesso: 98.4%</span>
                </div>
             </div>
          </div>
@@ -78,9 +78,9 @@ const AutomacoesView: React.FC = () => {
                <Clock size={32} />
             </div>
             <div className="relative z-10">
-               <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 leading-none mb-2">Próxima Varredura</p>
-               <h3 className="text-xl font-light">Em 12 min</h3>
-               <p className="text-[9px] font-bold uppercase tracking-widest mt-2 opacity-60 italic whitespace-nowrap">IA Solara analizando agenda...</p>
+               <p className="text-xs font-bold uppercase tracking-widest opacity-40 leading-none mb-2">Próxima Varredura</p>
+               <h3 className="text-xl font-normal">Em 12 min</h3>
+               <p className="text-xs font-bold uppercase tracking-widest mt-2 opacity-60 italic whitespace-nowrap">IA Solara analizando agenda...</p>
             </div>
          </div>
       </div>
@@ -92,7 +92,7 @@ const AutomacoesView: React.FC = () => {
            <div className="flex gap-4">
               <div className="bg-white/60 px-4 py-2 rounded-[13px] flex items-center gap-3 border border-black/5">
                  <Search size={14} className="text-slate-400" />
-                 <input type="text" placeholder="Buscar automação..." className="bg-transparent outline-none text-[10px] font-bold text-[#0a3d62] uppercase tracking-widest placeholder:text-slate-300 w-48" />
+                 <input type="text" placeholder="Buscar automação..." className="bg-transparent outline-none text-xs font-bold text-[#0a3d62] uppercase tracking-widest placeholder:text-slate-300 w-48" />
               </div>
            </div>
         </div>
@@ -117,19 +117,19 @@ const AutomacoesView: React.FC = () => {
                   
                   <div className="mb-10">
                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{a.type}</span>
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{a.type}</span>
                         <div className="w-1 h-1 bg-slate-200 rounded-full"></div>
-                        <span className={`text-[10px] font-bold uppercase tracking-widest ${a.active ? 'text-green-500' : 'text-slate-400'}`}>
+                        <span className={`text-xs font-bold uppercase tracking-widest ${a.active ? 'text-green-500' : 'text-slate-400'}`}>
                            {a.active ? 'Ativo' : 'Pausado'}
                         </span>
                      </div>
-                     <h4 className="text-2xl font-light text-[#0a3d62] tracking-tighter italic">{a.name}</h4>
+                     <h4 className="text-2xl font-normal text-[#0a3d62] tracking-tighter italic">{a.name}</h4>
                   </div>
 
                   <div className="flex justify-between items-center mt-auto pt-6 border-t border-black/5">
                      <div className="flex items-center gap-2">
                         <CheckCircle2 size={14} className="text-slate-300" />
-                        <span className="text-[11px] font-black text-[#2f3640]">Varredura automática 24/7 ativa</span>
+                        <span className="text-xs font-extrabold text-[#2f3640]">Varredura automática 24/7 ativa</span>
                      </div>
                      <button 
                         onClick={() => toggleStatus(a.id)}

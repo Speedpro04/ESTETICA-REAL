@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import {
   UserMinus, Send, Calendar, MessageCircle, TrendingUp, AlertCircle,
@@ -133,10 +134,10 @@ const RecoveryView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-semibold text-[#706fd3] tracking-tight uppercase">
+          <h2 className="text-3xl font-bold text-[#706fd3] tracking-tight uppercase">
             IA de Recuperação de Orçamentos
           </h2>
-          <p className="text-[#57606f] text-sm font-medium uppercase tracking-widest mt-3 opacity-70">
+          <p className="text-[#57606f] text-xs font-extrabold uppercase tracking-widest mt-3 opacity-70">
             Inteligência Preditiva · Identificação de abandonos em orçamentos
           </p>
         </div>
@@ -147,7 +148,7 @@ const RecoveryView: React.FC = () => {
           <button
             onClick={handleRecalculate}
             disabled={isRecalculating}
-            className="flex items-center gap-3 px-6 py-3 bg-[#706fd3] text-white rounded-[13px] text-sm font-medium uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-[#706fd3]/10"
+            className="flex items-center gap-3 px-6 py-3 bg-[#706fd3] text-white rounded-[13px] text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-[#706fd3]/10"
             title="Recalcular pontuação de risco agora"
           >
             <RefreshCw size={16} className={isRecalculating ? 'animate-spin' : ''} />
@@ -163,9 +164,9 @@ const RecoveryView: React.FC = () => {
             <div className={`inline-flex p-3 rounded-[13px] ${kpi.bg} mb-4`}>
               <kpi.icon size={20} className={kpi.color} />
             </div>
-            <p className="text-xs font-bold text-[#2f3640] uppercase tracking-widest mb-2 leading-tight">{kpi.label}</p>
-            <h3 className={`text-3xl font-semibold ${kpi.color} leading-none`}>{kpi.value}</h3>
-            <p className="text-xs font-bold text-[#2f3640] mt-2 uppercase tracking-tight opacity-90 leading-tight">{kpi.sub}</p>
+            <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest mb-2 leading-tight">{kpi.label}</p>
+            <h3 className={`text-3xl font-bold ${kpi.color} leading-none`}>{kpi.value}</h3>
+            <p className="text-xs font-extrabold text-[#2f3640] mt-2 uppercase tracking-tight opacity-90 leading-tight">{kpi.sub}</p>
           </div>
         ))}
       </div>
@@ -175,7 +176,7 @@ const RecoveryView: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
         <div>
           <h3 className="text-sm font-bold text-[#706fd3] uppercase tracking-[0.1em]">Distribuição por Score de Risco</h3>
-          <p className="text-xs font-semibold text-[#2f3640] font-bold tracking-widest mt-1">Motor IA recalcula automaticamente</p>
+          <p className="text-xs font-extrabold text-[#2f3640] tracking-widest mt-1">Motor IA recalcula automaticamente</p>
         </div>
         <div className="flex gap-2 flex-wrap">
           {(['TODOS', 'CRITICO', 'ALTO', 'MODERADO', 'BAIXO'] as const).map(s => (
@@ -238,7 +239,7 @@ const RecoveryView: React.FC = () => {
           <h3 className="text-sm font-bold text-[#706fd3] uppercase tracking-[0.1em]">
             Clientes Prioritários para Recuperação
           </h3>
-          <p className="text-xs font-bold text-[#2f3640] font-bold tracking-widest mt-2">
+          <p className="text-xs font-bold text-[#2f3640] tracking-widest mt-2">
             {filteredList.length} cliente{filteredList.length !== 1 ? 's' : ''} · Score IA identifica urgência automaticamente
           </p>
         </div>
@@ -262,13 +263,13 @@ const RecoveryView: React.FC = () => {
                   <td className="px-6 py-6">
                     <div className="flex flex-col">
                       <span className="text-base font-bold text-[#706fd3]">{p.name}</span>
-                      <span className="text-xs font-bold text-slate-500 uppercase mt-1">
+                      <span className="text-xs font-extrabold text-slate-500 uppercase mt-1">
                         {p.attempts} contato{p.attempts !== 1 ? 's' : ''}
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-6 text-sm font-semibold text-slate-600 whitespace-nowrap">{p.lastVisit}</td>
-                  <td className="px-6 py-6 text-xs font-bold uppercase tracking-wide text-[#706fd3] opacity-90 whitespace-nowrap">{p.status}</td>
+                  <td className="px-6 py-6 text-sm font-bold text-slate-600 whitespace-nowrap">{p.lastVisit}</td>
+                  <td className="px-6 py-6 text-xs font-extrabold uppercase tracking-wide text-[#706fd3] opacity-90 whitespace-nowrap">{p.status}</td>
                   <td className="px-6 py-6">
                     <div className="flex items-center gap-2">
                       <div className={`w-2 h-2 rounded-full shrink-0 ${score.dot}`} />
@@ -277,17 +278,17 @@ const RecoveryView: React.FC = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-6 text-sm font-semibold text-slate-600 whitespace-nowrap">{p.lastContact}</td>
+                  <td className="px-6 py-6 text-sm font-bold text-slate-600 whitespace-nowrap">{p.lastContact}</td>
                   <td className="px-6 py-6">
                     <div className="flex items-center gap-2">
                       {CHANNEL_ICONS[p.channel]}
-                      <span className="text-sm font-semibold text-slate-600">{p.channel}</span>
+                      <span className="text-sm font-bold text-slate-600">{p.channel}</span>
                     </div>
                   </td>
                   <td className="px-6 py-6 max-w-[180px]">
                     <div className="flex items-start gap-2">
                       <Brain size={14} className="text-[#ff7675] shrink-0 mt-0.5" />
-                      <span className="text-xs font-semibold text-slate-700 leading-tight">{p.sugestao}</span>
+                      <span className="text-xs font-bold text-slate-700 leading-tight">{p.sugestao}</span>
                     </div>
                   </td>
                   <td className="px-6 py-6 text-sm font-bold text-violet-600 whitespace-nowrap">
@@ -332,7 +333,7 @@ const RecoveryView: React.FC = () => {
       </div>
       <div className="flex-1 space-y-3">
         <h4 className="text-sm font-bold text-[#706fd3] uppercase tracking-[0.2em]">Recomendação da Solara AI</h4>
-        <p className="text-base font-semibold text-slate-100 leading-relaxed">
+        <p className="text-base font-bold text-slate-100 leading-relaxed">
           "Clientes com orçamentos de <strong className="text-white font-bold">ESTÉTICA FACIAL</strong> têm{' '}
           <strong className="text-white font-bold">52% mais chance</strong> de fechar quando o
           contato é feito em até 48h após a avaliação. Temos{' '}
@@ -355,7 +356,7 @@ const RecoveryView: React.FC = () => {
       </div>
         <button
           onClick={() => alert('Campanha de Recuperação de Orçamentos iniciada!')}
-          className="bg-[#706fd3] text-white px-10 py-4 rounded-[13px] text-sm font-semibold uppercase tracking-widest hover:brightness-110 shadow-lg shadow-[#706fd3]/20 transition-all whitespace-nowrap shrink-0 flex items-center gap-3 active:scale-95"
+          className="bg-[#706fd3] text-white px-10 py-4 rounded-[13px] text-xs font-bold uppercase tracking-widest hover:brightness-110 shadow-lg shadow-[#706fd3]/20 transition-all whitespace-nowrap shrink-0 flex items-center gap-3 active:scale-95"
           title="Iniciar campanha de recuperação automática"
         >
           <Zap size={18} />

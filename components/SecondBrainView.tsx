@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Plus, 
@@ -28,7 +29,7 @@ const SecondBrainView: React.FC = () => {
   const activeNote = MOCK_NOTES.find(n => n.id === activeNoteId) || MOCK_NOTES[0];
 
   return (
-    <div className="grid grid-cols-12 gap-8 h-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="grid grid-cols-12 gap-8 h-full animate-in fade-in slide-in-from-bottom-4 duration-700 font-inter">
       {/* Sidebar de Notas */}
       <div className="col-span-3 flex flex-col gap-6">
         <div className="bg-white/80 backdrop-blur-xl border border-black/5 rounded-[32px] p-6 shadow-sm flex flex-col h-[calc(100vh-220px)]">
@@ -66,7 +67,7 @@ const SecondBrainView: React.FC = () => {
                   <FileText size={16} className={activeNoteId === note.id ? 'text-white' : 'text-slate-500 font-medium'} />
                   <span className="font-bold text-xs uppercase tracking-widest truncate">{note.title}</span>
                 </div>
-                <div className="text-[10px] text-slate-500 font-semibold ml-7">{note.category} • {note.updated}</div>
+                <div className="text-xs text-slate-500 font-bold ml-7">{note.category} • {note.updated}</div>
               </button>
             ))}
           </div>
@@ -82,11 +83,11 @@ const SecondBrainView: React.FC = () => {
               onChange={() => {}}
             />
             <div className="flex items-center gap-3 shrink-0">
-               <div className="bg-red-50 text-[#E84118] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-red-100 flex items-center gap-2">
+               <div className="bg-red-50 text-[#E84118] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-red-100 flex items-center gap-2">
                  <Database size={12} />
                  Polars Sync
                </div>
-               <div className="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-slate-200">
+               <div className="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-slate-200">
                  Draft
                </div>
             </div>
@@ -117,11 +118,11 @@ const SecondBrainView: React.FC = () => {
            <AestheticsGraph />
 
            <div className="space-y-4">
-             <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] px-2">Sugestões da IA (RAG)</h4>
+             <h4 className="text-xs font-bold text-white/40 uppercase tracking-[0.2em] px-2">Sugestões da IA (RAG)</h4>
              <div className="bg-white/5 border border-white/5 rounded-[13px] p-4 hover:bg-white/10 transition-all cursor-pointer group">
                <div className="flex items-center gap-2 mb-2">
                  <Zap size={14} className="text-yellow-400" />
-                 <span className="text-[11px] font-bold text-white uppercase tracking-widest">CONEXÃO DETECTADA</span>
+                 <span className="text-xs font-bold text-white uppercase tracking-widest">CONEXÃO DETECTADA</span>
                </div>
                <p className="text-xs text-white/80 font-medium leading-relaxed group-hover:text-white transition-colors">
                  O Polars sugere conectar esta nota ao protocolo de <strong>Recuperação Pós-Peeling</strong>.
@@ -134,7 +135,7 @@ const SecondBrainView: React.FC = () => {
                 <Sparkles size={16} />
                 <span className="text-xs font-bold uppercase tracking-widest">Smart Insights</span>
               </div>
-              <p className="text-[11px] leading-relaxed opacity-90">
+              <p className="text-xs font-medium leading-relaxed opacity-90">
                 A IA analisou os prontuários e recomenda focar esta estratégia em pacientes acima de 40 anos para aumentar a conversão.
               </p>
            </div>

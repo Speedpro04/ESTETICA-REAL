@@ -56,7 +56,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
     <div className="animate-in slide-in-from-right-4 duration-500 pb-12 font-inter">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <button onClick={onBack} className="flex items-center gap-2 text-[#40407a]/40 hover:text-[#40407a] transition-all group font-bold uppercase text-[10px] tracking-widest">
+        <button onClick={onBack} className="flex items-center gap-2 text-[#40407a]/40 hover:text-[#40407a] transition-all group font-bold uppercase text-xs tracking-widest">
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span>Voltar para Clientes</span>
         </button>
@@ -64,12 +64,12 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 bg-[#40407a] text-white px-5 py-2.5 rounded-[13px] shadow-xl shadow-[#40407a]/20">
             <Sparkles size={14} className="animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-widest">Solara Intelligence</span>
+            <span className="text-xs font-bold uppercase tracking-widest">Solara Intelligence</span>
           </div>
           {syncStatus === 'syncing' && (
             <div className="flex items-center gap-2 bg-blue-50 text-blue-500 px-3 py-2 rounded-xl border border-blue-100">
               <Loader2 className="animate-spin h-3 w-3" />
-              <span className="text-[9px] font-bold uppercase tracking-tighter">Sync Cloud</span>
+              <span className="text-xs font-bold uppercase tracking-tighter">Sync Cloud</span>
             </div>
           )}
         </div>
@@ -85,7 +85,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                 {lead.name.charAt(0)}
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">{lead.name}</h2>
-              <p className="text-[#7ed6df] text-[10px] mt-2 font-black uppercase tracking-[0.2em]">{lead.interestArea || 'Lead Qualificado'}</p>
+              <p className="text-[#7ed6df] text-xs mt-2 font-extrabold uppercase tracking-[0.2em]">{lead.interestArea || 'Lead Qualificado'}</p>
             </div>
             
             <div className="p-8 space-y-8 flex-1">
@@ -95,7 +95,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                     <Phone size={20} />
                   </div>
                   <div>
-                    <p className="text-[#2f3640] font-black uppercase tracking-widest mb-1">WhatsApp</p>
+                    <p className="text-[#2f3640] font-extrabold uppercase tracking-widest mb-1">WhatsApp</p>
                     <p className="text-sm font-bold text-[#40407a]">{lead.phone}</p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                     <Zap size={20} />
                   </div>
                   <div>
-                    <p className="text-[#2f3640] font-black uppercase tracking-widest mb-1">Origem do Lead</p>
+                    <p className="text-[#2f3640] font-extrabold uppercase tracking-widest mb-1">Origem do Lead</p>
                     <p className="text-sm font-bold text-[#40407a] uppercase tracking-tighter">{lead.leadSource || 'Instagram'}</p>
                   </div>
                 </div>
@@ -112,13 +112,13 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
 
               <div className="pt-8 border-t border-black/5">
                 <div className="bg-[#40407a]/5 p-6 rounded-[13px] border border-[#40407a]/10">
-                  <h4 className="text-[10px] font-bold text-[#40407a] uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <h4 className="text-xs font-bold text-[#40407a] uppercase tracking-widest mb-4 flex items-center gap-2">
                     <Gem size={14} className="text-[#706fd3]" /> Perfil Estético
                   </h4>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] text-[#2f3640] font-black uppercase tracking-wider">Score Premium</span>
-                      <span className="text-[10px] text-[#22a6b3] font-black uppercase">AA+</span>
+                      <span className="text-xs text-[#2f3640] font-extrabold uppercase tracking-wider">Score Premium</span>
+                      <span className="text-xs text-[#22a6b3] font-extrabold uppercase">AA+</span>
                     </div>
                     <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div className="w-[85%] h-full bg-gradient-to-r from-[#706fd3] to-[#7ed6df]"></div>
@@ -131,7 +131,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
 
           {lead.status === 'RECOVERY' && (
             <div className="bg-amber-50 border border-amber-200 rounded-[13px] p-8 animate-pulse shadow-lg shadow-amber-500/5">
-              <h3 className="text-amber-700 font-bold text-[10px] uppercase tracking-widest mb-4 flex items-center gap-2">
+              <h3 className="text-amber-700 font-bold text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
                 <AlertTriangle size={16} /> Alerta de Recuperação
               </h3>
               <p className="text-amber-800 text-xs font-medium leading-relaxed">
@@ -152,7 +152,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-3 pb-6 text-[10px] font-bold transition-all relative tracking-[0.2em] uppercase ${
+                className={`flex items-center gap-3 pb-6 text-xs font-bold transition-all relative tracking-[0.2em] uppercase ${
                   activeTab === tab.id ? 'text-[#706fd3]' : 'text-slate-300 hover:text-[#40407a]'
                 }`}
               >
@@ -176,7 +176,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                       </div>
                       <div>
                         <h3 className="font-bold text-white tracking-tight text-2xl uppercase">Recuperação Solara</h3>
-                        <p className="text-white/60 text-[10px] font-bold uppercase tracking-[0.3em] mt-1.5">Inteligência Estratégica</p>
+                        <p className="text-white/60 text-xs font-bold uppercase tracking-[0.3em] mt-1.5">Inteligência Estratégica</p>
                       </div>
                     </div>
                   </div>
@@ -189,13 +189,13 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                       onChange={(e) => setNewNote(e.target.value)}
                     />
                     <div className="flex justify-between items-center mt-6">
-                       <p className="text-white/40 text-[9px] font-bold uppercase tracking-widest leading-relaxed max-w-[60%]">
+                       <p className="text-white/40 text-xs font-bold uppercase tracking-widest leading-relaxed max-w-[60%]">
                          A Solara analisa o histórico de compras e procedimentos para sugerir a próxima grande venda.
                        </p>
                        <button 
                         onClick={handleSaveNote}
                         disabled={!newNote}
-                        className="bg-white text-[#40407a] px-10 py-5 rounded-[24px] font-bold text-[10px] uppercase tracking-[0.2em] shadow-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-30"
+                        className="bg-white text-[#40407a] px-10 py-5 rounded-[24px] font-bold text-xs uppercase tracking-[0.2em] shadow-2xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-30"
                       >
                         Treinar IA / Salvar
                       </button>
@@ -208,7 +208,7 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                   {lead.history.length === 0 ? (
                     <div className="p-20 text-center bg-white/40 rounded-[13px] border border-white/50 border-dashed">
                       <Zap size={48} className="text-slate-200 mx-auto mb-6" />
-                      <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Nenhum procedimento registrado ainda.</p>
+                      <p className="text-xs font-bold text-slate-300 uppercase tracking-widest">Nenhum procedimento registrado ainda.</p>
                     </div>
                   ) : (
                     lead.history.map((record, i) => (
@@ -216,10 +216,10 @@ const LeadDetailView: React.FC<LeadDetailViewProps> = ({ patient: lead, onBack, 
                         <div className="w-1 bg-[#7ed6df] self-stretch rounded-full opacity-30"></div>
                         <div className="flex-1">
                           <div className="flex justify-between items-center mb-4">
-                            <span className="text-[10px] font-black text-[#706fd3] uppercase tracking-widest">{record.date}</span>
-                            <span className="text-[9px] font-black text-[#2f3640] uppercase tracking-[0.15em]">{record.professional}</span>
+                            <span className="text-xs font-extrabold text-[#706fd3] uppercase tracking-widest">{record.date}</span>
+                            <span className="text-xs font-extrabold text-[#2f3640] uppercase tracking-[0.15em]">{record.professional}</span>
                           </div>
-                          <p className="text-[#0a3d62] text-lg font-black leading-relaxed mb-6">{record.notes}</p>
+                          <p className="text-[#0a3d62] text-lg font-extrabold leading-relaxed mb-6">{record.notes}</p>
                           {record.summary && (
                             <div className="bg-[#7ed6df]/5 p-4 rounded-[13px] border border-[#7ed6df]/10 italic text-[#22a6b3] text-sm">
                               Solara: {record.summary}

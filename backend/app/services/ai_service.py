@@ -95,7 +95,7 @@ def consult_ai(message: str, tenant_id: str, user_name: str, custom_instruction:
     
     try:
         model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
+            model_name="gemini-2.0-flash-lite",
             tools=tools_declaration,
             system_instruction=system_instruction
         )

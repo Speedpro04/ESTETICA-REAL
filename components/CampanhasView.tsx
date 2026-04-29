@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Megaphone, Brain, Play, CheckCircle2, BarChart2, Users, Send, Clock, TrendingUp, Zap, MessageCircle, Sparkles, ChevronRight, AlertTriangle, DollarSign } from 'lucide-react';
 
@@ -100,8 +101,8 @@ const CampanhasView: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-700 font-inter">
       {/* Header */}
       <div>
-        <h2 className="text-3xl font-light text-[#0a3d62] tracking-tight uppercase">Campanhas Inteligentes</h2>
-        <p className="text-[#2f3640] text-xs font-black uppercase tracking-widest mt-1 opacity-90">
+        <h2 className="text-3xl font-normal text-[#0a3d62] tracking-tight uppercase">Campanhas Inteligentes</h2>
+        <p className="text-[#2f3640] text-xs font-extrabold uppercase tracking-widest mt-1 opacity-90">
           IA identifica pacientes e dispara campanhas automaticamente
         </p>
       </div>
@@ -116,10 +117,10 @@ const CampanhasView: React.FC = () => {
         ].map((k, i) => (
           <div key={i} className="bg-white rounded-[13px] p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all">
             <div className={`inline-flex p-2 rounded-[13px] ${k.bg} mb-3`}>
-              <kpi.icon size={18} className={k.color} />
+              <k.icon size={18} className={k.color} />
             </div>
-            <p className="text-[11px] font-black text-[#2f3640] uppercase tracking-widest mb-1 leading-tight">{k.label}</p>
-            <h3 className={`text-3xl font-light ${k.color}`}>{k.value}</h3>
+            <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest mb-1 leading-tight">{k.label}</p>
+            <h3 className={`text-3xl font-normal ${k.color}`}>{k.value}</h3>
           </div>
         ))}
       </div>
@@ -130,7 +131,7 @@ const CampanhasView: React.FC = () => {
           <button
             key={s.id}
             onClick={() => setActiveSection(s.id)}
-            className={`flex items-center gap-2.5 px-6 py-4 rounded-[13px] text-xs font-light uppercase tracking-widest transition-all border ${
+            className={`flex items-center gap-2.5 px-6 py-4 rounded-[13px] text-xs font-normal uppercase tracking-widest transition-all border ${
               activeSection === s.id
                 ? 'bg-[#0a3d62] text-white border-[#0a3d62] shadow-lg'
                 : 'bg-white text-slate-500 border-slate-200 hover:border-slate-300'
@@ -138,7 +139,7 @@ const CampanhasView: React.FC = () => {
           >
             <s.icon size={16} />
             {s.label}
-            <span className={`w-6 h-6 rounded-full text-[10px] font-light flex items-center justify-center ${
+            <span className={`w-6 h-6 rounded-full text-xs font-normal flex items-center justify-center ${
               activeSection === s.id ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
             }`}>
               {s.count}
@@ -152,7 +153,7 @@ const CampanhasView: React.FC = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Brain size={18} className="text-[#ff7675]" />
-            <p className="text-xs font-black text-[#2f3640] uppercase tracking-widest">
+            <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest">
               IA analisou {campanhasSugeridas.reduce((a, c) => a + c.pacientes, 0)} pacientes e sugere as seguintes campanhas
             </p>
           </div>
@@ -171,12 +172,12 @@ const CampanhasView: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h4 className="text-lg font-light text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
+                    <h4 className="text-lg font-normal text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
+                    <span className={`px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
                       {c.canal}
                     </span>
                     {meta && (
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest border ${meta.scoreCls}`}>
+                      <span className={`px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest border ${meta.scoreCls}`}>
                         Score: {meta.score}
                       </span>
                     )}
@@ -185,12 +186,12 @@ const CampanhasView: React.FC = () => {
                   <div className="flex items-center gap-6 mt-3">
                     <div className="flex items-center gap-2">
                       <Users size={14} className="text-slate-400" />
-                      <span className="text-[11px] font-light text-slate-400 uppercase tracking-widest">{c.pacientes} pacientes selecionados pela IA</span>
+                      <span className="text-xs font-normal text-slate-400 uppercase tracking-widest">{c.pacientes} pacientes selecionados pela IA</span>
                     </div>
                     {meta && (
                       <div className="flex items-center gap-2">
                         <DollarSign size={14} className="text-violet-400" />
-                        <span className="text-[11px] font-light text-violet-500 uppercase tracking-widest">
+                        <span className="text-xs font-normal text-violet-500 uppercase tracking-widest">
                           Potencial: R$ {meta.faturamento.toLocaleString('pt-BR')}
                         </span>
                       </div>
@@ -198,14 +199,14 @@ const CampanhasView: React.FC = () => {
                   </div>
                 </div>
                 {isActivated ? (
-                  <div className="shrink-0 flex items-center gap-3 bg-emerald-50 text-emerald-600 border border-emerald-200 px-6 py-3 rounded-[13px] text-[11px] font-light uppercase tracking-widest">
+                  <div className="shrink-0 flex items-center gap-3 bg-emerald-50 text-emerald-600 border border-emerald-200 px-6 py-3 rounded-[13px] text-xs font-normal uppercase tracking-widest">
                     <CheckCircle2 size={16} />
                     Executando...
                   </div>
                 ) : (
                   <button
                     onClick={() => handleActivate(c.id)}
-                    className="shrink-0 flex items-center gap-3 bg-[#0a3d62] text-white px-7 py-4 rounded-[13px] text-[11px] font-light uppercase tracking-widest hover:bg-[#ff7675] transition-all shadow-sm active:scale-95"
+                    className="shrink-0 flex items-center gap-3 bg-[#0a3d62] text-white px-7 py-4 rounded-[13px] text-xs font-normal uppercase tracking-widest hover:bg-[#ff7675] transition-all shadow-sm active:scale-95"
                   >
                     <Sparkles size={16} />
                     Executar com IA
@@ -228,36 +229,36 @@ const CampanhasView: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h4 className="text-lg font-light text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
+                    <h4 className="text-lg font-normal text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
+                    <span className={`px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
                       {c.canal}
                     </span>
-                    <span className="px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest bg-emerald-100 text-emerald-700">
+                    <span className="px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest bg-emerald-100 text-emerald-700">
                       Em andamento
                     </span>
                   </div>
-                  <p className="text-sm font-light text-slate-500">{c.descricao}</p>
+                  <p className="text-sm font-normal text-slate-500">{c.descricao}</p>
                 </div>
                 <div className="flex gap-8 shrink-0 text-center">
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Pacientes</p>
-                    <p className="text-2xl font-light text-[#0a3d62]">{c.pacientes}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Pacientes</p>
+                    <p className="text-2xl font-normal text-[#0a3d62]">{c.pacientes}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Retornaram</p>
-                    <p className="text-2xl font-light text-emerald-500">{c.recuperados}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Retornaram</p>
+                    <p className="text-2xl font-normal text-emerald-500">{c.recuperados}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Taxa</p>
-                    <p className="text-2xl font-light text-[#ff7675]">{c.taxa}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Taxa</p>
+                    <p className="text-2xl font-normal text-[#ff7675]">{c.taxa}</p>
                   </div>
                 </div>
               </div>
               {/* Progress bar */}
               <div className="mt-6">
                 <div className="flex justify-between mb-2">
-                  <span className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Progresso da campanha</span>
-                  <span className="text-[11px] font-light text-emerald-500">{c.taxa}</span>
+                  <span className="text-xs font-normal text-slate-400 uppercase tracking-widest">Progresso da campanha</span>
+                  <span className="text-xs font-normal text-emerald-500">{c.taxa}</span>
                 </div>
                 <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
                   <div
@@ -267,7 +268,7 @@ const CampanhasView: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2 mt-3">
                   <Clock size={14} className="text-slate-400" />
-                  <span className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Iniciada em {c.iniciada}</span>
+                  <span className="text-xs font-normal text-slate-400 uppercase tracking-widest">Iniciada em {c.iniciada}</span>
                 </div>
               </div>
             </div>
@@ -287,8 +288,8 @@ const CampanhasView: React.FC = () => {
               { label: 'Faturamento estimado', value: 'R$ 18.200' },
             ].map((s, i) => (
               <div key={i}>
-                <p className="text-[11px] font-light text-[#82ccdd] uppercase tracking-widest mb-1">{s.label}</p>
-                <p className="text-3xl font-light text-white">{s.value}</p>
+                <p className="text-xs font-normal text-[#82ccdd] uppercase tracking-widest mb-1">{s.label}</p>
+                <p className="text-3xl font-normal text-white">{s.value}</p>
               </div>
             ))}
           </div>
@@ -301,28 +302,28 @@ const CampanhasView: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <h4 className="text-lg font-light text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
+                    <h4 className="text-lg font-normal text-[#0a3d62] uppercase tracking-tight">{c.tipo}</h4>
+                    <span className={`px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest ${CANAL_COLOR[c.canal] ?? 'text-slate-500 bg-slate-50'}`}>
                       {c.canal}
                     </span>
-                    <span className="px-3 py-1 rounded-full text-[10px] font-light uppercase tracking-widest bg-slate-100 text-slate-500">
+                    <span className="px-3 py-1 rounded-full text-xs font-normal uppercase tracking-widest bg-slate-100 text-slate-500">
                       Concluída
                     </span>
                   </div>
-                  <p className="text-sm font-light text-slate-500">{c.descricao}</p>
+                  <p className="text-sm font-normal text-slate-500">{c.descricao}</p>
                 </div>
                 <div className="flex gap-8 shrink-0 text-center">
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Pacientes</p>
-                    <p className="text-2xl font-light text-[#0a3d62]">{c.pacientes}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Pacientes</p>
+                    <p className="text-2xl font-normal text-[#0a3d62]">{c.pacientes}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Recuperados</p>
-                    <p className="text-2xl font-light text-emerald-500">{c.recuperados}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Recuperados</p>
+                    <p className="text-2xl font-normal text-emerald-500">{c.recuperados}</p>
                   </div>
                   <div>
-                    <p className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Taxa</p>
-                    <p className="text-2xl font-light text-[#ff7675]">{c.taxa}</p>
+                    <p className="text-xs font-normal text-slate-400 uppercase tracking-widest">Taxa</p>
+                    <p className="text-2xl font-normal text-[#ff7675]">{c.taxa}</p>
                   </div>
                 </div>
               </div>
@@ -336,7 +337,7 @@ const CampanhasView: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2 mt-3">
                   <Clock size={14} className="text-slate-400" />
-                  <span className="text-[11px] font-light text-slate-400 uppercase tracking-widest">Iniciada em {c.iniciada}</span>
+                  <span className="text-xs font-normal text-slate-400 uppercase tracking-widest">Iniciada em {c.iniciada}</span>
                 </div>
               </div>
             </div>

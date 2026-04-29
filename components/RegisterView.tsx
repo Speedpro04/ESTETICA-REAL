@@ -89,13 +89,13 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
           <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
             <ShieldCheck size={40} className="text-green-400" />
           </div>
-          <h2 className="text-white text-2xl font-light uppercase tracking-tight mb-4">Cadastro Realizado!</h2>
-          <p className="text-slate-400 text-sm font-light leading-relaxed mb-8">
+          <h2 className="text-white text-2xl font-normal uppercase tracking-tight mb-4">Cadastro Realizado!</h2>
+          <p className="text-slate-400 text-sm font-normal leading-relaxed mb-8">
             Verifique seu email para confirmar sua conta. Depois, volte aqui e faça login para acessar o sistema.
           </p>
           <button
             onClick={onBack}
-            className="w-full py-5 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-light uppercase tracking-[0.2em] text-xs shadow-lg hover:brightness-110 transition-all"
+            className="w-full py-5 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-bold uppercase tracking-[0.2em] text-xs shadow-lg hover:brightness-110 transition-all"
           >
             Ir para o Login
           </button>
@@ -108,7 +108,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
     <div className="min-h-screen premium-gradient flex items-center justify-center p-6 font-inter relative">
       <button
         onClick={onBack}
-        className="absolute top-6 left-6 flex items-center gap-2 text-white/50 hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all group"
+        className="absolute top-6 left-6 flex items-center gap-2 text-white/50 hover:text-white text-xs font-bold uppercase tracking-widest transition-all group"
       >
         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
         Voltar ao Login
@@ -117,8 +117,8 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
       <div className="w-full max-w-[520px] bg-white/5 backdrop-blur-2xl rounded-[40px] border border-white/10 p-10 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)]">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-white text-2xl font-light tracking-tight uppercase mb-2">Criar Conta</h1>
-          <p className="text-[#82ccdd] text-[10px] font-light uppercase tracking-[0.3em]">Assistente Solara</p>
+          <h1 className="text-white text-2xl font-normal tracking-tight uppercase mb-2">Criar Conta</h1>
+          <p className="text-[#82ccdd] text-xs font-bold uppercase tracking-[0.3em]">Assistente Solara</p>
         </div>
 
         {/* Progress */}
@@ -135,9 +135,9 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
           ))}
         </div>
         <div className="flex justify-between px-4 mb-8">
-          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Plano</span>
-          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Clínica</span>
-          <span className="text-[8px] font-bold text-white/40 uppercase tracking-widest">Conta</span>
+          <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Plano</span>
+          <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Clínica</span>
+          <span className="text-xs font-bold text-white/40 uppercase tracking-widest">Conta</span>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -157,25 +157,25 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                 >
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-white text-sm font-light uppercase tracking-wider">{plan.name}</span>
+                      <span className="text-white text-sm font-normal uppercase tracking-wider">{plan.name}</span>
                       {plan.popular && (
-                        <span className="px-2 py-0.5 bg-[#f6851e] text-white text-[7px] font-bold rounded-full uppercase tracking-wider">
+                        <span className="px-2 py-0.5 bg-[#f6851e] text-white text-[10px] font-bold rounded-full uppercase tracking-wider">
                           Popular
                         </span>
                       )}
                     </div>
-                    <span className="text-white/40 text-[10px] font-light uppercase tracking-widest">{plan.dentists}</span>
+                    <span className="text-white/40 text-xs font-normal uppercase tracking-widest">{plan.dentists}</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-white text-lg font-light">{plan.price}</span>
-                    <span className="text-white/40 text-[10px]">/mês</span>
+                    <span className="text-white text-lg font-normal">{plan.price}</span>
+                    <span className="text-white/40 text-xs">/mês</span>
                   </div>
                 </button>
               ))}
               <button
                 type="button"
                 onClick={() => setStep(2)}
-                className="w-full py-5 mt-4 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-light uppercase tracking-[0.2em] text-xs shadow-lg hover:brightness-110 transition-all"
+                className="w-full py-5 mt-4 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-bold uppercase tracking-[0.2em] text-xs shadow-lg hover:brightness-110 transition-all"
               >
                 Continuar →
               </button>
@@ -186,7 +186,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
           {step === 2 && (
             <div className="space-y-4">
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Nome da Clínica</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Nome da Clínica</label>
                 <div className="relative">
                   <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -195,12 +195,12 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.clinic_name}
                     onChange={e => updateField('clinic_name', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">CNPJ</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">CNPJ</label>
                 <div className="relative">
                   <CreditCard className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -209,22 +209,22 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.cnpj}
                     onChange={e => updateField('cnpj', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Telefone</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Telefone</label>
                 <input
                   type="tel"
                   placeholder="(11) 99999-9999"
                   value={formData.phone}
                   onChange={e => updateField('phone', e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                 />
               </div>
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setStep(1)} className="flex-1 py-4 border border-white/10 text-white/50 rounded-[20px] font-light uppercase tracking-widest text-[10px] hover:bg-white/5 transition-all">
+                <button type="button" onClick={() => setStep(1)} className="flex-1 py-4 border border-white/10 text-white/50 rounded-[20px] font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-all">
                   ← Voltar
                 </button>
                 <button
@@ -236,7 +236,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     }
                     setStep(3);
                   }}
-                  className="flex-1 py-4 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-light uppercase tracking-widest text-[10px] shadow-lg hover:brightness-110 transition-all"
+                  className="flex-1 py-4 bg-[#7ed6df] text-[#0f172a] rounded-[20px] font-bold uppercase tracking-widest text-xs shadow-lg hover:brightness-110 transition-all"
                 >
                   Continuar →
                 </button>
@@ -248,7 +248,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
           {step === 3 && (
             <div className="space-y-4">
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Nome completo</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Nome completo</label>
                 <div className="relative">
                   <UserCircle2 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -257,12 +257,12 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.admin_name}
                     onChange={e => updateField('admin_name', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Email</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -271,12 +271,12 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.email}
                     onChange={e => updateField('email', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Senha</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Senha</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -285,7 +285,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.password}
                     onChange={e => updateField('password', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors">
                     {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -293,7 +293,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                 </div>
               </div>
               <div>
-                <label className="text-[10px] font-light text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Confirmar Senha</label>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest ml-1 mb-1 block">Confirmar Senha</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
                   <input
@@ -302,7 +302,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
                     value={formData.confirmPassword}
                     onChange={e => updateField('confirmPassword', e.target.value)}
                     required
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-light"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white text-sm focus:border-[#7ed6df]/50 outline-none transition-all placeholder:text-slate-600 font-normal"
                   />
                 </div>
               </div>
@@ -314,13 +314,13 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
               )}
 
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setStep(2)} className="flex-1 py-4 border border-white/10 text-white/50 rounded-[20px] font-light uppercase tracking-widest text-[10px] hover:bg-white/5 transition-all">
+                <button type="button" onClick={() => setStep(2)} className="flex-1 py-4 border border-white/10 text-white/50 rounded-[20px] font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-all">
                   ← Voltar
                 </button>
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="flex-1 py-4 bg-[#f6851e] text-white rounded-[20px] font-light uppercase tracking-widest text-[10px] shadow-lg hover:brightness-110 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 py-4 bg-[#f6851e] text-white rounded-[20px] font-bold uppercase tracking-widest text-xs shadow-lg hover:brightness-110 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isLoading ? <><Loader2 size={14} className="animate-spin" /> Criando...</> : 'Criar Conta'}
                 </button>
@@ -331,7 +331,7 @@ const RegisterView: React.FC<RegisterViewProps> = ({ onBack, onSuccess }) => {
 
         <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-center gap-2">
           <ShieldCheck size={12} className="text-[#7ed6df]" />
-          <p className="text-[8px] text-slate-500 font-bold uppercase tracking-[0.2em]">Dados protegidos · LGPD</p>
+          <p className="text-xs text-slate-500 font-bold uppercase tracking-[0.2em]">Dados protegidos · LGPD</p>
         </div>
       </div>
     </div>

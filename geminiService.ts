@@ -17,36 +17,60 @@ RESTRIÇÕES CRÍTICAS:
 
 // Chave do .env (Nota: Em produção, mude para uma chamada via Backend para segurança total)
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+console.log("Gemini API Key defined:", !!apiKey);
 const genAI = new GoogleGenerativeAI(apiKey);
 
 export const askSolara = async (message: string, history: {role: 'user' | 'model', text: string}[], context?: any): Promise<string> => {
   try {
+    console.log("Solara Request:", { message, historyLength: history.length, contextKeys: context ? Object.keys(context) : [] });
+    
+    if (!apiKey) {
+      console.error("Gemini API Key is missing!");
+      return "Erro: Chave de API não configurada.";
+    }
+
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash-lite',
       systemInstruction: SOLARA_BALANCED_INSTRUCTION 
     });
     
+    const validHistory = [];
+    let foundFirstUser = false;
+    for (const msg of history) {
+      if (msg.role === 'user') foundFirstUser = true;
+      if (foundFirstUser) {
+        validHistory.push({
+          role: msg.role === 'user' ? 'user' : 'model',
+          parts: [{ text: msg.text }]
+        });
+      }
+    }
+
+    console.log("Starting Chat with history length:", validHistory.length);
     const chat = model.startChat({
-      history: history.map(msg => ({
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.text }]
-      })),
+      history: validHistory,
     });
 
-    const prompt = `CONTEXTO OPERACIONAL: ${JSON.stringify(context)}. MENSAGEM: ${message}`;
+    const prompt = `CONTEXTO OPERACIONAL: ${JSON.stringify(context || {})}. MENSAGEM: ${message}`;
+    console.log("Sending message to Gemini...");
     const result = await chat.sendMessage(prompt);
     const response = await result.response;
-    return response.text() || "Operação não processada.";
-  } catch (error) {
-    console.error("Solara Error:", error);
-    return "Falha na conexão com o hub de inteligência.";
+    const text = response.text();
+    console.log("Gemini Response received:", text.substring(0, 50) + "...");
+    return text || "Operação não processada.";
+  } catch (error: any) {
+    console.error("Solara AI Error Details:", error);
+    if (error?.message?.includes("API key not valid")) {
+      return "Erro: Chave de API do Gemini inválida.";
+    }
+    return `Falha na conexão com o hub de inteligência: ${error?.message || 'Erro desconhecido'}`;
   }
 };
 
 export const summarizeMedicalNotes = async (notes: string): Promise<string> => {
   if (!notes) return "Sem dados.";
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
     const result = await model.generateContent(`Sintetize estas anotações profissionais de forma executiva, seguindo as instruções de Solara: "${notes}"`);
     const response = await result.response;
     return response.text() || "Resumo indisponível.";
@@ -59,7 +83,7 @@ export const analyzeSymptoms = async (symptoms: string): Promise<{ reasoning: st
   if (!symptoms) return { reasoning: "Sem dados.", isUrgent: false };
   try {
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.0-flash-lite',
       generationConfig: {
         responseMimeType: "application/json",
       }
@@ -77,7 +101,7 @@ export const analyzeSymptoms = async (symptoms: string): Promise<{ reasoning: st
 
 export const generateStrategicReport = async (data: any): Promise<string> => {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-lite' });
     const result = await model.generateContent(`Gere um relatório estratégico de performance para esta unidade de estética: ${JSON.stringify(data)}`);
     const response = await result.response;
     return response.text() || "Sem dados.";

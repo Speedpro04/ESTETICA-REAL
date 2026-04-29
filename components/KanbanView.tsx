@@ -41,7 +41,7 @@ const RealTimeClock: React.FC<{ arrivalTime: string }> = ({ arrivalTime }) => {
   }, [arrivalTime]);
 
   return (
-    <div className="flex items-center gap-1.5 font-black text-solara-primary/50 text-[9px] uppercase tracking-widest">
+    <div className="flex items-center gap-1.5 font-extrabold text-solara-primary/50 text-xs uppercase tracking-widest">
       <Clock size={12} className="text-solara-accent2" />
       <span>Há {mins} min</span>
     </div>
@@ -76,10 +76,10 @@ const KanbanView: React.FC<KanbanViewProps> = ({ patients, onUpdateStatus, onOpe
   return (
     <div className="h-full flex flex-col space-y-8 font-montserrat select-none animate-in fade-in duration-500">
       <div className="px-4">
-        <h1 className="text-2xl font-black text-solara-primary tracking-tighter uppercase leading-none">
+        <h1 className="text-2xl font-extrabold text-solara-primary tracking-tighter uppercase leading-none">
           Agenda Kanban
         </h1>
-        <p className="text-solara-text1 font-bold mt-2 text-[10px] uppercase tracking-[0.3em]">Gestão Operacional de Fluxo</p>
+        <p className="text-solara-text1 font-bold mt-2 text-xs uppercase tracking-[0.3em]">Gestão Operacional de Fluxo</p>
       </div>
 
       <div className="flex gap-6 overflow-x-auto pb-10 flex-1 px-2 snap-x scrollbar-hide">
@@ -99,9 +99,9 @@ const KanbanView: React.FC<KanbanViewProps> = ({ patients, onUpdateStatus, onOpe
               <div className="p-5 flex items-center justify-between bg-white border-b-2 border-solara-border/20 sticky top-0 z-20">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: styles.dot }}></div>
-                  <h3 className="font-black text-solara-primary tracking-tighter text-[11px] uppercase italic">{col.title}</h3>
+                  <h3 className="font-extrabold text-solara-primary tracking-tighter text-xs uppercase italic">{col.title}</h3>
                 </div>
-                <span className="bg-solara-primary text-white text-[10px] font-black px-3 py-1 rounded-solara border-2 border-solara-border">
+                <span className="bg-solara-primary text-white text-xs font-extrabold px-3 py-1 rounded-solara border-2 border-solara-border">
                   {colPatients.length}
                 </span>
               </div>
@@ -124,15 +124,15 @@ const KanbanView: React.FC<KanbanViewProps> = ({ patients, onUpdateStatus, onOpe
                       <div className="flex justify-between items-start mb-4">
                         <div className="flex items-center gap-3">
                           <GripVertical size={16} className="text-solara-border group-hover:text-solara-primary" />
-                          <span className="text-[9px] font-black text-solara-text1 uppercase tracking-widest">{patient.insurance}</span>
+                          <span className="text-xs font-extrabold text-solara-text1 uppercase tracking-widest">{patient.insurance}</span>
                         </div>
                         <div className="flex items-center gap-2">
                            <RealTimeClock arrivalTime={patient.arrivalTime} />
                         </div>
                       </div>
 
-                      <h4 className="font-light text-solara-primary text-base mb-1 tracking-tighter uppercase leading-tight group-hover:text-solara-accent1 transition-colors">{patient.name}</h4>
-                      <p className="text-[10px] font-bold text-solara-text1 uppercase tracking-widest mb-4 flex items-center gap-1.5">
+                      <h4 className="font-normal text-solara-primary text-base mb-1 tracking-tighter uppercase leading-tight group-hover:text-solara-accent1 transition-colors">{patient.name}</h4>
+                      <p className="text-xs font-bold text-solara-text1 uppercase tracking-widest mb-4 flex items-center gap-1.5">
                         <Activity size={12} className="text-solara-accent2" />
                         {patient.specialty || 'Procedimento Geral'}
                       </p>
@@ -143,14 +143,14 @@ const KanbanView: React.FC<KanbanViewProps> = ({ patients, onUpdateStatus, onOpe
                            title="WhatsApp"
                          >
                            <MessageSquare size={14} fill="currentColor" />
-                           <span className="text-[9px] font-black uppercase tracking-tighter">WhatsApp</span>
+                           <span className="text-xs font-extrabold uppercase tracking-tighter">WhatsApp</span>
                          </button>
                          <button 
                            className="flex items-center justify-center gap-2 solara-button-secondary py-2 shadow-md active:scale-95"
                            onClick={() => onOpenPatient(patient.id)}
                          >
                            <CheckCircle2 size={14} />
-                           <span className="text-[9px] font-black uppercase tracking-tighter">Confirmar</span>
+                           <span className="text-xs font-extrabold uppercase tracking-tighter">Confirmar</span>
                          </button>
                       </div>
                     </div>
@@ -160,7 +160,7 @@ const KanbanView: React.FC<KanbanViewProps> = ({ patients, onUpdateStatus, onOpe
                 {colPatients.length === 0 && (
                    <div className="h-48 flex flex-col items-center justify-center text-solara-border opacity-40 space-y-4 border-2 border-dashed border-solara-border rounded-solara bg-white/30 backdrop-blur-sm">
                      <CheckCircle2 size={32} />
-                     <p className="text-[10px] font-black uppercase tracking-[0.3em]">Fila Vazia</p>
+                     <p className="text-xs font-extrabold uppercase tracking-[0.3em]">Fila Vazia</p>
                    </div>
                 )}
               </div>

@@ -17,8 +17,8 @@ const PrivacidadeView: React.FC = () => {
     <div className="space-y-10 animate-in fade-in duration-700 font-inter">
       {/* Header */}
       <div>
-        <h2 className="text-4xl font-light text-[#0a3d62] tracking-tighter uppercase leading-none italic">Segurança & Privacidade</h2>
-        <p className="text-[#2f3640] font-black mt-3 text-[10px] uppercase tracking-[0.3em] opacity-90">Conformidade LGPD e Proteção de Dados</p>
+        <h2 className="text-4xl font-normal text-[#0a3d62] tracking-tighter uppercase leading-none italic">Segurança & Privacidade</h2>
+        <p className="text-[#2f3640] font-extrabold mt-3 text-xs uppercase tracking-[0.3em] opacity-90">Conformidade LGPD e Proteção de Dados</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -27,10 +27,10 @@ const PrivacidadeView: React.FC = () => {
                <ShieldCheck size={32} />
             </div>
             <div>
-               <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest leading-none mb-2">Status LGPD</p>
-               <h3 className="text-xl font-light text-[#0a3d62]">Conforme</h3>
+               <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest leading-none mb-2">Status LGPD</p>
+               <h3 className="text-xl font-normal text-[#0a3d62]">Conforme</h3>
                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-500">Certificado Ativo</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-emerald-500">Certificado Ativo</span>
                </div>
             </div>
          </div>
@@ -40,10 +40,10 @@ const PrivacidadeView: React.FC = () => {
                <Lock size={32} />
             </div>
             <div>
-               <p className="text-[10px] font-black text-[#2f3640] uppercase tracking-widest leading-none mb-2">Criptografia</p>
-               <h3 className="text-xl font-light text-[#0a3d62]">AES-256 bits</h3>
+               <p className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest leading-none mb-2">Criptografia</p>
+               <h3 className="text-xl font-normal text-[#0a3d62]">AES-256 bits</h3>
                <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#0a3d62] opacity-40">Dados Ponta-a-Ponta</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#0a3d62] opacity-40">Dados Ponta-a-Ponta</span>
                </div>
             </div>
          </div>
@@ -54,9 +54,9 @@ const PrivacidadeView: React.FC = () => {
                <Database size={32} />
             </div>
             <div className="relative z-10">
-               <p className="text-[10px] font-bold uppercase tracking-widest opacity-40 leading-none mb-2">Backups</p>
-               <h3 className="text-xl font-light">Automático</h3>
-               <p className="text-[9px] font-bold uppercase tracking-widest mt-2 opacity-60">Sincronizado há 4h</p>
+               <p className="text-xs font-bold uppercase tracking-widest opacity-40 leading-none mb-2">Backups</p>
+               <h3 className="text-xl font-normal">Automático</h3>
+               <p className="text-xs font-bold uppercase tracking-widest mt-2 opacity-60">Sincronizado há 4h</p>
             </div>
          </div>
       </div>
@@ -78,8 +78,8 @@ const PrivacidadeView: React.FC = () => {
                          <FileLock2 size={24} />
                       </div>
                       <div>
-                         <h4 className="text-[11px] font-black text-[#2f3640] uppercase tracking-widest mb-1">{doc.title}</h4>
-                         <p className="text-[10px] font-black text-[#2f3640]">{doc.desc}</p>
+                         <h4 className="text-xs font-extrabold text-[#2f3640] uppercase tracking-widest mb-1">{doc.title}</h4>
+                         <p className="text-xs font-extrabold text-[#2f3640]">{doc.desc}</p>
                       </div>
                    </div>
                    <button className="bg-[#0a3d62] text-white p-3 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all" title="Gerar documento">
@@ -107,12 +107,12 @@ const PrivacidadeView: React.FC = () => {
                       <span className="text-slate-400 mx-2">●</span>
                       <span className="font-medium text-slate-500">{log.action}</span>
                       <span className="text-slate-400 mx-2">→</span>
-                      <span className="text-[10px] font-bold text-[#0a3d62] opacity-40 uppercase tracking-widest">{log.patient}</span>
+                      <span className="text-xs font-bold text-[#0a3d62] opacity-40 uppercase tracking-widest">{log.patient}</span>
                    </div>
-                   <span className="text-[9px] font-bold text-slate-300 uppercase tracking-widest">{log.time}</span>
+                   <span className="text-xs font-bold text-slate-300 uppercase tracking-widest">{log.time}</span>
                 </div>
               ))}
-              <button className="w-full py-4 mt-4 border-2 border-slate-100 text-slate-400 rounded-[13px] text-[10px] font-bold uppercase tracking-widest hover:bg-slate-50 transition-all">
+              <button className="w-full py-4 mt-4 border-2 border-slate-100 text-slate-400 rounded-[13px] text-xs font-bold uppercase tracking-widest hover:bg-slate-50 transition-all">
                 Ver Logs Completos
               </button>
            </div>
